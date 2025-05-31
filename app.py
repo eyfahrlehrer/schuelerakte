@@ -1,5 +1,6 @@
 from flask import Flask, render_template, session, redirect, url_for
 from auth import auth
+from student import get_all_students, add_student
 
 app = Flask(__name__)
 app.secret_key = "supergeheim"  # wichtig für Login-Sessions
@@ -13,3 +14,9 @@ def start():
         return render_template('start.html')
     else:
         return redirect(url_for('auth.login'))
+        
+@app.route("/schueler")
+def schueler():
+    if 'user' not in session:
+        return redirect(url_for('auth.login'))
+    return render_template("students.html", schueler=get_all_students())
