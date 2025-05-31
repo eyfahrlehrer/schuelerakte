@@ -97,3 +97,13 @@ def diagrammkarte():
         return redirect(url_for("diagrammkarte"))
 
     return render_template("diagrammkarte.html")
+
+@app.route("/saved")
+def show_saved():
+    try:
+        with open("diagrammkarte.txt", "r", encoding="utf-8") as f:
+            content = f.read()
+    except FileNotFoundError:
+        content = "Noch keine Einträge vorhanden."
+
+    return render_template("saved.html", content=content)
