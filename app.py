@@ -64,22 +64,20 @@ def diagrammkarte():
             "vorname": request.form.get("vorname"),
             "anlage": request.form.get("anlage"),
             "grundstufe": [
-                key for key in request.form.keys()
-                if key.startswith("grund_")
+                key for key in request.form.keys() if key.startswith("grund_")
             ],
             "aufbaustufe": [
-                key for key in request.form.keys()
-                if key.startswith("aufbau_")
+                key for key in request.form.keys() if key.startswith("aufbau_")
             ],
             "leistungsstufe": [
-                key for key in request.form.keys()
-                if key.startswith("leistung_")
+                key for key in request.form.keys() if key.startswith("leistung_")
             ]
         }
 
-        save_diagrammkarte(data)  # ✅ speichern
-        return render_template("diagrammkarte.html")
-    return render_template("diagrammkarte.html")
+        save_diagrammkarte(data)
+        return render_template("diagrammkarte.html", success=True)
+
+    return render_template("diagrammkarte.html", success=False)
 
 @app.route("/saved")
 def show_saved():
