@@ -51,3 +51,14 @@ def add():
 @app.route("/diagrammkarte")
 def diagrammkarte():
     return render_template("diagrammkarte.html")
+
+from storage import save_diagrammkarte
+
+@app.route("/diagrammkarte", methods=["GET", "POST"])
+def diagrammkarte():
+    if request.method == "POST":
+        form_data = request.form.to_dict()
+        save_diagrammkarte(form_data)
+        return "Daten gespeichert!"  # später schöner
+    return render_template("diagrammkarte.html")
+
