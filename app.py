@@ -1,5 +1,5 @@
-from flask import Flask
-app = Flask(__name__)
+from flask import Flask, render_template, session, redirect, url_for
+from auth import auth
 
 @app.route("/")
 def start():
