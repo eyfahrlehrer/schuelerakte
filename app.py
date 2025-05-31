@@ -101,9 +101,8 @@ def diagrammkarte():
 @app.route("/saved")
 def show_saved():
     try:
-        with open("diagrammkarte.txt", "r", encoding="utf-8") as f:
+        with open("saved_diagrammkarte.txt", "r", encoding="utf-8") as f:
             content = f.read()
+        return f"<pre>{content}</pre>"
     except FileNotFoundError:
-        content = "Noch keine Einträge vorhanden."
-
-    return render_template("saved.html", content=content)
+        return "Noch keine Eintragungen vorhanden."
