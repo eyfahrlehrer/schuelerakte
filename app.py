@@ -19,7 +19,7 @@ def diagrammkarte():
         aufbau = request.form.getlist("aufbau")
         leistung = request.form.getlist("leistung")
 
-        print("📋 Schülerdaten gespeichert:")
+        print("Schülerdaten gespeichert:")
         print("Name:", name)
         print("Vorname:", vorname)
         print("Anlage-Nr.:", anlage)
@@ -68,6 +68,6 @@ def diagrammkarte():
     if request.method == "POST":
         data = request.form.to_dict(flat=False)
         save_diagrammkarte(data)
-        return "✅ Daten gespeichert!"
+        return "Daten gespeichert!"
     return render_template("diagrammkarte.html")
 
