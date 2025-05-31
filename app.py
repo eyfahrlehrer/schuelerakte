@@ -77,9 +77,8 @@ def diagrammkarte():
             ]
         }
 
-        save_diagrammkarte(data)  # Speichern in Datei
-        return redirect(url_for("diagrammkarte"))
-
+        save_diagrammkarte(data)  # ✅ speichern
+        return render_template("diagrammkarte.html")
     return render_template("diagrammkarte.html")
 
 @app.route("/saved")
