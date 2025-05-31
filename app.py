@@ -1,40 +1,44 @@
-from flask import Flask, render_template, session, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 from auth import auth
 from student import get_all_students, add_student
 from storage import save_diagrammkarte
-from storage import save_diagrammkarte
 
 app = Flask(__name__)
-app.secret_key = "supergeheim"  # wichtig für Login-Sessions
+app.secret_key = "supergeheim"  # Wichtig für Login-Sessions
 
-# Blueprint für Login verwenden
+# Login-Blueprint registrieren
 app.register_blueprint(auth)
-        
+
+# ========== ROUTE: STARTSEITE ==========
+@app.route("/start")
+def start():
+    if "user" in session:
+        return render_template("start.html")
+    else:
+        return redirect(url_for("auth.login"))
+
+# ========== ROUTE: SCHÜLERÜBERSICHT ==========
 @app.route("/schueler")
 def schueler():
-    if 'user' not in session:
-        return redirect(url_for('auth.login'))
+    if "user" not in session:
+        return redirect(url_for("auth.login"))
     return render_template("students.html", schueler=get_all_students())
-    
+
+# ========== ROUTE: NEUEN SCHÜLER HINZUFÜGEN ==========
 @app.route("/add", methods=["GET", "POST"])
 def add():
-    if 'user' not in session:
-        return redirect(url_for('auth.login'))
+    if "user" not in session:
+        return redirect(url_for("auth.login"))
 
     if request.method == "POST":
-        name = request.form["name"]
-        progress = request.form["progress"]
+        name = request.form.get("name")
+        progress = request.form.get("progress")
         add_student(name, progress)
-        return redirect(url_for('schueler'))
+        return redirect(url_for("schueler"))
 
     return render_template("add.html")
 
-@app.route("/diagrammkarte")
-def diagrammkarte():
-    return render_template("diagrammkarte.html")
-
-from storage import save_diagrammkarte
-
+# ========== ROUTE: AUSBILDUNGSDIAGRAMMKARTE ==========
 @app.route("/diagrammkarte", methods=["GET", "POST"])
 def diagrammkarte():
     if request.method == "POST":
@@ -42,22 +46,17 @@ def diagrammkarte():
             "name": request.form.get("name"),
             "vorname": request.form.get("vorname"),
             "anlage": request.form.get("anlage"),
-            "grundstufe": [
-                key for key in request.form.keys() if key.startswith("grund_")
-            ],
-            "aufbaustufe": [
-                key for key in request.form.keys() if key.startswith("aufbau_")
-            ],
-            "leistungsstufe": [
-                key for key in request.form.keys() if key.startswith("leistung_")
-            ]
+            "grundstufe": [key for key in request.form.keys() if key.startswith("grund_")],
+            "aufbaustufe": [key for key in request.form.keys() if key.startswith("aufbau_")],
+            "leistungsstufe": [key for key in request.form.keys() if key.startswith("leistung_")]
         }
 
         save_diagrammkarte(data)
-        return render_template("diagrammkarte.html", success=True)
+        return render_template("diagrammkarte.html", status="✅ Daten gespeichert")
 
-    return render_template("diagrammkarte.html", success=False)
+    return render_template("diagrammkarte.html")
 
+# ========== ROUTE: GELESENE DATEI ANZEIGEN (optional) ==========
 @app.route("/saved")
 def show_saved():
     try:
@@ -65,4 +64,8 @@ def show_saved():
             content = f.read()
         return f"<pre>{content}</pre>"
     except FileNotFoundError:
-        return "Noch keine Eintragungen vorhanden."
+        return "Noch keine Eintragung vorhanden."
+
+# ========== START DER APP (lokal) ==========
+if __name__ == "__main__":
+    app.run(debug=True)
