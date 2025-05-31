@@ -1,6 +1,7 @@
 from flask import Flask, render_template, session, redirect, url_for
 from auth import auth
 from student import get_all_students, add_student
+from storage import save_diagrammkarte
 
 app = Flask(__name__)
 app.secret_key = "supergeheim"  # wichtig für Login-Sessions
@@ -60,5 +61,13 @@ def diagrammkarte():
         form_data = request.form.to_dict()
         save_diagrammkarte(form_data)
         return "Daten gespeichert!"  # später schöner
+    return render_template("diagrammkarte.html")
+
+@app.route("/diagrammkarte", methods=["GET", "POST"])
+def diagrammkarte():
+    if request.method == "POST":
+        data = request.form.to_dict(flat=False)
+        save_diagrammkarte(data)
+        return "✅ Daten gespeichert!"
     return render_template("diagrammkarte.html")
 
