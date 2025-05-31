@@ -59,23 +59,7 @@ from storage import save_diagrammkarte
 @app.route("/diagrammkarte", methods=["GET", "POST"])
 def diagrammkarte():
     if request.method == "POST":
-        
-        
-        
-    
-
-
-
-    
-        
-    
-        
-    
-
-
-
-    
-        data = {
+  data = {
             "name": request.form.get("name"),
             "vorname": request.form.get("vorname"),
             "anlage": request.form.get("anlage"),
