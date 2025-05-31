@@ -9,27 +9,6 @@ app.secret_key = "supergeheim"  # wichtig für Login-Sessions
 
 # Blueprint für Login verwenden
 app.register_blueprint(auth)
-
-@app.route("/diagrammkarte", methods=["GET", "POST"])
-def diagrammkarte():
-    if request.method == "POST":
-        name = request.form.get("name")
-        vorname = request.form.get("vorname")
-        anlage = request.form.get("anlage")
-        grund = request.form.getlist("grund")
-        aufbau = request.form.getlist("aufbau")
-        leistung = request.form.getlist("leistung")
-
-        print("Schülerdaten gespeichert:")
-        print("Name:", name)
-        print("Vorname:", vorname)
-        print("Anlage-Nr.:", anlage)
-        print("Grundstufe:", grund)
-        print("Aufbaustufe:", aufbau)
-        print("Leistungsstufe:", leistung)
-
-    return render_template("diagrammkarte.html")
-
         
 @app.route("/schueler")
 def schueler():
