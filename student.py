@@ -1,18 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Schülerübersicht</title>
-</head>
-<body>
-    <h1>Schülerakte</h1>
-    <ul>
-        {% for s in schueler %}
-            <li>
-                <strong>{{ s.name }}</strong> – {{ s.progress }}
-            </li>
-        {% endfor %}
-    </ul>
+def get_all_students():
+    return [
+        {"id": 1, "name": "Max Mustermann", "progress": "Grundstoff abgeschlossen"},
+        {"id": 2, "name": "Lisa Beispiel", "progress": "Sonderfahrten in Planung"},
+    ]
 
-    <a href="/start">Zurück zur Startseite</a>
-</body>
-</html>
+def add_student(name, progress):
+    # Das wird später erweitert
+    pass
