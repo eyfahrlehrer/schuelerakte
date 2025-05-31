@@ -20,3 +20,16 @@ def schueler():
     if 'user' not in session:
         return redirect(url_for('auth.login'))
     return render_template("students.html", schueler=get_all_students())
+    
+@app.route("/add", methods=["GET", "POST"])
+def add():
+    if 'user' not in session:
+        return redirect(url_for('auth.login'))
+
+    if request.method == "POST":
+        name = request.form["name"]
+        progress = request.form["progress"]
+        add_student(name, progress)
+        return redirect(url_for('schueler'))
+
+    return render_template("add.html")
