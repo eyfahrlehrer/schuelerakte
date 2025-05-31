@@ -106,3 +106,12 @@ def show_saved():
         return f"<pre>{content}</pre>"
     except FileNotFoundError:
         return "Noch keine Eintragungen vorhanden."
+
+@app.route("/diagrammkarte", methods=["GET", "POST"])
+def diagrammkarte():
+    if request.method == "POST":
+        form_data = request.form.to_dict(flat=False)
+        save_diagrammkarte(form_data)
+        return "Daten gespeichert ✅"
+
+    return render_template("diagrammkarte.html")
