@@ -59,22 +59,22 @@ from storage import save_diagrammkarte
 @app.route("/diagrammkarte", methods=["GET", "POST"])
 def diagrammkarte():
     if request.method == "POST":
-        form_data = request.form.to_dict()
-        save_diagrammkarte(form_data)
-        return "Daten gespeichert!"  # später schöner
-    return render_template("diagrammkarte.html")
+        
+        
+        
+    
 
-@app.route("/diagrammkarte", methods=["GET", "POST"])
-def diagrammkarte():
-    if request.method == "POST":
-        data = request.form.to_dict(flat=False)
-        save_diagrammkarte(data)
-        return "Daten gespeichert!"
-    return render_template("diagrammkarte.html")
 
-@app.route("/diagrammkarte", methods=["GET", "POST"])
-def diagrammkarte():
-    if request.method == "POST":
+
+    
+        
+    
+        
+    
+
+
+
+    
         data = {
             "name": request.form.get("name"),
             "vorname": request.form.get("vorname"),
