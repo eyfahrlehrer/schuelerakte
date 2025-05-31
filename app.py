@@ -33,3 +33,7 @@ def add():
         return redirect(url_for('schueler'))
 
     return render_template("add.html")
+
+@app.route("/diagrammkarte")
+def diagrammkarte():
+    return render_template("diagrammkarte.html")
