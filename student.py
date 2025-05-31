@@ -4,7 +4,7 @@
     <title>Schülerübersicht</title>
 </head>
 <body>
-    <h1>📋 Schülerakte</h1>
+    <h1>Schülerakte</h1>
     <ul>
         {% for s in schueler %}
             <li>
