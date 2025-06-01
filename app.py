@@ -56,16 +56,8 @@ def diagrammkarte():
 
     return render_template("diagrammkarte.html")
 
-# ========== ROUTE: GELESENE DATEI ANZEIGEN (optional) ==========
-@app.route("/saved")
-def show_saved():
-    try:
-        with open("saved_diagrammkarte.txt", "r", encoding="utf-8") as f:
-            content = f.read()
-        return f"<pre>{content}</pre>"
-    except FileNotFoundError:
-        return "Noch keine Eintragung vorhanden."
-        
+
+# ========== ROUTE: GELESENE DATEI ANZEIGEN ==========
 @app.route("/saved")
 def show_saved():
     try:
@@ -74,6 +66,8 @@ def show_saved():
         return render_template("anzeigen.html", daten=content)
     except FileNotFoundError:
         return render_template("anzeigen.html", daten="❌ Noch keine Eintragung vorhanden.")
+
+
 # ========== START DER APP (lokal) ==========
 if __name__ == "__main__":
     app.run(debug=True)
