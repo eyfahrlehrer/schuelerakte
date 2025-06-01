@@ -154,6 +154,12 @@ def leistungsstufe():
         print("Leistungsstufe wurde abgeschickt:", request.form)
     return render_template("leistungsstufe.html")
 
+@app.route("/grundfahraufgaben", methods=["GET", "POST"])
+def grundfahraufgaben():
+    if request.method == "POST":
+        # Hier später Speicherung oder Verarbeitung der Formulardaten
+        print("Grundfahraufgaben ausgefüllt:", request.form)
+    return render_template("grundfahraufgaben.html")
 
 # Route: Gespeicherte Daten anzeigen
 @app.route("/anzeigen")
