@@ -66,15 +66,14 @@ def show_saved():
     except FileNotFoundError:
         return "Noch keine Eintragung vorhanden."
         
-@app.route("/anzeigen")
-def anzeigen():
+@app.route("/saved")
+def show_saved():
     try:
         with open("saved_diagrammkarte.txt", "r", encoding="utf-8") as f:
-            inhalt = f.read()
+            content = f.read()
+        return render_template("anzeigen.html", daten=content)
     except FileNotFoundError:
-        inhalt = "Noch keine Einträge vorhanden."
-
-    return render_template("anzeigen.html", daten=inhalt)
+        return render_template("anzeigen.html", daten="❌ Noch keine Eintragung vorhanden.")
 # ========== START DER APP (lokal) ==========
 if __name__ == "__main__":
     app.run(debug=True)
