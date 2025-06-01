@@ -264,6 +264,43 @@ def autobahnfahrt():
 
     return render_template("autobahnfahrt.html")
 
+@app.route("/daemmerung", methods=["GET", "POST"])
+def daemmerung():
+    if "username" not in session:
+        return redirect(url_for("login"))
+
+    if request.method == "POST":
+        eintrag = {
+            "stammdaten": session.get("stammdaten", {}),
+            "daemmerung": {
+                "beleuchtung": "beleuchtung" in request.form,
+                "kontrolle": "kontrolle" in request.form,
+                "benutzung": "benutzung" in request.form,
+                "einstellen": "einstellen" in request.form,
+                "fernlicht": "fernlicht" in request.form,
+                "beleuchtete_strasse": "beleuchtete_strasse" in request.form,
+                "unbeleuchtete_strasse": "unbeleuchtete_strasse" in request.form,
+                "parken": "parken" in request.form,
+                "besondere_situationen": "besondere_situationen" in request.form,
+                "schlechte_witterung": "schlechte_witterung" in request.form,
+                "bahnuebergaenge": "bahnuebergaenge" in request.form,
+                "tiere": "tiere" in request.form,
+                "unbeleuchtete_verkehrsteilnehmer": "unbeleuchtete_verkehrsteilnehmer" in request.form,
+                "besondere_anforderungen": "besondere_anforderungen" in request.form,
+                "blendung": "blendung" in request.form,
+                "orientierung": "orientierung" in request.form,
+                "abschlussbesprechung": "abschlussbesprechung" in request.form,
+                "notizen": request.form.get("notizen")
+            }
+        }
+
+        os.makedirs("db", exist_ok=True)
+        with open("db/saved_daemmerung.txt", "a", encoding="utf-8") as f:
+            f.write(str(eintrag) + "\n")
+
+        return render_template("daemmerung.html", status="✅ Dämmerungsfahrt gespeichert")
+
+    return render_template("daemmerung.html")
 
 # Route: Gespeicherte Daten anzeigen
 @app.route("/anzeigen")
