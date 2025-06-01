@@ -30,11 +30,23 @@
         <textarea name="notizen" id="notizen" rows="4" class="w-full border p-2 rounded" placeholder="Beobachtungen, Besonderheiten…"></textarea>
       </div>
 
-      <!-- Speichern -->
-      <div>
-        <button class="bg-rose-700 hover:bg-rose-800 text-white px-4 py-2 rounded">Speichern</button>
-      </div>
+      <!-- Navigationsleiste -->
+<div class="mt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+  <!-- Zurück -->
+  <a href="{{ url_for('daemmerung') }}" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded shadow w-full md:w-auto text-center">
+    ⬅️ Zurück
+  </a>
 
+  <!-- Speichern -->
+  <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded shadow w-full md:w-auto">
+    💾 Speichern
+  </button>
+
+  <!-- Weiter -->
+  <a href="{{ url_for('technik') }}" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded shadow w-full md:w-auto text-center">
+    Weiter ➡️
+  </a>
+</div>
     </form>
   </div>
 </body>
