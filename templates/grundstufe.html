@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Grundstufe – Ausbildungsdiagrammkarte</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-8">
+  <div class="max-w-2xl mx-auto bg-white p-6 rounded shadow">
+    <h1 class="text-2xl font-bold mb-6">Grundstufe</h1>
+
+    <form method="POST">
+      <div class="mb-4">
+        <label class="block">Name:
+          <input type="text" name="name" class="border rounded w-full p-2 mt-1" required>
+        </label>
+      </div>
+      <div class="mb-4">
+        <label class="block">Vorname:
+          <input type="text" name="vorname" class="border rounded w-full p-2 mt-1" required>
+        </label>
+      </div>
+
+      <div class="bg-yellow-100 p-4 rounded mb-4">
+        <h2 class="text-lg font-semibold mb-2">Grundstufe – Einweisung und Bedienung</h2>
+        <label class="block"><input type="checkbox" name="sitz"> Sitz einstellen</label>
+        <label class="block"><input type="checkbox" name="spiegel"> Spiegel einstellen</label>
+        <label class="block"><input type="checkbox" name="lenkrad"> Lenkradhaltung</label>
+        <label class="block"><input type="checkbox" name="pedale"> Pedale bedienen</label>
+        <label class="block"><input type="checkbox" name="guert"> Gurt anlegen/anpassen</label>
+      </div>
+
+      <button class="bg-blue-600 text-white px-4 py-2 rounded">Speichern</button>
+    </form>
+  </div>
+</body>
+</html>
