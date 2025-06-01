@@ -313,6 +313,37 @@ def anzeigen():
 
     return render_template("anzeigen.html", eintraege=daten)
 
+@app.route("/reifestufe", methods=["GET", "POST"])
+def reifestufe():
+    if "username" not in session:
+        return redirect(url_for("login"))
+
+    if request.method == "POST":
+        eintrag = {
+            "stammdaten": session.get("stammdaten", {}),
+            "reifestufe": {
+                "selbststaendiges_fahren": "selbststaendiges_fahren" in request.form,
+                "innerorts": "innerorts" in request.form,
+                "ausserorts": "ausserorts" in request.form,
+                "verantwortungsbewusstes_fahren": "verantwortungsbewusstes_fahren" in request.form,
+                "testfahrt": "testfahrt" in request.form,
+                "fakt": "fakt" in request.form,
+                "andere": "andere" in request.form,
+                "wiederholung_vertiefung": "wiederholung_vertiefung" in request.form,
+                "leistungsbewertung": "leistungsbewertung" in request.form,
+                "notizen": request.form.get("notizen")
+            }
+        }
+
+        os.makedirs("db", exist_ok=True)
+        with open("db/saved_reifestufe.txt", "a", encoding="utf-8") as f:
+            f.write(str(eintrag) + "\n")
+
+        return render_template("reifestufe.html", status="✅ Reifestufe gespeichert")
+
+    return render_template("reifestufe.html")
+
+
 # Route: PDF-Export der gespeicherten Daten
 @app.route("/pdf")
 def pdf_export():
