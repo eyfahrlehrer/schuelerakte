@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Schüler-Stammdaten</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-8">
+  <div class="max-w-2xl mx-auto bg-white p-6 rounded shadow">
+    <h1 class="text-2xl font-bold mb-6">Schüler-Stammdaten</h1>
+
+    <form method="POST" action="/grundstufe">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <label>Name:
+          <input type="text" name="name" class="w-full border p-2 rounded" required>
+        </label>
+
+        <label>Vorname:
+          <input type="text" name="vorname" class="w-full border p-2 rounded" required>
+        </label>
+
+        <label>Geburtsdatum:
+          <input type="date" name="geburtsdatum" class="w-full border p-2 rounded" required>
+        </label>
+
+        <label>Straße:
+          <input type="text" name="strasse" class="w-full border p-2 rounded">
+        </label>
+
+        <label>Hausnummer:
+          <input type="text" name="hausnummer" class="w-full border p-2 rounded">
+        </label>
+
+        <label>Mobilnummer:
+          <input type="tel" name="mobil" class="w-full border p-2 rounded">
+        </label>
+
+        <label>
+          <input type="checkbox" name="sehhilfe"> Sehhilfe erforderlich
+        </label>
+
+        <label>
+          <input type="checkbox" name="theorie_bestaanden"> Theorieprüfung bestanden
+        </label>
+      </div>
+
+      <div class="mt-6">
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Weiter zur Grundstufe</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
