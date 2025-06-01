@@ -2,6 +2,9 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from auth import auth
 from student import get_all_students, add_student
 from storage import save_diagrammkarte
+from flask import send_file
+import io
+from xhtml2pdf import pisa
 
 app = Flask(__name__)
 app.secret_key = "supergeheim"  # Wichtig für Login-Sessions
@@ -126,6 +129,35 @@ def download_view():
         return render_template("download.html", content=content)
     except FileNotFoundError:
         return "Noch keine Daten gespeichert."
+
+
+@app.route("/download/pdf")
+def download_pdf():
+    try:
+        with open("saved_diagrammkarte.txt", "r", encoding="utf-8") as f:
+            content = f.read()
+
+        html = f"""
+        <html>
+        <head><meta charset="UTF-8"></head>
+        <body>
+        <h1>Gespeicherte Ausbildungsdaten</h1>
+        <pre>{content}</pre>
+        </body>
+        </html>
+        """
+
+        result = io.BytesIO()
+        pisa_status = pisa.CreatePDF(io.StringIO(html), dest=result)
+        result.seek(0)
+
+        if pisa_status.err:
+            return "PDF konnte nicht erstellt werden.", 500
+
+        return send_file(result, mimetype='application/pdf', as_attachment=True, download_name='ausbildungsdaten.pdf')
+
+    except FileNotFoundError:
+        return render_template("anzeigen.html", fehler="❌ Noch keine gespeicherten Daten vorhanden.")
 
 # ========== START DER APP (lokal) ==========
 if __name__ == "__main__":
