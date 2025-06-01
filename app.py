@@ -183,6 +183,48 @@ def grundfahraufgaben():
 
     return render_template("grundfahraufgaben.html")
 
+@app.route("/ueberlandfahrt", methods=["GET", "POST"])
+def ueberlandfahrt():
+    if "username" not in session:
+        return redirect(url_for("login"))
+
+    if request.method == "POST":
+        eintrag = {
+            "stammdaten": session.get("stammdaten", {}),
+            "ueberlandfahrt": {
+                "angepasste_geschwindigkeit": "angepasste_geschwindigkeit" in request.form,
+                "abstand_vorne": "abstand_vorne" in request.form,
+                "abstand_hinten": "abstand_hinten" in request.form,
+                "abstand_seitlich": "abstand_seitlich" in request.form,
+                "beobachtungsspiegel": "beobachtungsspiegel" in request.form,
+                "verkehrszeichen": "verkehrszeichen" in request.form,
+                "kreuzungen_einmuendungen": "kreuzungen_einmuendungen" in request.form,
+                "kurven": "kurven" in request.form,
+                "steigerung": "steigerung" in request.form,
+                "gefaelle": "gefaelle" in request.form,
+                "alleen": "alleen" in request.form,
+                "ueberholen": "ueberholen" in request.form,
+                "liegen_geblieben": "liegen_geblieben" in request.form,
+                "fussgaenger": "fussgaenger" in request.form,
+                "ortseinfahrt": "ortseinfahrt" in request.form,
+                "wildtiere": "wildtiere" in request.form,
+                "leistungsgrenze": "leistungsgrenze" in request.form,
+                "ablenkung": "ablenkung" in request.form,
+                "orientierung": "orientierung" in request.form,
+                "notizen": request.form.get("notizen")
+            }
+        }
+
+        # In Datei speichern
+        os.makedirs("db", exist_ok=True)
+        with open("db/saved_ueberlandfahrt.txt", "a", encoding="utf-8") as f:
+            f.write(str(eintrag) + "\n")
+
+        return render_template("ueberlandfahrt.html", status="✅ Überlandfahrt gespeichert")
+
+    return render_template("ueberlandfahrt.html")
+
+
 
 # Route: Gespeicherte Daten anzeigen
 @app.route("/anzeigen")
