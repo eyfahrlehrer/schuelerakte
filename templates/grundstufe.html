@@ -6,28 +6,54 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100 p-8">
-  <div class="max-w-2xl mx-auto bg-white p-6 rounded shadow">
+  <div class="max-w-3xl mx-auto bg-white p-6 rounded shadow">
     <h1 class="text-2xl font-bold mb-6">Grundstufe</h1>
 
     <form method="POST">
+
       <div class="mb-4">
-        <label class="block">Name:
-          <input type="text" name="name" class="border rounded w-full p-2 mt-1" required>
-        </label>
-      </div>
-      <div class="mb-4">
-        <label class="block">Vorname:
-          <input type="text" name="vorname" class="border rounded w-full p-2 mt-1" required>
-        </label>
+        <label class="block font-semibold">Besonderheiten beim Einsteigen:</label>
+        <input type="checkbox" name="einsteigen"> <span>Ja</span>
       </div>
 
-      <div class="bg-yellow-100 p-4 rounded mb-4">
-        <h2 class="text-lg font-semibold mb-2">Grundstufe – Einweisung und Bedienung</h2>
-        <label class="block"><input type="checkbox" name="sitz"> Sitz einstellen</label>
-        <label class="block"><input type="checkbox" name="spiegel"> Spiegel einstellen</label>
-        <label class="block"><input type="checkbox" name="lenkrad"> Lenkradhaltung</label>
-        <label class="block"><input type="checkbox" name="pedale"> Pedale bedienen</label>
-        <label class="block"><input type="checkbox" name="guert"> Gurt anlegen/anpassen</label>
+      <div class="bg-yellow-50 p-4 rounded mb-4">
+        <h2 class="font-semibold mb-2">Einstellen von:</h2>
+        <label class="block"><input type="checkbox" name="sitz"> Sitz</label>
+        <label class="block"><input type="checkbox" name="lenkrad"> Lenkrad</label>
+        <label class="block"><input type="checkbox" name="spiegel"> Spiegel</label>
+        <label class="block"><input type="checkbox" name="kopfstuetze"> Kopfstütze</label>
+      </div>
+
+      <label class="block mb-2"><input type="checkbox" name="lenkhaltung"> Lenkradhaltung</label>
+      <label class="block mb-2"><input type="checkbox" name="pedale"> Pedale</label>
+      <label class="block mb-2"><input type="checkbox" name="guert"> Gurt anlegen/anpassen</label>
+      <label class="block mb-2"><input type="checkbox" name="wahlhebel"> Schalt-/Wählhebel</label>
+      <label class="block mb-2"><input type="checkbox" name="zuendschloss"> Zündschloss</label>
+      <label class="block mb-2"><input type="checkbox" name="motor"> Motor anlassen</label>
+      <label class="block mb-4"><input type="checkbox" name="anhalteuebungen"> Anfahr- bzw. Anhalteübungen</label>
+
+      <div class="mb-6">
+        <h2 class="font-semibold mb-2">Schaltübungen (umweltschonend)</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+          <label><input type="checkbox" name="hoch_1_2"> hoch: 1-2</label>
+          <label><input type="checkbox" name="hoch_2_3"> hoch: 2-3</label>
+          <label><input type="checkbox" name="hoch_3_4"> hoch: 3-4</label>
+          <label><input type="checkbox" name="hoch_4_5"> hoch: 4-5</label>
+          <label><input type="checkbox" name="runter_4_3"> runter: 4-3</label>
+          <label><input type="checkbox" name="runter_3_2"> runter: 3-2</label>
+          <label><input type="checkbox" name="runter_2_1"> runter: 2-1</label>
+          <label><input type="checkbox" name="runter_4_2"> runter: 4-2</label>
+          <label><input type="checkbox" name="runter_4_1"> runter: 4-1</label>
+          <label><input type="checkbox" name="runter_3_1"> runter: 3-1</label>
+          <label><input type="checkbox" name="runter_5_2"> runter: 5-2</label>
+        </div>
+      </div>
+
+      <label class="block mb-6"><input type="checkbox" name="lenkuebungen"> Lenkübungen</label>
+
+      <div class="mb-6">
+        <label for="notizen" class="block font-semibold mb-1">Notizen des Fahrlehrers:</label>
+        <textarea name="notizen" id="notizen" rows="4" class="w-full border p-2 rounded" placeholder="Besonderheiten, Fortschritt oder Hinweise..."></textarea>
       </div>
 
       <button class="bg-blue-600 text-white px-4 py-2 rounded">Speichern</button>
