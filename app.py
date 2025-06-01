@@ -44,6 +44,26 @@ def diagrammkarte():
 
     return render_template("diagrammkarte.html")
 
+@app.route("/stammdaten", methods=["GET", "POST"])
+def stammdaten():
+    if "username" not in session:
+        return redirect(url_for("login"))
+
+    if request.method == "POST":
+        session["stammdaten"] = {
+            "name": request.form.get("name"),
+            "vorname": request.form.get("vorname"),
+            "geburtsdatum": request.form.get("geburtsdatum"),
+            "strasse": request.form.get("strasse"),
+            "hausnummer": request.form.get("hausnummer"),
+            "mobil": request.form.get("mobil"),
+            "sehhilfe": "sehhilfe" in request.form,
+            "theorie_bestaanden": "theorie_bestaanden" in request.form
+        }
+        return redirect(url_for("grundstufe"))
+
+    return render_template("stammdaten.html")
+
 @app.route("/grundstufe", methods=["GET", "POST"])
 def grundstufe():
     if "username" not in session:
