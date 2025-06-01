@@ -123,6 +123,14 @@ def aufbaustufe():
                     "sichern": "g_sichern" in request.form,
                     "schalten": "g_schalten" in request.form
                 },
+                "steigung": {
+                    "anhalten": "s_anh" in request.form,
+                    "anfahren": "s_anf" in request.form,
+                    "rueckwaerts": "s_rueck" in request.form,
+                    "sichern": "s_sichern" in request.form,
+                    "schalten": "s_schalten" in request.form
+                },
+
                 "tastgeschwindigkeit": "tastgeschwindigkeit" in request.form,
                 "kontrolleinrichtungen": "kontrolleinrichtungen" in request.form,
                 "besonderheiten": "besonderheiten" in request.form,
