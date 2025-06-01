@@ -11,8 +11,8 @@
 
     <form method="POST">
 
-      <div class="mb-4">
-        <label class="block font-semibold">Besonderheiten beim Einsteigen:</label>
+      <div class="bg-yellow-50 p-4 rounded mb-4">
+        <label class="block font-semibold mb-2">Besonderheiten beim Einsteigen:</label>
         <input type="checkbox" name="einsteigen"> <span>Ja</span>
       </div>
 
@@ -24,15 +24,17 @@
         <label class="block"><input type="checkbox" name="kopfstuetze"> Kopfstütze</label>
       </div>
 
-      <label class="block mb-2"><input type="checkbox" name="lenkhaltung"> Lenkradhaltung</label>
-      <label class="block mb-2"><input type="checkbox" name="pedale"> Pedale</label>
-      <label class="block mb-2"><input type="checkbox" name="guert"> Gurt anlegen/anpassen</label>
-      <label class="block mb-2"><input type="checkbox" name="wahlhebel"> Schalt-/Wählhebel</label>
-      <label class="block mb-2"><input type="checkbox" name="zuendschloss"> Zündschloss</label>
-      <label class="block mb-2"><input type="checkbox" name="motor"> Motor anlassen</label>
-      <label class="block mb-4"><input type="checkbox" name="anhalteuebungen"> Anfahr- bzw. Anhalteübungen</label>
+      <div class="bg-yellow-50 p-4 rounded mb-4">
+        <label class="block mb-2"><input type="checkbox" name="lenkhaltung"> Lenkradhaltung</label>
+        <label class="block mb-2"><input type="checkbox" name="pedale"> Pedale</label>
+        <label class="block mb-2"><input type="checkbox" name="guert"> Gurt anlegen/anpassen</label>
+        <label class="block mb-2"><input type="checkbox" name="wahlhebel"> Schalt-/Wählhebel</label>
+        <label class="block mb-2"><input type="checkbox" name="zuendschloss"> Zündschloss</label>
+        <label class="block mb-2"><input type="checkbox" name="motor"> Motor anlassen</label>
+        <label class="block mb-2"><input type="checkbox" name="anhalteuebungen"> Anfahr- bzw. Anhalteübungen</label>
+      </div>
 
-      <div class="mb-6">
+      <div class="bg-yellow-50 p-4 rounded mb-4">
         <h2 class="font-semibold mb-2">Schaltübungen (umweltschonend)</h2>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
           <label><input type="checkbox" name="hoch_1_2"> hoch: 1-2</label>
@@ -49,9 +51,12 @@
         </div>
       </div>
 
-      <label class="block mb-6"><input type="checkbox" name="lenkuebungen"> Lenkübungen</label>
+      <div class="bg-yellow-50 p-4 rounded mb-6">
+        <label class="block font-semibold mb-1">Lenkübungen:</label>
+        <input type="checkbox" name="lenkuebungen">
+      </div>
 
-      <div class="mb-6">
+      <div class="bg-yellow-50 p-4 rounded mb-6">
         <label for="notizen" class="block font-semibold mb-1">Notizen des Fahrlehrers:</label>
         <textarea name="notizen" id="notizen" rows="4" class="w-full border p-2 rounded" placeholder="Besonderheiten, Fortschritt oder Hinweise..."></textarea>
       </div>
