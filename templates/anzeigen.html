@@ -2,14 +2,41 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Gespeicherte Ausbildungsdiagramme</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gespeicherte Ausbildungsdiagrammkarten</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #2e5f9c;
+        }
+        .daten-block {
+            white-space: pre-wrap;
+            background: #f8f9fa;
+            border-left: 5px solid #2e5f9c;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 0.95em;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #2e5f9c;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
-    <h1>Gespeicherte Ausbildungsdiagrammkarten</h1>
-    <div>
-        <pre>{{ daten }}</pre>
+    <h1>📋 Gespeicherte Ausbildungsdiagrammkarten</h1>
+
+    <div class="daten-block">
+        {{ daten }}
     </div>
-    <br>
-    <a href="/diagrammkarte">Zurück zur Erfassung</a>
+
+    <a href="/diagrammkarte" class="back-link">🔙 Neue Karte eintragen</a>
 </body>
 </html>
