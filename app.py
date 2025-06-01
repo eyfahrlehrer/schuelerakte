@@ -96,7 +96,7 @@ def grundstufe():
         with open("saved_grundstufe.txt", "a", encoding="utf-8") as f:
             f.write(str(eintrag) + "\\n")
 
-        return render_template("grundstufe.html", status=\"✅ Grundstufe gespeichert\")
+        return render_template("grundstufe.html", status="✅ Grundstufe gespeichert")
 
     return render_template("grundstufe.html")
 
