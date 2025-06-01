@@ -66,7 +66,23 @@
         <textarea name="notizen" id="notizen" rows="4" class="w-full border p-2 rounded" placeholder="Besonderheiten, Fortschritt oder Hinweise..."></textarea>
       </div>
 
-      <button class="bg-blue-600 text-white px-4 py-2 rounded">Speichern</button>
+     <!-- Navigation -->
+<div class="mt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+  <!-- Zurück -->
+  <a href="{{ url_for('stammdaten') }}" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded shadow">
+    ⬅️ Zurück
+  </a>
+
+  <!-- Speichern -->
+  <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded shadow">
+    💾 Speichern
+  </button>
+
+  <!-- Weiter -->
+  <a href="{{ url_for('aufbaustufe') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded shadow">
+    Weiter ➡️
+  </a>
+</div> 
     </form>
   </div>
 </body>
