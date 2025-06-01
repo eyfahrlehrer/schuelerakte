@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Reifestufe</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-6">
+  <div class="max-w-3xl mx-auto bg-rose-300 p-6 rounded shadow">
+    <h1 class="text-2xl font-bold text-rose-900 mb-4">Reifestufe</h1>
+
+    <form method="POST" class="space-y-4">
+
+      <!-- Reifestufe-Checkboxen -->
+      <div>
+        <label class="block"><input type="checkbox" name="selbststaendiges_fahren"> Selbstständiges Fahren</label>
+        <label class="block"><input type="checkbox" name="innerorts"> Innerorts</label>
+        <label class="block"><input type="checkbox" name="ausserorts"> Außerorts</label>
+        <label class="block"><input type="checkbox" name="verantwortungsbewusstes_fahren"> Verantwortungsbewusstes Fahren</label>
+        <label class="block"><input type="checkbox" name="testfahrt"> Testfahrt unter Prüfungsbedingungen</label>
+        <label class="block"><input type="checkbox" name="fakt"> FAKT</label>
+        <label class="block"><input type="checkbox" name="andere"> Andere</label>
+        <label class="block"><input type="checkbox" name="wiederholung_vertiefung"> Wiederholung / Vertiefung</label>
+        <label class="block"><input type="checkbox" name="leistungsbewertung"> Leistungsbewertung</label>
+      </div>
+
+      <!-- Notizen -->
+      <div>
+        <label for="notizen" class="block font-semibold">Notizen des Fahrlehrers:</label>
+        <textarea name="notizen" id="notizen" rows="4" class="w-full border p-2 rounded" placeholder="Beobachtungen, Besonderheiten…"></textarea>
+      </div>
+
+      <!-- Speichern -->
+      <div>
+        <button class="bg-rose-700 hover:bg-rose-800 text-white px-4 py-2 rounded">Speichern</button>
+      </div>
+
+    </form>
+  </div>
+</body>
+</html>
