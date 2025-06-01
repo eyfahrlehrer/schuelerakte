@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Sonderfahrt: Autobahnfahrt</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-6">
+  <div class="max-w-4xl mx-auto bg-purple-300 p-6 rounded shadow">
+    <h1 class="text-2xl font-bold text-purple-900 mb-4">Sonderfahrt: Autobahnfahrt</h1>
+
+    <form method="POST" class="space-y-4">
+
+      <!-- Autobahn Basics -->
+      <div>
+        <label class="block"><input type="checkbox" name="fahrtplanung"> Fahrtplanung</label>
+        <label class="block"><input type="checkbox" name="einfahren_bab"> Einfahren in BAB</label>
+        <label class="block"><input type="checkbox" name="freistreifenwahl"> Freistreifenwahl</label>
+        <label class="block"><input type="checkbox" name="geschwindigkeit"> Geschwindigkeit</label>
+      </div>
+
+      <!-- Abstand -->
+      <div>
+        <p class="font-semibold mt-4">Abstand</p>
+        <label class="block"><input type="checkbox" name="abstand_vorne"> Vorne</label>
+        <label class="block"><input type="checkbox" name="abstand_hinten"> Hinten</label>
+        <label class="block"><input type="checkbox" name="abstand_seitlich"> Seitlich</label>
+      </div>
+
+      <!-- Weitere Themen -->
+      <div>
+        <label class="block"><input type="checkbox" name="ueberholen"> Überholen</label>
+        <label class="block"><input type="checkbox" name="schildermarkierungen"> Schildermarkierungen</label>
+        <label class="block"><input type="checkbox" name="vorbeifahren_anschlussstellen"> Vorbeifahren Anschlussstellen</label>
+        <label class="block"><input type="checkbox" name="rastparkplaetze"> Rastparkplätze und Tankstellen</label>
+        <label class="block"><input type="checkbox" name="verhalten_unfaelle"> Verhalten bei Unfällen</label>
+        <label class="block"><input type="checkbox" name="dichter_verkehr"> Dichter Verkehr / Stau</label>
+        <label class="block"><input type="checkbox" name="besondere_situation"> Besondere Situation</label>
+        <label class="block"><input type="checkbox" name="besondere_anforderungen"> Besondere Anforderungen</label>
+        <label class="block"><input type="checkbox" name="leistungsgrenze"> Leistungsgrenze</label>
+        <label class="block"><input type="checkbox" name="ablenkung"> Ablenkung</label>
+        <label class="block"><input type="checkbox" name="konfliktsituation"> Konfliktsituation</label>
+        <label class="block"><input type="checkbox" name="verlassen_bab"> Verlassen der BAB</label>
+      </div>
+
+      <!-- Notizen -->
+      <div class="mt-4">
+        <label for="notizen" class="block font-semibold">Notizen des Fahrlehrers:</label>
+        <textarea name="notizen" id="notizen" rows="4" class="w-full border p-2 rounded" placeholder="Besonderheiten oder Beobachtungen…"></textarea>
+      </div>
+
+      <button class="mt-4 bg-purple-700 hover:bg-purple-800 text-white px-4 py-2 rounded">Speichern</button>
+
+    </form>
+  </div>
+</body>
+</html>
