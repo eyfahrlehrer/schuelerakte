@@ -379,8 +379,7 @@ def pdf_export():
     except Exception as e:
         return f"Fehler bei der PDF-Erzeugung: {e}"
 
-@app.route("/aufbaustufe")
-def aufbaustufe():
+
 
 # App starten
 if __name__ == "__main__":
