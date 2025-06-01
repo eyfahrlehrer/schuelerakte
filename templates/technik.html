@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Technik</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-6">
+  <div class="max-w-7xl mx-auto bg-lime-300 p-6 rounded shadow">
+    <h1 class="text-2xl font-bold text-lime-900 mb-4">Technik</h1>
+
+    <form method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <!-- Linke Seite -->
+      <div class="space-y-4">
+        <fieldset class="border border-gray-500 rounded p-4">
+          <legend class="font-semibold">Reifen</legend>
+          <label><input type="checkbox" name="reifen_beschaedigung"> Beschädigungen</label><br>
+          <label><input type="checkbox" name="profiltiefe_druck"> Profiltiefe, Reifendruck</label>
+        </fieldset>
+
+        <fieldset class="border border-gray-500 rounded p-4">
+          <legend class="font-semibold">Lichtanlage</legend>
+          <label><input type="checkbox" name="standlicht"> Standlicht</label><br>
+          <label><input type="checkbox" name="abbendlicht"> Abbendlicht</label><br>
+          <label><input type="checkbox" name="fernlicht"> Fernlicht</label><br>
+          <label><input type="checkbox" name="schlussleuchten"> Schlussleuchten m. Kennzeichenbeleuchtung</label><br>
+          <label><input type="checkbox" name="nebellicht"> Nebelschlussleuchte</label><br>
+          <label><input type="checkbox" name="warnblinker"> Warnblinkanlage</label><br>
+          <label><input type="checkbox" name="blinker"> Blinker</label><br>
+          <label><input type="checkbox" name="hupe"> Hupe</label><br>
+          <label><input type="checkbox" name="bremsleuchte"> Bremsleuchte</label><br>
+          <label><input type="checkbox" name="kontrollleuchten"> Kontrollleuchten benennen</label>
+        </fieldset>
+
+        <fieldset class="border border-gray-500 rounded p-4">
+          <legend class="font-semibold">Lenkung</legend>
+          <label><input type="checkbox" name="lenkschloss"> Lenkschloss entriegeln</label><br>
+          <label><input type="checkbox" name="lenkspiel"> Überprüfen des Lenkspiels</label>
+        </fieldset>
+
+        <fieldset class="border border-gray-500 rounded p-4">
+          <legend class="font-semibold">Bremsen</legend>
+          <label><input type="checkbox" name="betriebsbremse"> Betriebsbremse</label><br>
+          <label><input type="checkbox" name="feststellbremse"> Feststellbremse</label>
+        </fieldset>
+
+        <fieldset class="border border-gray-500 rounded p-4">
+          <legend class="font-semibold">Motorraum</legend>
+          <label><input type="checkbox" name="motoroel"> Motoröl</label><br>
+          <label><input type="checkbox" name="kuehlmittel"> Kühlmittel</label><br>
+          <label><input type="checkbox" name="wischwasser"> Scheibenwischwasser</label>
+        </fieldset>
+
+        <fieldset class="border border-gray-500 rounded p-4">
+          <legend class="font-semibold">Tanken</legend>
+          <label><input type="checkbox" name="tanken"> Tankvorgang</label>
+        </fieldset>
+      </div>
+
+      <!-- Rechte Seite -->
+      <div class="space-y-4">
+        <fieldset class="border border-gray-500 rounded p-4">
+          <legend class="font-semibold">Sicherungsmittel</legend>
+          <label><input type="checkbox" name="warndreieck"> Warndreieck</label><br>
+          <label><input type="checkbox" name="verbandskasten"> Verbandskasten</label><br>
+          <label><input type="checkbox" name="bordwerkzeug"> Bordwerkzeug</label><br>
+          <label><input type="checkbox" name="abschalten"> Zusätzliche Abschalten</label>
+        </fieldset>
+
+        <fieldset class="border border-gray-500 rounded p-4">
+          <legend class="font-semibold">Außenkontrolle</legend>
+          <label><input type="checkbox" name="schaden_sauberkeit"> Schäden, Sauberkeit</label><br>
+          <label><input type="checkbox" name="scheibenwischer"> Scheibenwischer</label><br>
+          <label><input type="checkbox" name="kennzeichen"> Kennzeichen / HU</label><br>
+          <label><input type="checkbox" name="spiegel"> Spiegel</label><br>
+          <label><input type="checkbox" name="beleuchtung"> Beleuchtung</label>
+        </fieldset>
+
+        <fieldset class="border border-gray-500 rounded p-4">
+          <legend class="font-semibold">Ladung</legend>
+          <label><input type="checkbox" name="ladung_sicherung"> Sicherung</label><br>
+          <label><input type="checkbox" name="ladung_kennzeichnung"> Kenntlichmachung</label>
+        </fieldset>
+
+        <fieldset class="border border-gray-500 rounded p-4">
+          <legend class="font-semibold">Fahrerassistenzsysteme</legend>
+          <label><input type="checkbox" name="assistent_ein"> Ein-/Ausschalten</label><br>
+          <label><input type="checkbox" name="assistent_anwenden"> Anwendung</label>
+        </fieldset>
+
+        <fieldset class="border border-gray-500 rounded p-4">
+          <legend class="font-semibold">Heizung / Lüftung</legend>
+          <label><input type="checkbox" name="heizung"> Heizung</label><br>
+          <label><input type="checkbox" name="lueftung"> Lüftung</label><br>
+          <label><input type="checkbox" name="klimaanlage"> Klimaanlage</label><br>
+          <label><input type="checkbox" name="heckscheibenheizung"> Heckscheibenheizung</label><br>
+          <label><input type="checkbox" name="sonderheizung"> Beheizte Sonderausstattung</label>
+        </fieldset>
+
+        <fieldset class="border border-gray-500 rounded p-4">
+          <legend class="font-semibold">Energiesparende Nutzung</legend>
+          <label><input type="checkbox" name="verbraucher_aus"> Keine unnötigen Verbraucher</label><br>
+          <label><input type="checkbox" name="abschalten_rechtzeitig"> Rechtzeitiges Abschalten</label>
+        </fieldset>
+
+        <fieldset class="border border-gray-500 rounded p-4">
+          <legend class="font-semibold">Witterung</legend>
+          <label><input type="checkbox" name="schlechte_witterung"> Fahren bei schlechter Witterung</label><br>
+          <label><input type="checkbox" name="wit_lueftung"> Lüftung</label><br>
+          <label><input type="checkbox" name="wit_beleuchtung"> Beleuchtung</label><br>
+          <label><input type="checkbox" name="wit_scheibenwischer"> Scheibenwischer/-wasser</label><br>
+          <label><input type="checkbox" name="regen"> Regen, Sprühnebel</label><br>
+          <label><input type="checkbox" name="aquaplaning"> Wasserlachen, Aquaplaning</label><br>
+          <label><input type="checkbox" name="wind"> Wind, Sturm, Böen</label><br>
+          <label><input type="checkbox" name="schnee_matsch"> Schnee und Matsch</label><br>
+          <label><input type="checkbox" name="eis"> Eis</label>
+        </fieldset>
+      </div>
+
+      <!-- Notizen -->
+      <div class="md:col-span-2">
+        <label for="notizen" class="block font-semibold">Notizen des Fahrlehrers:</label>
+        <textarea name="notizen" id="notizen" rows="4" class="w-full border p-2 rounded" placeholder="Kommentare, Hinweise etc."></textarea>
+      </div>
+
+      <div class="md:col-span-2">
+        <button class="bg-lime-700 hover:bg-lime-800 text-white px-4 py-2 rounded">Speichern</button>
+      </div>
+
+    </form>
+  </div>
+</body>
+</html>
