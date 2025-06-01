@@ -1,136 +1,55 @@
-from flask import Flask, render_template, request, redirect, url_for, session
-from auth import auth
-from student import get_all_students, add_student
-from storage import save_diagrammkarte
-from flask import send_file
+from flask import Flask, render_template, request, redirect, url_for, session, send_file
 import io
 from xhtml2pdf import pisa
 
 app = Flask(__name__)
-app.secret_key = "supergeheim"  # Wichtig für Login-Sessions
+app.secret_key = "geheimcode123"
 
-# Login-Blueprint registrieren
-app.register_blueprint(auth)
+# Dummy-Login-Daten
+users = {
+    "admin": "passwort"
+}
 
-# ========== ROUTE: STARTSEITE ==========
-@app.route("/start")
-def start():
-    if "user" in session:
-        return render_template("start.html")
-    else:
-        return redirect(url_for("auth.login"))
-
-# ========== ROUTE: SCHÜLERÜBERSICHT ==========
-@app.route("/schueler")
-def schueler():
-    if "user" not in session:
-        return redirect(url_for("auth.login"))
-    return render_template("students.html", schueler=get_all_students())
-
-# ========== ROUTE: NEUEN SCHÜLER HINZUFÜGEN ==========
-@app.route("/add", methods=["GET", "POST"])
-def add():
-    if "user" not in session:
-        return redirect(url_for("auth.login"))
-
+# Route: Startseite mit Login
+@app.route("/", methods=["GET", "POST"])
+def login():
     if request.method == "POST":
-        name = request.form.get("name")
-        progress = request.form.get("progress")
-        add_student(name, progress)
-        return redirect(url_for("schueler"))
+        username = request.form["username"]
+        password = request.form["password"]
+        if username in users and users[username] == password:
+            session["username"] = username
+            return redirect(url_for("diagrammkarte"))
+        else:
+            return render_template("login.html", fehler="❌ Falscher Benutzername oder Passwort.")
+    return render_template("login.html")
 
-    return render_template("add.html")
-
-# ========== ROUTE: AUSBILDUNGSDIAGRAMMKARTE ==========
+# Route: Formular zur Diagrammkarte
 @app.route("/diagrammkarte", methods=["GET", "POST"])
 def diagrammkarte():
+    if "username" not in session:
+        return redirect(url_for("login"))
     if request.method == "POST":
-        data = {
-            "name": request.form.get("name"),
-            "vorname": request.form.get("vorname"),
-            "anlage": request.form.get("anlage"),
-            "grundstufe": [key for key in request.form.keys() if key.startswith("grund_")],
-            "aufbaustufe": [key for key in request.form.keys() if key.startswith("aufbau_")],
-            "leistungsstufe": [key for key in request.form.keys() if key.startswith("leistung_")]
-        }
-
-        save_diagrammkarte(data)
-        return render_template("diagrammkarte.html", status="✅ Daten gespeichert")
-
+        name = request.form.get("name", "")
+        daten = dict(request.form)
+        daten.pop("name", None)  # „Name“-Feld separat
+        with open("saved_diagrammkarte.txt", "w", encoding="utf-8") as f:
+            f.write(f"Name: {name}\n")
+            for feld, wert in daten.items():
+                f.write(f"{feld}: {wert}\n")
+        return redirect(url_for("anzeigen"))
     return render_template("diagrammkarte.html")
 
-
-# ========== ROUTE: GELESENE DATEI ANZEIGEN ==========
+# Route: Anzeige gespeicherter Daten
 @app.route("/saved")
-def show_saved():
+def anzeigen():
     try:
         with open("saved_diagrammkarte.txt", "r", encoding="utf-8") as f:
-            content = f.read()
-        return render_template("anzeigen.html", daten=content)
+            daten = f.read()
+        return render_template("anzeigen.html", daten=daten)
     except FileNotFoundError:
-        return render_template("anzeigen.html", daten="❌ Noch keine Eintragung vorhanden.")
+        return render_template("anzeigen.html", fehler="❌ Noch keine Daten gespeichert.")
 
-from flask import make_response
-import pdfkit
-
-@app.route("/saved/pdf")
-def download_pdf():
-    try:
-        with open("saved_diagrammkarte.txt", "r", encoding="utf-8") as f:
-            content = f.read()
-
-        html_content = f"""
-        <html>
-        <head>
-            <meta charset='UTF-8'>
-            <style>
-                body {{
-                    font-family: Arial, sans-serif;
-                    padding: 20px;
-                    line-height: 1.6;
-                }}
-                h1 {{
-                    color: #2a5d9f;
-                }}
-                pre {{
-                    background: #f4f4f4;
-                    padding: 10px;
-                    border-left: 5px solid #2a5d9f;
-                    white-space: pre-wrap;
-                }}
-            </style>
-        </head>
-        <body>
-            <h1>Gespeicherte Ausbildungsdaten</h1>
-            <pre>{content}</pre>
-        </body>
-        </html>
-        """
-
-        # Falls du lokal testest:
-        # config = pdfkit.configuration(wkhtmltopdf="C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe")
-        # pdf = pdfkit.from_string(html_content, False, configuration=config)
-
-        pdf = pdfkit.from_string(html_content, False)  # Für Server (Render)
-
-        response = make_response(pdf)
-        response.headers['Content-Type'] = 'application/pdf'
-        response.headers['Content-Disposition'] = 'attachment; filename=ausbildungsdaten.pdf'
-        return response
-    except Exception as e:
-        return f"Fehler bei der PDF-Erzeugung: {e}"
-
-
-@app.route("/download")
-def download_view():
-    try:
-        with open("saved_diagrammkarte.txt", "r", encoding="utf-8") as f:
-            content = f.read()
-        return render_template("download.html", content=content)
-    except FileNotFoundError:
-        return "Noch keine Daten gespeichert."
-
-
+# Route: PDF-Download
 @app.route("/download/pdf")
 def download_pdf():
     try:
@@ -157,8 +76,8 @@ def download_pdf():
         return send_file(result, mimetype='application/pdf', as_attachment=True, download_name='ausbildungsdaten.pdf')
 
     except FileNotFoundError:
-        return render_template("anzeigen.html", fehler="❌ Noch keine gespeicherten Daten vorhanden.")
+        return render_template("anzeigen.html", fehler="❌ Es gibt noch keine gespeicherten Daten zum PDF-Download.")
 
-# ========== START DER APP (lokal) ==========
+# Server starten
 if __name__ == "__main__":
     app.run(debug=True)
