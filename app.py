@@ -71,23 +71,35 @@ def grundstufe():
 
     if request.method == "POST":
         eintrag = {
-            "name": request.form.get("name"),
-            "vorname": request.form.get("vorname"),
+            "stammdaten": session.get("stammdaten", {}),
             "grundstufe": {
+                "einsteigen": "einsteigen" in request.form,
                 "sitz": "sitz" in request.form,
-                "spiegel": "spiegel" in request.form,
                 "lenkrad": "lenkrad" in request.form,
+                "spiegel": "spiegel" in request.form,
+                "kopfstuetze": "kopfstuetze" in request.form,
+                "lenkhaltung": "lenkhaltung" in request.form,
                 "pedale": "pedale" in request.form,
-                "guert": "guert" in request.form
+                "guert": "guert" in request.form,
+                "wahlhebel": "wahlhebel" in request.form,
+                "zuendschloss": "zuendschloss" in request.form,
+                "motor": "motor" in request.form,
+                "anhalteuebungen": "anhalteuebungen" in request.form,
+                "lenkuebungen": "lenkuebungen" in request.form,
+                "hoch": [key for key in request.form if key.startswith("hoch_")],
+                "runter": [key for key in request.form if key.startswith("runter_")],
+                "notizen": request.form.get("notizen")
             }
         }
-        # Optional: Daten speichern (z. B. in Text- oder JSON-Datei)
+
+        # Speichern in Datei
         with open("saved_grundstufe.txt", "a", encoding="utf-8") as f:
             f.write(str(eintrag) + "\\n")
 
-        return render_template("grundstufe.html", status="✅ Grundstufe gespeichert")
+        return render_template("grundstufe.html", status=\"✅ Grundstufe gespeichert\")
 
     return render_template("grundstufe.html")
+
 
 
 # Route: Gespeicherte Daten anzeigen
