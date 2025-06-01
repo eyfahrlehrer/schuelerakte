@@ -156,10 +156,33 @@ def leistungsstufe():
 
 @app.route("/grundfahraufgaben", methods=["GET", "POST"])
 def grundfahraufgaben():
+    if "username" not in session:
+        return redirect(url_for("login"))
+
     if request.method == "POST":
-        # Hier später Speicherung oder Verarbeitung der Formulardaten
-        print("Grundfahraufgaben ausgefüllt:", request.form)
+        eintrag = {
+            "stammdaten": session.get("stammdaten", {}),
+            "grundfahraufgaben": {
+                "rueckwaerts_ecke": "rueckwaerts_ecke" in request.form,
+                "einparken_laengs_rueck": "einparken_laengs_rueck" in request.form,
+                "einparken_quer_rueck": "einparken_quer_rueck" in request.form,
+                "einparken_links_vor": "einparken_links_vor" in request.form,
+                "einparken_rechts_vor": "einparken_rechts_vor" in request.form,
+                "umkehren": "umkehren" in request.form,
+                "gefahrenbremsung": "gefahrenbremsung" in request.form,
+                "notizen": request.form.get("notizen")
+            }
+        }
+
+        # In Datei speichern
+        os.makedirs("db", exist_ok=True)
+        with open("db/saved_grundfahraufgaben.txt", "a", encoding="utf-8") as f:
+            f.write(str(eintrag) + "\n")
+
+        return render_template("grundfahraufgaben.html", status="✅ Aufgaben gespeichert")
+
     return render_template("grundfahraufgaben.html")
+
 
 # Route: Gespeicherte Daten anzeigen
 @app.route("/anzeigen")
