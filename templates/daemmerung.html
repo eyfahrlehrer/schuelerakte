@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Sonderfahrt: Dämmerung / Dunkelheitsfahrt</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-6">
+  <div class="max-w-5xl mx-auto bg-teal-300 p-6 rounded shadow">
+    <h1 class="text-2xl font-bold text-teal-900 mb-4">Sonderfahrt: Dämmerung / Dunkelheitsfahrt</h1>
+
+    <form method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <!-- Linke Seite -->
+      <div>
+        <p class="font-semibold mb-2">Licht und Sicht</p>
+        <label class="block"><input type="checkbox" name="beleuchtung"> Beleuchtung</label>
+        <label class="block"><input type="checkbox" name="kontrolle"> Kontrolle</label>
+        <label class="block"><input type="checkbox" name="benutzung"> Benutzung</label>
+        <label class="block"><input type="checkbox" name="einstellen"> Einstellen</label>
+        <label class="block"><input type="checkbox" name="fernlicht"> Fernlicht</label>
+        <label class="block"><input type="checkbox" name="beleuchtete_strasse"> Beleuchtete Straße</label>
+        <label class="block"><input type="checkbox" name="unbeleuchtete_strasse"> Unbeleuchtete Straße</label>
+        <label class="block"><input type="checkbox" name="parken"> Parken</label>
+      </div>
+
+      <!-- Rechte Seite -->
+      <div>
+        <p class="font-semibold mb-2">Besondere Bedingungen</p>
+        <label class="block"><input type="checkbox" name="besondere_situationen"> Besondere Situationen</label>
+        <label class="block"><input type="checkbox" name="schlechte_witterung"> Schlechte Witterung</label>
+        <label class="block"><input type="checkbox" name="bahnuebergaenge"> Bahnübergänge</label>
+        <label class="block"><input type="checkbox" name="tiere"> Tiere</label>
+        <label class="block"><input type="checkbox" name="unbeleuchtete_verkehrsteilnehmer"> Unbeleuchtete Verkehrsteilnehmer</label>
+        <label class="block"><input type="checkbox" name="besondere_anforderungen"> Besondere Anforderungen</label>
+        <label class="block"><input type="checkbox" name="blendung"> Blendung</label>
+        <label class="block"><input type="checkbox" name="orientierung"> Orientierung</label>
+        <label class="block"><input type="checkbox" name="abschlussbesprechung"> Abschlussbesprechung</label>
+      </div>
+
+      <!-- Notizen -->
+      <div class="md:col-span-2">
+        <label for="notizen" class="block font-semibold">Notizen des Fahrlehrers:</label>
+        <textarea name="notizen" id="notizen" rows="4" class="w-full border p-2 rounded" placeholder="Besonderheiten oder Beobachtungen…"></textarea>
+      </div>
+
+      <!-- Button -->
+      <div class="md:col-span-2">
+        <button class="bg-teal-700 hover:bg-teal-800 text-white px-4 py-2 rounded">Speichern</button>
+      </div>
+
+    </form>
+  </div>
+</body>
+</html>
