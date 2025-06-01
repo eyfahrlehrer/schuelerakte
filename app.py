@@ -78,6 +78,17 @@ def download_pdf():
     except FileNotFoundError:
         return render_template("anzeigen.html", fehler="❌ Es gibt noch keine gespeicherten Daten zum PDF-Download.")
 
+@app.route("/anzeigen")
+def anzeigen():
+    try:
+        with open("saved_diagrammkarte.txt", "r", encoding="utf-8") as f:
+            eintraege = f.read().split("---\n")
+    except FileNotFoundError:
+        eintraege = []
+
+    return render_template("anzeigen.html", eintraege=eintraege)
+
+
 # Server starten
 if __name__ == "__main__":
     app.run(debug=True)
