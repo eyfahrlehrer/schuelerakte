@@ -2,18 +2,18 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Überlandfahrt</title>
+  <title>Sonderfahrt: Überlandfahrten</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100 p-8">
-  <div class="max-w-4xl mx-auto p-6">
-    <h1 class="text-2xl font-bold mb-4 text-lime-700">Sonderfahrt: Überlandfahrten</h1>
+<body class="bg-gray-100 p-6">
+  <div class="max-w-4xl mx-auto bg-blue-300 p-6 rounded shadow">
+    <h1 class="text-2xl font-bold text-blue-800 mb-4">Sonderfahrt: Überlandfahrten</h1>
 
-    <form method="POST" class="space-y-6">
+    <form method="POST" class="space-y-4">
 
       <!-- Fahrverhalten -->
-      <div class="bg-lime-400 p-4 rounded">
-        <p class="font-semibold mb-2">Fahrverhalten</p>
+      <div>
+        <p class="font-semibold">Fahrverhalten</p>
         <label class="block"><input type="checkbox" name="angepasste_geschwindigkeit"> Angepasste Geschwindigkeit</label>
         <label class="block"><input type="checkbox" name="abstand_vorne"> Abstand – vorne</label>
         <label class="block"><input type="checkbox" name="abstand_hinten"> Abstand – hinten</label>
@@ -24,8 +24,8 @@
       </div>
 
       <!-- Straßenführung -->
-      <div class="bg-lime-400 p-4 rounded">
-        <p class="font-semibold mb-2">Straßenführung</p>
+      <div>
+        <p class="font-semibold">Straßenführung</p>
         <label class="block"><input type="checkbox" name="kurven"> Kurven</label>
         <label class="block"><input type="checkbox" name="steigerung"> Steigerung</label>
         <label class="block"><input type="checkbox" name="gefaelle"> Gefälle</label>
@@ -34,8 +34,8 @@
       </div>
 
       <!-- Besondere Situationen -->
-      <div class="bg-lime-400 p-4 rounded">
-        <p class="font-semibold mb-2">Besondere Situationen</p>
+      <div>
+        <p class="font-semibold">Besondere Situationen</p>
         <label class="block"><input type="checkbox" name="liegen_geblieben"> Liegengeblieben und Absichern</label>
         <label class="block"><input type="checkbox" name="fussgaenger"> Fußgänger</label>
         <label class="block"><input type="checkbox" name="ortseinfahrt"> Einfahren in Ortschaften</label>
@@ -43,20 +43,21 @@
       </div>
 
       <!-- Besondere Anforderungen -->
-      <div class="bg-lime-400 p-4 rounded">
-        <p class="font-semibold mb-2">Besondere Anforderungen</p>
+      <div>
+        <p class="font-semibold">Besondere Anforderungen</p>
         <label class="block"><input type="checkbox" name="leistungsgrenze"> Leistungsgrenze</label>
         <label class="block"><input type="checkbox" name="ablenkung"> Ablenkung</label>
         <label class="block"><input type="checkbox" name="orientierung"> Orientierung</label>
       </div>
 
       <!-- Notizen -->
-      <div class="bg-lime-400 p-4 rounded">
-        <label for="notizen" class="block font-semibold mb-2">Notizen des Fahrlehrers:</label>
+      <div>
+        <label for="notizen" class="block font-semibold">Notizen des Fahrlehrers:</label>
         <textarea name="notizen" id="notizen" rows="4" class="w-full border p-2 rounded" placeholder="Besonderheiten oder Beobachtungen…"></textarea>
       </div>
 
-      <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded">Speichern</button>
+      <button class="mt-4 bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded">Speichern</button>
+
     </form>
   </div>
 </body>
