@@ -343,6 +343,25 @@ def reifestufe():
 
     return render_template("reifestufe.html")
 
+@app.route("/technik", methods=["GET", "POST"])
+def technik():
+    if "username" not in session:
+        return redirect(url_for("login"))
+
+    if request.method == "POST":
+        eintrag = {
+            "stammdaten": session.get("stammdaten", {}),
+            "technik": dict(request.form)
+        }
+
+        os.makedirs("db", exist_ok=True)
+        with open("db/saved_technik.txt", "a", encoding="utf-8") as f:
+            f.write(str(eintrag) + "\n")
+
+        return render_template("technik.html", status="✅ Technik gespeichert")
+
+    return render_template("technik.html")
+
 
 # Route: PDF-Export der gespeicherten Daten
 @app.route("/pdf")
