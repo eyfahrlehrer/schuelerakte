@@ -100,6 +100,44 @@ def grundstufe():
 
     return render_template("grundstufe.html")
 
+@app.route("/aufbaustufe", methods=["GET", "POST"])
+def aufbaustufe():
+    if "username" not in session:
+        return redirect(url_for("login"))
+
+    if request.method == "POST":
+        eintrag = {
+            "stammdaten": session.get("stammdaten", {}),
+            "aufbaustufe": {
+                "rollen": "rollen" in request.form,
+                "abbremsen": "abbremsen" in request.form,
+                "bremsuebungen": {
+                    "degressiv": "brems_degressiv" in request.form,
+                    "zielbremsung": "brems_ziel" in request.form,
+                    "gefahr": "brems_gefahr" in request.form
+                },
+                "gefaelle": {
+                    "anhalten": "g_anh" in request.form,
+                    "anfahren": "g_anf" in request.form,
+                    "rueckwaerts": "g_rueck" in request.form,
+                    "sichern": "g_sichern" in request.form,
+                    "schalten": "g_schalten" in request.form
+                },
+                "tastgeschwindigkeit": "tastgeschwindigkeit" in request.form,
+                "kontrolleinrichtungen": "kontrolleinrichtungen" in request.form,
+                "besonderheiten": "besonderheiten" in request.form,
+                "notizen": request.form.get("notizen")
+            }
+        }
+
+        # Speichern in Datei
+        os.makedirs("db", exist_ok=True)
+        with open("db/saved_aufbaustufe.txt", "a", encoding="utf-8") as f:
+            f.write(str(eintrag) + "\n")
+
+        return render_template("aufbaustufe.html", status="✅ Aufbaustufe gespeichert")
+
+    return render_template("aufbaustufe.html")
 
 
 # Route: Gespeicherte Daten anzeigen
