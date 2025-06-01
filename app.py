@@ -117,6 +117,16 @@ def download_pdf():
     except Exception as e:
         return f"Fehler bei der PDF-Erzeugung: {e}"
 
+
+@app.route("/download")
+def download_view():
+    try:
+        with open("saved_diagrammkarte.txt", "r", encoding="utf-8") as f:
+            content = f.read()
+        return render_template("download.html", content=content)
+    except FileNotFoundError:
+        return "Noch keine Daten gespeichert."
+
 # ========== START DER APP (lokal) ==========
 if __name__ == "__main__":
     app.run(debug=True)
