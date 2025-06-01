@@ -9,44 +9,43 @@
   <div class="max-w-4xl mx-auto p-6">
     <h1 class="text-2xl font-bold mb-4 text-indigo-700">Grundfahraufgaben</h1>
 
-    <form method="POST">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <form method="POST" class="space-y-6">
 
-        <!-- Spalte 1 -->
-        <div class="bg-indigo-400 p-4 rounded">
-          <p class="font-semibold mb-2">Rückwärtsfahren / Längsparken</p>
-          <label class="block"><input type="checkbox" name="rechts_rueck_ecke"> Rechts rückwärts um die Ecke</label>
-          <label class="block"><input type="checkbox" name="einparken_laengs_rueck"> Einparken längs rückwärts</label>
-          <label class="block"><input type="checkbox" name="links_rueck"> Links rückwärts</label>
-
-          <p class="font-semibold mt-4 mb-2">Wenden / Vorwärtsparken</p>
-          <label class="block"><input type="checkbox" name="umkehren"> Umkehren</label>
-          <label class="block"><input type="checkbox" name="einparken_links_vor"> Einparken links vorwärts</label>
-          <label class="block"><input type="checkbox" name="einparken_rechts_vor"> Einparken rechts vorwärts</label>
-
-          <p class="font-semibold mt-4 mb-2">Sonstiges</p>
-          <label class="block"><input type="checkbox" name="gefahrenbremsung"> Gefahrenbremsung</label>
-        </div>
-
-        <!-- Spalte 2 -->
-        <div class="bg-indigo-400 p-4 rounded">
-          <p class="font-semibold mb-2">Querparken – Vorwärts</p>
-          <label class="block"><input type="checkbox" name="quer_links_vor"> Links quer vorwärts</label>
-          <label class="block"><input type="checkbox" name="quer_rechts_vor"> Rechts quer vorwärts</label>
-
-          <p class="font-semibold mt-4 mb-2">Querparken – Rückwärts</p>
-          <label class="block"><input type="checkbox" name="quer_links_rueck"> Rückwärts quer links</label>
-          <label class="block"><input type="checkbox" name="quer_rechts_rueck"> Rückwärts quer rechts</label>
-        </div>
+      <div class="bg-indigo-400 p-4 rounded">
+        <p class="font-semibold mb-2">Rückwärtsfahren</p>
+        <label class="block"><input type="checkbox" name="rueckwaerts_ecke"> Rechts rückwärts um die Ecke</label>
       </div>
 
-      <div class="bg-indigo-400 p-4 rounded mt-6">
+      <div class="bg-indigo-400 p-4 rounded">
+        <p class="font-semibold mb-2">Rückwärtsparken</p>
+        <label class="block"><input type="checkbox" name="einparken_laengs_rueck"> Rechts einparken in Längsaufstellung</label>
+        <label class="block"><input type="checkbox" name="einparken_quer_rueck"> Rechts einparken in Querstellung</label>
+      </div>
+
+      <div class="bg-indigo-400 p-4 rounded">
+        <p class="font-semibold mb-2">Vorwärtsparken</p>
+        <label class="block"><input type="checkbox" name="einparken_links_vor"> Links vorwärts einparken</label>
+        <label class="block"><input type="checkbox" name="einparken_rechts_vor"> Rechts vorwärts einparken</label>
+      </div>
+
+      <div class="bg-indigo-400 p-4 rounded">
+        <p class="font-semibold mb-2">Wenden</p>
+        <label class="block"><input type="checkbox" name="umkehren"> Umkehren</label>
+      </div>
+
+      <div class="bg-indigo-400 p-4 rounded">
+        <p class="font-semibold mb-2">Bremsmanöver</p>
+        <label class="block"><input type="checkbox" name="gefahrenbremsung"> Gefahrenbremsung</label>
+      </div>
+
+      <div class="bg-indigo-400 p-4 rounded">
         <label for="notizen" class="block font-semibold mb-2">Notizen des Fahrlehrers:</label>
         <textarea name="notizen" id="notizen" rows="4" class="w-full border p-2 rounded" placeholder="Besonderheiten oder Beobachtungen…"></textarea>
       </div>
 
-      <button class="mt-6 bg-blue-600 text-white px-4 py-2 rounded">Speichern</button>
+      <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded">Speichern</button>
     </form>
   </div>
 </body>
 </html>
+
