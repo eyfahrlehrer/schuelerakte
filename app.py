@@ -147,6 +147,13 @@ def aufbaustufe():
 
     return render_template("aufbaustufe.html")
 
+@app.route("/leistungsstufe", methods=["GET", "POST"])
+def leistungsstufe():
+    if request.method == "POST":
+        # Hier später Verarbeitung der Formulardaten möglich
+        print("Leistungsstufe wurde abgeschickt:", request.form)
+    return render_template("leistungsstufe.html")
+
 
 # Route: Gespeicherte Daten anzeigen
 @app.route("/anzeigen")
