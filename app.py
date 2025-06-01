@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session, send_file
 import io
 from xhtml2pdf import pisa
+from storage import save_diagrammkarte
 
 app = Flask(__name__)
 app.secret_key = "geheimcode123"
@@ -23,72 +24,53 @@ def login():
             return render_template("login.html", fehler="❌ Falscher Benutzername oder Passwort.")
     return render_template("login.html")
 
-# Route: Formular zur Diagrammkarte
+# Route: Ausbildungsdiagrammkarte anzeigen und speichern
 @app.route("/diagrammkarte", methods=["GET", "POST"])
 def diagrammkarte():
     if "username" not in session:
         return redirect(url_for("login"))
+
     if request.method == "POST":
-        name = request.form.get("name", "")
-        daten = dict(request.form)
-        daten.pop("name", None)  # „Name“-Feld separat
-        with open("saved_diagrammkarte.txt", "w", encoding="utf-8") as f:
-            f.write(f"Name: {name}\n")
-            for feld, wert in daten.items():
-                f.write(f"{feld}: {wert}\n")
-        return redirect(url_for("anzeigen"))
+        data = {
+            "name": request.form.get("name"),
+            "vorname": request.form.get("vorname"),
+            "anlage": request.form.get("anlage"),
+            "grundstufe": [key for key in request.form if key.startswith("grund_")],
+            "aufbaustufe": [key for key in request.form if key.startswith("aufbau_")],
+            "leistungsstufe": [key for key in request.form if key.startswith("leistung_")]
+        }
+        save_diagrammkarte(data)
+        return render_template("diagrammkarte.html", status="✅ Daten gespeichert")
+
     return render_template("diagrammkarte.html")
 
-# Route: Anzeige gespeicherter Daten
-@app.route("/saved")
-def anzeigen():
-    try:
-        with open("saved_diagrammkarte.txt", "r", encoding="utf-8") as f:
-            daten = f.read()
-        return render_template("anzeigen.html", daten=daten)
-    except FileNotFoundError:
-        return render_template("anzeigen.html", fehler="❌ Noch keine Daten gespeichert.")
-
-# Route: PDF-Download
-@app.route("/download/pdf")
-def download_pdf():
-    try:
-        with open("saved_diagrammkarte.txt", "r", encoding="utf-8") as f:
-            content = f.read()
-
-        html = f"""
-        <html>
-        <head><meta charset="UTF-8"></head>
-        <body>
-        <h1>Gespeicherte Ausbildungsdaten</h1>
-        <pre>{content}</pre>
-        </body>
-        </html>
-        """
-
-        result = io.BytesIO()
-        pisa_status = pisa.CreatePDF(io.StringIO(html), dest=result)
-        result.seek(0)
-
-        if pisa_status.err:
-            return "PDF konnte nicht erstellt werden.", 500
-
-        return send_file(result, mimetype='application/pdf', as_attachment=True, download_name='ausbildungsdaten.pdf')
-
-    except FileNotFoundError:
-        return render_template("anzeigen.html", fehler="❌ Es gibt noch keine gespeicherten Daten zum PDF-Download.")
-
+# Route: Gespeicherte Daten anzeigen
 @app.route("/anzeigen")
 def anzeigen():
     try:
         with open("saved_diagrammkarte.txt", "r", encoding="utf-8") as f:
-            eintraege = f.read().split("---\n")
+            daten = f.readlines()
     except FileNotFoundError:
-        eintraege = []
+        return render_template("anzeigen.html", fehler="Noch keine Einträge vorhanden.")
 
-    return render_template("anzeigen.html", eintraege=eintraege)
+    return render_template("anzeigen.html", eintraege=daten)
 
+# Route: PDF-Export der gespeicherten Daten
+@app.route("/pdf")
+def pdf_export():
+    try:
+        with open("saved_diagrammkarte.txt", "r", encoding="utf-8") as f:
+            content = f.read()
+        html = render_template("download.html", content=content)
+        pdf = io.BytesIO()
+        pisa_status = pisa.CreatePDF(io.StringIO(html), dest=pdf)
+        if pisa_status.err:
+            return "PDF-Fehler: konnte nicht erzeugt werden."
+        pdf.seek(0)
+        return send_file(pdf, mimetype="application/pdf", as_attachment=True, download_name="ausbildungsdaten.pdf")
+    except Exception as e:
+        return f"Fehler bei der PDF-Erzeugung: {e}"
 
-# Server starten
+# App starten
 if __name__ == "__main__":
     app.run(debug=True)
