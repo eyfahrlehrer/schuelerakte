@@ -224,6 +224,45 @@ def ueberlandfahrt():
 
     return render_template("ueberlandfahrt.html")
 
+@app.route("/autobahnfahrt", methods=["GET", "POST"])
+def autobahnfahrt():
+    if "username" not in session:
+        return redirect(url_for("login"))
+
+    if request.method == "POST":
+        eintrag = {
+            "stammdaten": session.get("stammdaten", {}),
+            "autobahnfahrt": {
+                "fahrtplanung": "fahrtplanung" in request.form,
+                "einfahren_bab": "einfahren_bab" in request.form,
+                "freistreifenwahl": "freistreifenwahl" in request.form,
+                "geschwindigkeit": "geschwindigkeit" in request.form,
+                "abstand_vorne": "abstand_vorne" in request.form,
+                "abstand_hinten": "abstand_hinten" in request.form,
+                "abstand_seitlich": "abstand_seitlich" in request.form,
+                "ueberholen": "ueberholen" in request.form,
+                "schildermarkierungen": "schildermarkierungen" in request.form,
+                "vorbeifahren_anschlussstellen": "vorbeifahren_anschlussstellen" in request.form,
+                "rastparkplaetze": "rastparkplaetze" in request.form,
+                "verhalten_unfaelle": "verhalten_unfaelle" in request.form,
+                "dichter_verkehr": "dichter_verkehr" in request.form,
+                "besondere_situation": "besondere_situation" in request.form,
+                "besondere_anforderungen": "besondere_anforderungen" in request.form,
+                "leistungsgrenze": "leistungsgrenze" in request.form,
+                "ablenkung": "ablenkung" in request.form,
+                "konfliktsituation": "konfliktsituation" in request.form,
+                "verlassen_bab": "verlassen_bab" in request.form,
+                "notizen": request.form.get("notizen")
+            }
+        }
+
+        os.makedirs("db", exist_ok=True)
+        with open("db/saved_autobahnfahrt.txt", "a", encoding="utf-8") as f:
+            f.write(str(eintrag) + "\n")
+
+        return render_template("autobahnfahrt.html", status="✅ Autobahnfahrt gespeichert")
+
+    return render_template("autobahnfahrt.html")
 
 
 # Route: Gespeicherte Daten anzeigen
