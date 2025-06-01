@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Überlandfahrt</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-8">
+  <div class="max-w-4xl mx-auto p-6">
+    <h1 class="text-2xl font-bold mb-4 text-lime-700">Sonderfahrt: Überlandfahrten</h1>
+
+    <form method="POST" class="space-y-6">
+
+      <!-- Fahrverhalten -->
+      <div class="bg-lime-400 p-4 rounded">
+        <p class="font-semibold mb-2">Fahrverhalten</p>
+        <label class="block"><input type="checkbox" name="angepasste_geschwindigkeit"> Angepasste Geschwindigkeit</label>
+        <label class="block"><input type="checkbox" name="abstand_vorne"> Abstand – vorne</label>
+        <label class="block"><input type="checkbox" name="abstand_hinten"> Abstand – hinten</label>
+        <label class="block"><input type="checkbox" name="abstand_seitlich"> Abstand – seitlich</label>
+        <label class="block"><input type="checkbox" name="beobachtungsspiegel"> Beobachtungsspiegel</label>
+        <label class="block"><input type="checkbox" name="verkehrszeichen"> Verkehrszeichen</label>
+        <label class="block"><input type="checkbox" name="kreuzungen_einmuendungen"> Kreuzungen / Einmündungen</label>
+      </div>
+
+      <!-- Straßenführung -->
+      <div class="bg-lime-400 p-4 rounded">
+        <p class="font-semibold mb-2">Straßenführung</p>
+        <label class="block"><input type="checkbox" name="kurven"> Kurven</label>
+        <label class="block"><input type="checkbox" name="steigerung"> Steigerung</label>
+        <label class="block"><input type="checkbox" name="gefaelle"> Gefälle</label>
+        <label class="block"><input type="checkbox" name="alleen"> Alleen</label>
+        <label class="block"><input type="checkbox" name="ueberholen"> Überholen</label>
+      </div>
+
+      <!-- Besondere Situationen -->
+      <div class="bg-lime-400 p-4 rounded">
+        <p class="font-semibold mb-2">Besondere Situationen</p>
+        <label class="block"><input type="checkbox" name="liegen_geblieben"> Liegengeblieben und Absichern</label>
+        <label class="block"><input type="checkbox" name="fussgaenger"> Fußgänger</label>
+        <label class="block"><input type="checkbox" name="ortseinfahrt"> Einfahren in Ortschaften</label>
+        <label class="block"><input type="checkbox" name="wildtiere"> Wildtiere</label>
+      </div>
+
+      <!-- Besondere Anforderungen -->
+      <div class="bg-lime-400 p-4 rounded">
+        <p class="font-semibold mb-2">Besondere Anforderungen</p>
+        <label class="block"><input type="checkbox" name="leistungsgrenze"> Leistungsgrenze</label>
+        <label class="block"><input type="checkbox" name="ablenkung"> Ablenkung</label>
+        <label class="block"><input type="checkbox" name="orientierung"> Orientierung</label>
+      </div>
+
+      <!-- Notizen -->
+      <div class="bg-lime-400 p-4 rounded">
+        <label for="notizen" class="block font-semibold mb-2">Notizen des Fahrlehrers:</label>
+        <textarea name="notizen" id="notizen" rows="4" class="w-full border p-2 rounded" placeholder="Besonderheiten oder Beobachtungen…"></textarea>
+      </div>
+
+      <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded">Speichern</button>
+    </form>
+  </div>
+</body>
+</html>
