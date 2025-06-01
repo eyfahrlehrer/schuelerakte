@@ -44,6 +44,32 @@ def diagrammkarte():
 
     return render_template("diagrammkarte.html")
 
+@app.route("/grundstufe", methods=["GET", "POST"])
+def grundstufe():
+    if "username" not in session:
+        return redirect(url_for("login"))
+
+    if request.method == "POST":
+        eintrag = {
+            "name": request.form.get("name"),
+            "vorname": request.form.get("vorname"),
+            "grundstufe": {
+                "sitz": "sitz" in request.form,
+                "spiegel": "spiegel" in request.form,
+                "lenkrad": "lenkrad" in request.form,
+                "pedale": "pedale" in request.form,
+                "guert": "guert" in request.form
+            }
+        }
+        # Optional: Daten speichern (z. B. in Text- oder JSON-Datei)
+        with open("saved_grundstufe.txt", "a", encoding="utf-8") as f:
+            f.write(str(eintrag) + "\\n")
+
+        return render_template("grundstufe.html", status="✅ Grundstufe gespeichert")
+
+    return render_template("grundstufe.html")
+
+
 # Route: Gespeicherte Daten anzeigen
 @app.route("/anzeigen")
 def anzeigen():
