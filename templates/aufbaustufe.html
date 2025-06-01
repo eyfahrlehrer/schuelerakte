@@ -7,24 +7,24 @@
 </head>
 <body class="bg-gray-100 p-8">
   <div class="max-w-3xl mx-auto p-6">
-    <h1 class="text-2xl font-bold mb-2 text-orange-700">Aufbaustufe</h1>
-    <p class="mb-6 italic text-orange-700">Umweltschonendes, vorausschauendes Fahren, Blickschulung</p>
+    <h1 class="text-2xl font-bold mb-2 text-amber-700">Aufbaustufe</h1>
+    <p class="mb-6 italic text-amber-700">Umweltschonendes, vorausschauendes Fahren, Blickschulung</p>
 
     <form method="POST">
 
-      <div class="bg-orange-500 p-4 rounded mb-4">
+      <div class="bg-amber-500 p-4 rounded mb-4">
         <label class="block mb-2"><input type="checkbox" name="rollen"> Rollen und Schalten</label>
         <label class="block mb-2"><input type="checkbox" name="abbremsen"> Abbremsen und Schalten</label>
       </div>
 
-      <div class="bg-orange-500 p-4 rounded mb-4">
+      <div class="bg-amber-500 p-4 rounded mb-4">
         <p class="font-semibold mb-2">Bremsübungen:</p>
         <label class="block"><input type="checkbox" name="brems_degressiv"> degressiv</label>
         <label class="block"><input type="checkbox" name="brems_ziel"> Zielbremsung</label>
         <label class="block"><input type="checkbox" name="brems_gefahr"> Gefahrensituation</label>
       </div>
 
-      <div class="bg-orange-500 p-4 rounded mb-4">
+      <div class="bg-amber-500 p-4 rounded mb-4">
         <p class="font-semibold mb-2">Gefälle:</p>
         <label class="block"><input type="checkbox" name="g_anh"> Anhalten</label>
         <label class="block"><input type="checkbox" name="g_anf"> Anfahren</label>
@@ -33,5 +33,28 @@
         <label class="block"><input type="checkbox" name="g_schalten"> Schalten</label>
       </div>
 
-      <div class="bg-orange-500 p-4 rounded mb-4">
-        <p class="font-semibold mb-
+      <div class="bg-amber-500 p-4 rounded mb-4">
+        <p class="font-semibold mb-2">Steigung:</p>
+        <label class="block"><input type="checkbox" name="s_anh"> Anhalten</label>
+        <label class="block"><input type="checkbox" name="s_anf"> Anfahren</label>
+        <label class="block"><input type="checkbox" name="s_rueck"> Rückwärts</label>
+        <label class="block"><input type="checkbox" name="s_sichern"> Sichern</label>
+        <label class="block"><input type="checkbox" name="s_schalten"> Schalten</label>
+      </div>
+
+      <div class="bg-amber-500 p-4 rounded mb-4">
+        <label class="block mb-2"><input type="checkbox" name="tastgeschwindigkeit"> Tastgeschwindigkeit</label>
+        <label class="block mb-2"><input type="checkbox" name="kontrolleinrichtungen"> Bedienungs- u. Kontrolleinrichtungen</label>
+        <label class="block mb-2"><input type="checkbox" name="besonderheiten"> Örtliche Besonderheiten</label>
+      </div>
+
+      <div class="bg-amber-500 p-4 rounded mb-6">
+        <label for="notizen" class="block font-semibold mb-1">Notizen des Fahrlehrers:</label>
+        <textarea name="notizen" id="notizen" rows="4" class="w-full border p-2 rounded" placeholder="Besonderheiten, Fortschritt oder Hinweise..."></textarea>
+      </div>
+
+      <button class="bg-blue-600 text-white px-4 py-2 rounded">Speichern</button>
+    </form>
+  </div>
+</body>
+</html>
