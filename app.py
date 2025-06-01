@@ -67,6 +67,55 @@ def show_saved():
     except FileNotFoundError:
         return render_template("anzeigen.html", daten="❌ Noch keine Eintragung vorhanden.")
 
+from flask import make_response
+import pdfkit
+
+@app.route("/saved/pdf")
+def download_pdf():
+    try:
+        with open("saved_diagrammkarte.txt", "r", encoding="utf-8") as f:
+            content = f.read()
+
+        html_content = f"""
+        <html>
+        <head>
+            <meta charset='UTF-8'>
+            <style>
+                body {{
+                    font-family: Arial, sans-serif;
+                    padding: 20px;
+                    line-height: 1.6;
+                }}
+                h1 {{
+                    color: #2a5d9f;
+                }}
+                pre {{
+                    background: #f4f4f4;
+                    padding: 10px;
+                    border-left: 5px solid #2a5d9f;
+                    white-space: pre-wrap;
+                }}
+            </style>
+        </head>
+        <body>
+            <h1>Gespeicherte Ausbildungsdaten</h1>
+            <pre>{content}</pre>
+        </body>
+        </html>
+        """
+
+        # Falls du lokal testest:
+        # config = pdfkit.configuration(wkhtmltopdf="C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe")
+        # pdf = pdfkit.from_string(html_content, False, configuration=config)
+
+        pdf = pdfkit.from_string(html_content, False)  # Für Server (Render)
+
+        response = make_response(pdf)
+        response.headers['Content-Type'] = 'application/pdf'
+        response.headers['Content-Disposition'] = 'attachment; filename=ausbildungsdaten.pdf'
+        return response
+    except Exception as e:
+        return f"Fehler bei der PDF-Erzeugung: {e}"
 
 # ========== START DER APP (lokal) ==========
 if __name__ == "__main__":
