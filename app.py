@@ -381,7 +381,8 @@ def profil():
 def pdf_export():
     try:
         with open("saved_diagrammkarte.txt", "r", encoding="utf-8") as f:
-            content = f.read()
+            content = f.readlines()
+
         html = render_template("download.html", content=content)
         pdf = io.BytesIO()
         pisa_status = pisa.CreatePDF(io.StringIO(html), dest=pdf)
