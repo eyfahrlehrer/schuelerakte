@@ -310,10 +310,6 @@ def autobahnfahrt():
             }
         }
 
-        os.makedirs("db", exist_ok=True)
-        with open("db/saved_autobahnfahrt.txt", "a", encoding="utf-8") as f:
-            f.write(str(eintrag) + "\n")
-
         return render_template("autobahnfahrt.html", status="✅ Autobahnfahrt gespeichert")
 
     return render_template("autobahnfahrt.html")
@@ -349,9 +345,7 @@ def daemmerung():
             }
         }
 
-        os.makedirs("db", exist_ok=True)
-        with open("db/saved_daemmerung.txt", "a", encoding="utf-8") as f:
-            f.write(str(eintrag) + "\n")
+       
 
         return render_template("daemmerung.html", status="✅ Dämmerungsfahrt gespeichert")
 
@@ -391,9 +385,7 @@ def reifestufe():
             }
         }
 
-        os.makedirs("db", exist_ok=True)
-        with open("db/saved_reifestufe.txt", "a", encoding="utf-8") as f:
-            f.write(str(eintrag) + "\n")
+      
 
         return render_template("reifestufe.html", status="✅ Reifestufe gespeichert")
 
@@ -411,7 +403,7 @@ def technik():
             "technik": dict(request.form)
         }
 
-        os.makedirs("db", exist_ok=True)
+ 
         with open("db/saved_technik.txt", "a", encoding="utf-8") as f:
             f.write(str(eintrag) + "\n")
 
