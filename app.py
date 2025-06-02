@@ -142,43 +142,38 @@ def grundstufe():
 
     return render_template("grundstufe.html", status=status)
 
-@app.route("/aufbaustufe", methods=["GET", "POST"])
-def aufbaustufe():
+@app.route("/grundstufe", methods=["GET", "POST"])
+def grundstufe():
     if "username" not in session:
         return redirect(url_for("login"))
 
     if request.method == "POST":
-        eintrag = {
-            "stammdaten": session.get("stammdaten", {}),
-            "aufbaustufe": {
-                "rollen": "rollen" in request.form,
-                "abbremsen": "abbremsen" in request.form,
-                "bremsuebungen": {
-                    "degressiv": "brems_degressiv" in request.form,
-                    "zielbremsung": "brems_ziel" in request.form,
-                    "gefahr": "brems_gefahr" in request.form
-                },
-                "gefaelle": {
-                    "anhalten": "g_anh" in request.form,
-                    "anfahren": "g_anf" in request.form,
-                    "rueckwaerts": "g_rueck" in request.form,
-                    "sichern": "g_sichern" in request.form,
-                    "schalten": "g_schalten" in request.form
-                },
-                "steigung": {
-                    "anhalten": "s_anh" in request.form,
-                    "anfahren": "s_anf" in request.form,
-                    "rueckwaerts": "s_rueck" in request.form,
-                    "sichern": "s_sichern" in request.form,
-                    "schalten": "s_schalten" in request.form
-                },
+        schueler_id = session.get("stammdaten", {}).get("id")
+        if not schueler_id:
+            return redirect(url_for("stammdaten"))
 
-                "tastgeschwindigkeit": "tastgeschwindigkeit" in request.form,
-                "kontrolleinrichtungen": "kontrolleinrichtungen" in request.form,
-                "besonderheiten": "besonderheiten" in request.form,
-                "notizen": request.form.get("notizen")
-            }
-        }
+        eintrag = Grundstufe(
+            schueler_id=schueler_id,
+            sitz="sitz" in request.form,
+            spiegel="spiegel" in request.form,
+            kopfstuetze="kopfstutze" in request.form,
+            pedal="pedale" in request.form,
+            gang="gang" in request.form,
+            schulterblick="schulterblick" in request.form,
+            einweisung="einweisung" in request.form,
+            schaltuebung=request.form.get("schaltuebung"),
+            notizen=request.form.get("notizen")
+        )
+
+        db = SessionLocal()
+        db.add(eintrag)
+        db.commit()
+        db.close()
+
+        return render_template("grundstufe.html", status="✅ Grundstufe gespeichert!")
+
+    return render_template("grundstufe.html")
+
 
         # Speichern in Datei
         os.makedirs("db", exist_ok=True)
