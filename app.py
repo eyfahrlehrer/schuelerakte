@@ -391,6 +391,3 @@ def pdf_export():
         return send_file(pdf, mimetype="application/pdf", as_attachment=True, download_name="ausbildungsdaten.pdf")
     except Exception as e:
         return f"Fehler bei der PDF-Erzeugung: {e}"
-
-# if __name__ == "__main__":
-#     app.run()
