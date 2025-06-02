@@ -362,6 +362,10 @@ def technik():
 
     return render_template("technik.html")
 
+@app.route("/profil")
+def profil():
+    return render_template("profil.html")
+
 
 # Route: PDF-Export der gespeicherten Daten
 @app.route("/pdf")
@@ -378,8 +382,6 @@ def pdf_export():
         return send_file(pdf, mimetype="application/pdf", as_attachment=True, download_name="ausbildungsdaten.pdf")
     except Exception as e:
         return f"Fehler bei der PDF-Erzeugung: {e}"
-
-
 
 # App starten
 if __name__ == "__main__":
