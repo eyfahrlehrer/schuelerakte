@@ -2,12 +2,11 @@ import os
 from sqlalchemy import create_engine
 from models import Base
 
-# Hole DATABASE_URL aus Umgebungsvariable
-DATABASE_URL = os.getenv("DATABASE_PUBLIC_URL")
+# Holt die URL aus Railway-Umgebungsvariablen
+DATABASE_URL = os.getenv("DATABASE_URL")
 
+engine = create_engine(DATABASE_URL)
 
-engine = create_engine(DATABASE_PUBLIC_URL)
-
-print("📡 Starte Datenbanktabellen-Erstellung ...")
+print("🚀 Starte Datenbanktabellen-Erstellung ...")
 Base.metadata.create_all(engine)
 print("✅ Tabellen erfolgreich erstellt.")
