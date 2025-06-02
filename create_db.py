@@ -2,9 +2,11 @@ import os
 from sqlalchemy import create_engine
 from models import Base
 
-# Erstelle Engine aus Umgebungsvariable
-engine = create_engine(os.getenv("postgresql://postgres:REfUKSgpPmQQiVgXupXEKLhHcourNHIr@mainline.proxy.rlwy.net:55720/railway"))
+# Hole DATABASE_URL aus Umgebungsvariable
+DATABASE_URL = os.getenv("DATABASE_URL")
 
-print("🚀 Starte Datenbanktabellen-Erstellung ...")
+engine = create_engine(DATABASE_URL)
+
+print("📡 Starte Datenbanktabellen-Erstellung ...")
 Base.metadata.create_all(engine)
 print("✅ Tabellen erfolgreich erstellt.")
