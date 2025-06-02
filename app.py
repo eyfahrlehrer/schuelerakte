@@ -134,7 +134,6 @@ def grundstufe():
     
         return render_template("aufbaustufe.html", status="✅ Aufbaustufe gespeichert")
 
-    return render_template("aufbaustufe.html")
 
 @app.route("/leistungsstufe", methods=["GET", "POST"])
 def leistungsstufe():
