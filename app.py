@@ -367,15 +367,14 @@ def technik():
 
 @app.route("/profil")
 def profil():
-    return render_template("profil.html")
+    if "username" not in session:
+        return redirect(url_for("login"))
 
-@app.route("/profil/<int:schueler_id>")
-def profil(schueler_id):
     db = SessionLocal()
-    schueler = db.query(Fahrschueler).filter(Fahrschueler.id == schueler_id).first()
+    schueler = db.query(Fahrschueler).first()  # Später mit Filter: .filter_by(name=session["name"]).first()
     db.close()
-    return render_template("profil.html", schueler=schueler)
 
+    return render_template("profil.html", schueler=schueler)
 
 # Route: PDF-Export der gespeicherten Daten
 @app.route("/pdf")
