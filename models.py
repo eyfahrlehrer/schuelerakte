@@ -33,3 +33,35 @@ class Grundstufe(Base):
 
     schaltuebung = Column(String, nullable=True)
     notizen = Column(String, nullable=True)
+
+class Aufbaustufe(Base):
+    __tablename__ = "aufbaustufe"
+
+    id = Column(Integer, primary_key=True, index=True)
+    schueler_id = Column(Integer, nullable=False)
+
+    rollen_schalten = Column(Boolean, default=False)
+    bremsen_schalten = Column(Boolean, default=False)
+
+    bremsuebung_degressiv = Column(Boolean, default=False)
+    bremsuebung_ziel = Column(Boolean, default=False)
+    bremsuebung_gefahr = Column(Boolean, default=False)
+
+    gefaelle_anfahren = Column(Boolean, default=False)
+    gefaelle_anhalten = Column(Boolean, default=False)
+    gefaelle_rueckwaerts = Column(Boolean, default=False)
+    gefaelle_sichern = Column(Boolean, default=False)
+    gefaelle_schalten = Column(Boolean, default=False)
+
+    steigungen_anfahren = Column(Boolean, default=False)
+    steigungen_anhalten = Column(Boolean, default=False)
+    steigungen_rueckwaerts = Column(Boolean, default=False)
+    steigungen_sichern = Column(Boolean, default=False)
+    steigungen_schalten = Column(Boolean, default=False)
+
+    tastgeschwindigkeit = Column(Boolean, default=False)
+    bedienung_kontrolle = Column(Boolean, default=False)
+    besondere_oertliche = Column(Boolean, default=False)
+
+    notizen = Column(String, nullable=True)
+
