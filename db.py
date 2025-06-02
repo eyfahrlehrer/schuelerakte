@@ -11,3 +11,5 @@ engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
+
+__all__ = ["SessionLocal", "engine", "Base"]
