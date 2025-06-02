@@ -1,7 +1,10 @@
-from db import Base, engine
-from models import Fahrschueler
+import os
+from sqlalchemy import create_engine
+from models import Base
 
-# Tabelle erstellen (falls nicht vorhanden)
+# Erstelle Engine aus Umgebungsvariable
+engine = create_engine(os.getenv("postgresql://postgres:REfUKSgpPmQQiVgXupXEKLhHcourNHIr@mainline.proxy.rlwy.net:55720/railway"))
+
 print("🚀 Starte Datenbanktabellen-Erstellung ...")
-Base.metadata.create_all(bind=engine)
-print("✅ Tabellen wurden erfolgreich erstellt!")
+Base.metadata.create_all(engine)
+print("✅ Tabellen erfolgreich erstellt.")
