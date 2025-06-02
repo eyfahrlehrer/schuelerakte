@@ -3,3 +3,4 @@ gunicorn
 pdfkit
 xhtml2pdf
 SQLAlchemy>=2.0.0
+python-dotenv
