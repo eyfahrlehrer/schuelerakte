@@ -191,34 +191,56 @@ def leistungsstufe():
         print("Leistungsstufe wurde abgeschickt:", request.form)
     return render_template("leistungsstufe.html")
 
-@app.route("/grundfahraufgaben", methods=["GET", "POST"])
-def grundfahraufgaben():
+@app.route("/aufbaustufe", methods=["GET", "POST"])
+def aufbaustufe():
     if "username" not in session:
         return redirect(url_for("login"))
 
+    status = ""
+    schueler_id = session.get("stammdaten", {}).get("id")
+
+    if not schueler_id:
+        status = "❌ Fehler: Stammdaten nicht vorhanden!"
+        return render_template("aufbaustufe.html", status=status)
+
     if request.method == "POST":
-        eintrag = {
-            "stammdaten": session.get("stammdaten", {}),
-            "grundfahraufgaben": {
-                "rueckwaerts_ecke": "rueckwaerts_ecke" in request.form,
-                "einparken_laengs_rueck": "einparken_laengs_rueck" in request.form,
-                "einparken_quer_rueck": "einparken_quer_rueck" in request.form,
-                "einparken_links_vor": "einparken_links_vor" in request.form,
-                "einparken_rechts_vor": "einparken_rechts_vor" in request.form,
-                "umkehren": "umkehren" in request.form,
-                "gefahrenbremsung": "gefahrenbremsung" in request.form,
-                "notizen": request.form.get("notizen")
-            }
-        }
+        daten = Aufbaustufe(
+            schueler_id=schueler_id,
+            rollen_schalten=bool(request.form.get("rollen_schalten")),
+            bremsen_schalten=bool(request.form.get("bremsen_schalten")),
 
-        # In Datei speichern
-        os.makedirs("db", exist_ok=True)
-        with open("db/saved_grundfahraufgaben.txt", "a", encoding="utf-8") as f:
-            f.write(str(eintrag) + "\n")
+            bremsuebung_degressiv=bool(request.form.get("bremsuebung_degressiv")),
+            bremsuebung_ziel=bool(request.form.get("bremsuebung_ziel")),
+            bremsuebung_gefahr=bool(request.form.get("bremsuebung_gefahr")),
 
-        return render_template("grundfahraufgaben.html", status="✅ Aufgaben gespeichert")
+            gefaelle_anfahren=bool(request.form.get("gefaelle_anfahren")),
+            gefaelle_anhalten=bool(request.form.get("gefaelle_anhalten")),
+            gefaelle_rueckwaerts=bool(request.form.get("gefaelle_rueckwaerts")),
+            gefaelle_sichern=bool(request.form.get("gefaelle_sichern")),
+            gefaelle_schalten=bool(request.form.get("gefaelle_schalten")),
 
-    return render_template("grundfahraufgaben.html")
+            steigungen_anfahren=bool(request.form.get("steigungen_anfahren")),
+            steigungen_anhalten=bool(request.form.get("steigungen_anhalten")),
+            steigungen_rueckwaerts=bool(request.form.get("steigungen_rueckwaerts")),
+            steigungen_sichern=bool(request.form.get("steigungen_sichern")),
+            steigungen_schalten=bool(request.form.get("steigungen_schalten")),
+
+            tastgeschwindigkeit=bool(request.form.get("tastgeschwindigkeit")),
+            bedienung_kontrolle=bool(request.form.get("bedienung_kontrolle")),
+            besondere_oertliche=bool(request.form.get("besondere_oertliche")),
+
+            notizen=request.form.get("notizen", "")
+        )
+
+        db = SessionLocal()
+        db.add(daten)
+        db.commit()
+        db.close()
+
+        status = "✅ Aufbaustufe gespeichert!"
+
+    return render_template("aufbaustufe.html", status=status)
+
 
 @app.route("/ueberlandfahrt", methods=["GET", "POST"])
 def ueberlandfahrt():
