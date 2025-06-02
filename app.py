@@ -53,45 +53,49 @@ def stammdaten():
         return redirect(url_for("login"))
 
     if request.method == "POST":
-        name = request.form.get("name")
-        vorname = request.form.get("vorname")
-        geburtsdatum = request.form.get("geburtsdatum")
-        strasse = request.form.get("strasse")
-        hausnummer = request.form.get("hausnummer")
-        mobil = request.form.get("mobil")
-        sehhilfe = "sehhilfe" in request.form
-        theorie_bestanden = "theorie_bestanden" in request.form
+        try:
+            name = request.form.get("name")
+            vorname = request.form.get("vorname")
+            geburtsdatum = request.form.get("geburtsdatum")
+            strasse = request.form.get("strasse")
+            hausnummer = request.form.get("hausnummer")
+            mobil = request.form.get("mobil")
+            sehhilfe = "sehhilfe" in request.form
+            theorie_bestanden = "theorie_bestanden" in request.form
 
-        # SQLAlchemy-Objekt erstellen
-        neuer_schueler = Fahrschueler(
-            name=name,
-            vorname=vorname,
-            geburtsdatum=geburtsdatum,
-            strasse=strasse,
-            hausnummer=hausnummer,
-            mobil=mobil,
-            sehhilfe=sehhilfe,
-            theorie_bestanden=theorie_bestanden
-        )
+            neuer_schueler = Fahrschueler(
+                name=name,
+                vorname=vorname,
+                geburtsdatum=geburtsdatum,
+                strasse=strasse,
+                hausnummer=hausnummer,
+                mobil=mobil,
+                sehhilfe=sehhilfe,
+                theorie_bestanden=theorie_bestanden
+            )
 
-        # In Datenbank speichern
-        db = SessionLocal()
-        db.add(neuer_schueler)
-        db.commit()
-        db.refresh(neuer_schueler)
-        db.close()
+            db = SessionLocal()
+            db.add(neuer_schueler)
+            db.commit()
+            db.refresh(neuer_schueler)
 
-        # ID für weitere Schritte merken
-        session["stammdaten"] = {
-            "id": neuer_schueler.id,
-            "name": name,
-            "vorname": vorname,
-            "geburtsdatum": geburtsdatum,
-        }
+            session["stammdaten"] = {
+                "id": neuer_schueler.id,
+                "name": name,
+                "vorname": vorname,
+                "geburtsdatum": geburtsdatum
+            }
 
-        return redirect(url_for("grundstufe"))
+            return redirect(url_for("grundstufe"))
+        
+        except Exception as e:
+            flash(f"Fehler beim Speichern: {e}", "danger")
+        
+        finally:
+            db.close()
 
     return render_template("stammdaten.html")
+
 
 @app.route("/grundstufe", methods=["GET", "POST"])
 def grundstufe():
