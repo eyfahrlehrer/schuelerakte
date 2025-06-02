@@ -403,10 +403,6 @@ def technik():
             "technik": dict(request.form)
         }
 
- 
-        with open("db/saved_technik.txt", "a", encoding="utf-8") as f:
-            f.write(str(eintrag) + "\n")
-
         return render_template("technik.html", status="✅ Technik gespeichert")
 
     return render_template("technik.html")
