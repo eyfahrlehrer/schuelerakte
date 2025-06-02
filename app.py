@@ -26,6 +26,7 @@ def login():
         else:
             return render_template("login.html", fehler="❌ Falscher Benutzername oder Passwort.")
     return render_template("login.html")
+    
 
 # Route: Ausbildungsdiagrammkarte anzeigen und speichern
 @app.route("/diagrammkarte", methods=["GET", "POST"])
@@ -46,6 +47,7 @@ def diagrammkarte():
         return render_template("diagrammkarte.html", status="✅ Daten gespeichert")
 
     return render_template("diagrammkarte.html")
+    
 
 @app.route("/stammdaten", methods=["GET", "POST"])
 def stammdaten():
@@ -96,6 +98,7 @@ def stammdaten():
 
     return render_template("stammdaten.html")
 
+
 @app.route("/grundstufe", methods=["GET", "POST"])
 def grundstufe():
     if "username" not in session:
@@ -131,8 +134,48 @@ def grundstufe():
         status = "✅ Grundstufe gespeichert!"
 
     return render_template("grundstufe.html", status=status)
-    
- 
+
+@app.route("/aufbaustufe", methods=["GET", "POST"])
+def aufbaustufe():
+    if "username" not in session:
+        return redirect(url_for("login"))
+
+    status = ""
+    schueler_id = session.get("stammdaten", {}).get("id")
+
+    if not schueler_id:
+        status = "❌ Fehler: Stammdaten nicht vorhanden!"
+        return render_template("aufbaustufe.html", status=status)
+
+    if request.method == "POST":
+        daten = Aufbaustufe(
+            schueler_id=schueler_id,
+            rollen_schalten="rollen_schalten" in request.form,
+            bremsen_schalten="bremsen_schalten" in request.form,
+            bremsuebung_degressiv="bremsuebung_degressiv" in request.form,
+            bremsuebung_ziel="bremsuebung_ziel" in request.form,
+            bremsuebung_gefahr="bremsuebung_gefahr" in request.form,
+            gefaelle_anfahren="gefaelle_anfahren" in request.form,
+            gefaelle_rueckwaerts="gefaelle_rueckwaerts" in request.form,
+            gefaelle_schalten="gefaelle_schalten" in request.form,
+            steigungen_anfahren="steigungen_anfahren" in request.form,
+            steigungen_anfahren_rueck="steigungen_anfahren_rueck" in request.form,
+            steigungen_sichern="steigungen_sichern" in request.form,
+            steigungen_schalten="steigungen_schalten" in request.form,
+            tastgeschwindigkeit="tastgeschwindigkeit" in request.form,
+            bedienung_kontrolleinr="bedienung_kontrolleinr" in request.form,
+            besondere_oertliche="besondere_oertliche" in request.form,
+            notizen=request.form.get("notizen", "")
+        )
+
+        db = SessionLocal()
+        db.add(daten)
+        db.commit()
+        db.close()
+
+        status = "✅ Aufbaustufe gespeichert!"
+
+    return render_template("aufbaustufe.html", status=status)
 
 
 @app.route("/leistungsstufe", methods=["GET", "POST"])
@@ -233,6 +276,7 @@ def ueberlandfahrt():
         return render_template("ueberlandfahrt.html", status="✅ Überlandfahrt gespeichert")
 
     return render_template("ueberlandfahrt.html")
+    
 
 @app.route("/autobahnfahrt", methods=["GET", "POST"])
 def autobahnfahrt():
@@ -273,6 +317,7 @@ def autobahnfahrt():
         return render_template("autobahnfahrt.html", status="✅ Autobahnfahrt gespeichert")
 
     return render_template("autobahnfahrt.html")
+    
 
 @app.route("/daemmerung", methods=["GET", "POST"])
 def daemmerung():
@@ -322,6 +367,7 @@ def anzeigen():
         return render_template("anzeigen.html", fehler="Noch keine Einträge vorhanden.")
 
     return render_template("anzeigen.html", eintraege=daten)
+    
 
 @app.route("/reifestufe", methods=["GET", "POST"])
 def reifestufe():
@@ -352,6 +398,7 @@ def reifestufe():
         return render_template("reifestufe.html", status="✅ Reifestufe gespeichert")
 
     return render_template("reifestufe.html")
+    
 
 @app.route("/technik", methods=["GET", "POST"])
 def technik():
