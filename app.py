@@ -394,4 +394,4 @@ def pdf_export():
 
 # App starten
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
