@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Fahrschülerprofil</title>
+  <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+  <div class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-10">
+    <h1 class="text-2xl font-bold mb-4 text-center text-blue-700">📋 Ausbildungsübersicht für Max Mustermann</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="bg-green-100 p-4 rounded shadow">
+        <h2 class="font-semibold">✅ Grundstufe</h2>
+        <p>✔️ abgeschlossen</p>
+      </div>
+      <div class="bg-green-100 p-4 rounded shadow">
+        <h2 class="font-semibold">✅ Aufbaustufe</h2>
+        <p>✔️ abgeschlossen</p>
+      </div>
+      <div class="bg-green-100 p-4 rounded shadow">
+        <h2 class="font-semibold">✅ Leistungsstufe</h2>
+        <p>✔️ abgeschlossen</p>
+      </div>
+      <div class="bg-green-100 p-4 rounded shadow">
+        <h2 class="font-semibold">✅ Grundfahraufgaben</h2>
+        <p>✔️ abgeschlossen</p>
+      </div>
+      <div class="bg-yellow-100 p-4 rounded shadow">
+        <h2 class="font-semibold">🔄 Sonderfahrten</h2>
+        <p>➡️ in Bearbeitung</p>
+      </div>
+      <div class="bg-gray-100 p-4 rounded shadow">
+        <h2 class="font-semibold">⬜ Reifestufe</h2>
+        <p>noch nicht begonnen</p>
+      </div>
+      <div class="bg-gray-100 p-4 rounded shadow">
+        <h2 class="font-semibold">⬜ Technik</h2>
+        <p>noch nicht begonnen</p>
+      </div>
+    </div>
+
+    <div class="mt-6 text-center">
+      <a href="{{ url_for('technik') }}" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded shadow">
+        Weiter zu Technik ➡️
+      </a>
+    </div>
+  </div>
+</body>
+</html>
