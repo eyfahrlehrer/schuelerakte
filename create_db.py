@@ -6,7 +6,7 @@ from models import Base
 DATABASE_URL = os.getenv("DATABASE_PUBLIC_URL")
 
 
-engine = create_engine(DATABASE_URL)
+engine = create_engine(DATABASE_PUBLIC_URL)
 
 print("📡 Starte Datenbanktabellen-Erstellung ...")
 Base.metadata.create_all(engine)
