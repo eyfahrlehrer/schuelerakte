@@ -392,6 +392,5 @@ def pdf_export():
     except Exception as e:
         return f"Fehler bei der PDF-Erzeugung: {e}"
 
-# App starten
-if __name__ == "__main__":
-    app.run()
+# if __name__ == "__main__":
+#     app.run()
