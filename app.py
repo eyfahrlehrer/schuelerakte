@@ -102,36 +102,45 @@ def grundstufe():
     if "username" not in session:
         return redirect(url_for("login"))
 
+    status = ""
+
     if request.method == "POST":
-        eintrag = {
-            "stammdaten": session.get("stammdaten", {}),
-            "grundstufe": {
-                "einsteigen": "einsteigen" in request.form,
-                "sitz": "sitz" in request.form,
-                "lenkrad": "lenkrad" in request.form,
-                "spiegel": "spiegel" in request.form,
-                "kopfstuetze": "kopfstuetze" in request.form,
-                "lenkhaltung": "lenkhaltung" in request.form,
-                "pedale": "pedale" in request.form,
-                "guert": "guert" in request.form,
-                "wahlhebel": "wahlhebel" in request.form,
-                "zuendschloss": "zuendschloss" in request.form,
-                "motor": "motor" in request.form,
-                "anhalteuebungen": "anhalteuebungen" in request.form,
-                "lenkuebungen": "lenkuebungen" in request.form,
-                "hoch": [key for key in request.form if key.startswith("hoch_")],
-                "runter": [key for key in request.form if key.startswith("runter_")],
-                "notizen": request.form.get("notizen")
-            }
+        schueler_id = session.get("stammdaten", {}).get("id")
+
+        if not schueler_id:
+            status = "❌ Fehler: Stammdaten nicht vorhanden!"
+            return render_template("grundstufe.html", status=status)
+
+        daten = {
+            "sitz": "sitzposition" in request.form,
+            "spiegel": "spiegel" in request.form,
+            "lenkrad": "lenkrad" in request.form,
+            "kopfstuetze": "kopfstuetze" in request.form,
+            "einweisung": "einweisung" in request.form,
+            "pedale": "pedale" in request.form,
+            "gang": "gang" in request.form,
+            "sicht": "sicht" in request.form,
+            "schaltuebung": request.form.get("schaltuebung", ""),
+            "notizen": request.form.get("notizen", "")
         }
 
-        # Speichern in Datei
-        with open("saved_grundstufe.txt", "a", encoding="utf-8") as f:
-            f.write(str(eintrag) + "\\n")
+        db = SessionLocal()
+        db.execute("""
+            INSERT INTO grundstufe (
+                schueler_id, sitz, spiegel, lenkrad, kopfstuetze,
+                einweisung, pedale, gang, sicht, schaltuebung, notizen
+            )
+            VALUES (
+                :id, :sitz, :spiegel, :lenkrad, :kopfstuetze,
+                :einweisung, :pedale, :gang, :sicht, :schaltuebung, :notizen
+            )
+        """, {"id": schueler_id, **daten})
+        db.commit()
+        db.close()
 
-        return render_template("grundstufe.html", status="✅ Grundstufe gespeichert")
+        status = "✅ Grundstufe gespeichert!"
 
-    return render_template("grundstufe.html")
+    return render_template("grundstufe.html", status=status)
 
 @app.route("/aufbaustufe", methods=["GET", "POST"])
 def aufbaustufe():
