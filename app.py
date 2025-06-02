@@ -131,14 +131,7 @@ def grundstufe():
         status = "✅ Grundstufe gespeichert!"
 
     return render_template("grundstufe.html", status=status)
-
-
-
-        # Speichern in Datei
-        os.makedirs("db", exist_ok=True)
-        with open("db/saved_aufbaustufe.txt", "a", encoding="utf-8") as f:
-            f.write(str(eintrag) + "\n")
-
+    
         return render_template("aufbaustufe.html", status="✅ Aufbaustufe gespeichert")
 
     return render_template("aufbaustufe.html")
