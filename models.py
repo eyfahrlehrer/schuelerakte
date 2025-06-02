@@ -1,21 +1,20 @@
-from sqlalchemy import Column, Integer, String, Boolean, Date, ForeignKey
+from sqlalchemy import Column, Integer, String, Boolean, Date
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
-class Fahrschueler(Base):
-    __tablename__ = "fahrschueler"
+class Schueler(Base):
+    __tablename__ = "schueler"
 
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, nullable=False)
     vorname = Column(String, nullable=False)
-    geburtsdatum = Column(String, nullable=False)  # Oder Date, wenn du mit Datumsformat arbeitest
-    strasse = Column(String)
-    hausnummer = Column(String)
-    mobil = Column(String)
+    nachname = Column(String, nullable=False)
+    geburtsdatum = Column(Date, nullable=True)
+    adresse = Column(String, nullable=True)
+    mobilnummer = Column(String, nullable=True)
     sehhilfe = Column(Boolean, default=False)
     theorie_bestanden = Column(Boolean, default=False)
-
+    
 class Grundstufe(Base):
     __tablename__ = "grundstufe"
 
