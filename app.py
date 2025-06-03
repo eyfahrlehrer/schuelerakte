@@ -4,7 +4,8 @@ from xhtml2pdf import pisa
 from storage import save_diagrammkarte
 from flask import render_template
 from db import SessionLocal
-from models import Fahrschueler
+from models import Schueler
+
 
 app = Flask(__name__)
 app.secret_key = "geheimcode123"
