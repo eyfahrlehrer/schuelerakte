@@ -145,4 +145,22 @@ class Daemmerung(Base):
 
     schueler = relationship("Schueler", back_populates="daemmerung")
 
+class Reifestufe(Base):
+    __tablename__ = "reifestufe"
+
+    id = Column(Integer, primary_key=True)
+    schueler_id = Column(Integer, ForeignKey("schueler.id"), nullable=False)
+
+    selbststaendiges_fahren = Column(Boolean, default=False)
+    innerorts = Column(Boolean, default=False)
+    ausserorts = Column(Boolean, default=False)
+    verantwortungsbewusstes_fahren = Column(Boolean, default=False)
+    testfahrt = Column(Boolean, default=False)
+    fakts = Column(Boolean, default=False)
+    andere = Column(Boolean, default=False)
+    wiederholung_vertiefung = Column(Boolean, default=False)
+    leistungsbewertung = Column(Boolean, default=False)
+    notizen = Column(String)
+
+    schueler = relationship("Schueler", back_populates="reifestufe")
 
