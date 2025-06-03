@@ -242,23 +242,19 @@ def grundfahraufgaben():
         return redirect(url_for("login"))
 
     if request.method == "POST":
-        eintrag = {
-            "stammdaten": session.get("stammdaten", {}),
-            "grundfahraufgaben": {
-                "rueckwaerts_ecke": "rueckwaerts_ecke" in request.form,
-                "einparken_laengs_rueck": "einparken_laengs_rueck" in request.form,
-                "einparken_quer_rueck": "einparken_quer_rueck" in request.form,
-                "einparken_links_vor": "einparken_links_vor" in request.form,
-                "einparken_rechts_vor": "einparken_rechts_vor" in request.form,
-                "umkehren": "umkehren" in request.form,
-                "gefahrenbremsung": "gefahrenbremsung" in request.form,
-                "notizen": request.form.get("notizen")
-            }
-        }
-
-        # Speichern z. B. in Datenbank oder Session – hier nur Platzhalter
-        print(eintrag)  # Debug-Zweck
-
+        eintrag = Grundfahraufgaben(
+            schueler_id=session.get("schueler_id"),
+            rueckwaerts_ecke=bool(request.form.get("rueckwaerts_ecke")),
+            einparken_laengs_rueck=bool(request.form.get("einparken_laengs_rueck")),
+            einparken_quer_rueck=bool(request.form.get("einparken_quer_rueck")),
+            einparken_links_vor=bool(request.form.get("einparken_links_vor")),
+            einparken_rechts_vor=bool(request.form.get("einparken_rechts_vor")),
+            umkehren=bool(request.form.get("umkehren")),
+            gefahrenbremsung=bool(request.form.get("gefahrenbremsung")),
+            notizen=request.form.get("notizen")
+        )
+        db.session.add(eintrag)
+        db.session.commit()
         return render_template("grundfahraufgaben.html", status="✅ Grundfahraufgaben gespeichert")
 
     return render_template("grundfahraufgaben.html")
