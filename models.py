@@ -18,6 +18,7 @@ class Schueler(Base):
     theorie_bestanden = Column(Boolean, default=False)
     grundfahraufgaben = relationship("Grundfahraufgaben", back_populates="schueler", uselist=False)
     ueberlandfahrt = relationship("Ueberlandfahrt", back_populates="schueler", uselist=False)
+    daemmerung = relationship("Daemmerung", back_populates="schueler", uselist=False)
 
     
 class Grundstufe(Base):
@@ -114,3 +115,34 @@ class Ueberlandfahrt(Base):
     notizen = Column(String)
 
     schueler = relationship("Schueler", back_populates="ueberlandfahrt")
+
+class Daemmerung(Base):
+    __tablename__ = "daemmerung"
+
+    id = Column(Integer, primary_key=True)
+    schueler_id = Column(Integer, ForeignKey("schueler.id"), nullable=False)
+
+    beleuchtung = Column(Boolean, default=False)
+    kontrolle = Column(Boolean, default=False)
+    benutzung = Column(Boolean, default=False)
+    einstellen = Column(Boolean, default=False)
+    fernlicht = Column(Boolean, default=False)
+    beleuchtete_strasse = Column(Boolean, default=False)
+    unbeleuchtete_strasse = Column(Boolean, default=False)
+    parken = Column(Boolean, default=False)
+
+    besondere_situationen = Column(Boolean, default=False)
+    schlechte_witterung = Column(Boolean, default=False)
+    bahnuebergaenge = Column(Boolean, default=False)
+    tiere = Column(Boolean, default=False)
+    unbeleuchtete_verkehrsteilnehmer = Column(Boolean, default=False)
+    besondere_anforderungen = Column(Boolean, default=False)
+    blendung = Column(Boolean, default=False)
+    orientierung = Column(Boolean, default=False)
+    abschlussbesprechung = Column(Boolean, default=False)
+
+    notizen = Column(String)
+
+    schueler = relationship("Schueler", back_populates="daemmerung")
+
+
