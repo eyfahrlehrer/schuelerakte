@@ -2,75 +2,95 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Aufbaustufe – Ausbildungsdiagrammkarte</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <title>Aufbaustufe</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 p-8">
-  <div class="max-w-3xl mx-auto p-6">
-    <h1 class="text-2xl font-bold mb-2 text-amber-700">Aufbaustufe</h1>
-    <p class="mb-6 italic text-amber-700">Umweltschonendes, vorausschauendes Fahren, Blickschulung</p>
+<body class="bg-gray-50 p-6">
+  <form method="POST" class="space-y-8">
+    <h1 class="text-2xl font-bold text-blue-700">Aufbaustufe</h1>
+    <p class="text-sm text-gray-600 mb-4">Umweltschonendes &amp; vorausschauendes Fahren, Blickschulung, Bremsübungen</p>
 
-    <form method="POST">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- SPALTE 1 -->
+      <div class="space-y-4">
+        <!-- Rollen und Schalten -->
+        <div class="bg-blue-100 p-4 rounded shadow">
+          <h2 class="font-semibold text-lg text-blue-900">Rollen & Schalten</h2>
+          <div class="ml-4 space-y-2">
+            <label><input type="checkbox" name="rollen"> Rollen</label><br>
+            <label><input type="checkbox" name="schalten"> Schalten</label>
+          </div>
+        </div>
 
-      <div class="bg-amber-500 p-4 rounded mb-4">
-        <label class="block mb-2"><input type="checkbox" name="rollen"> Rollen und Schalten</label>
-        <label class="block mb-2"><input type="checkbox" name="abbremsen"> Abbremsen und Schalten</label>
+        <!-- Bremsübungen -->
+        <div class="bg-red-100 p-4 rounded shadow">
+          <h2 class="font-semibold text-lg text-red-900">Bremsübungen</h2>
+          <div class="ml-4 space-y-2">
+            <label><input type="checkbox" name="bremsen_degressiv"> Degressiv</label><br>
+            <label><input type="checkbox" name="zielbremsung"> Zielbremsung</label><br>
+            <label><input type="checkbox" name="gefahrbremsung"> Gefahrbremsung</label>
+          </div>
+        </div>
+
+        <!-- Gefälle -->
+        <div class="bg-yellow-100 p-4 rounded shadow">
+          <h2 class="font-semibold text-lg text-yellow-900">Gefälle</h2>
+          <div class="ml-4 space-y-2">
+            <label><input type="checkbox" name="gefaelle_anhalten"> Anhalten</label><br>
+            <label><input type="checkbox" name="gefaelle_anfahren"> Anfahren</label><br>
+            <label><input type="checkbox" name="gefaelle_rueckwaerts"> Rückwärts</label><br>
+            <label><input type="checkbox" name="gefaelle_sichern"> Sichern</label><br>
+            <label><input type="checkbox" name="gefaelle_schalten"> Schalten</label>
+          </div>
+        </div>
       </div>
 
-      <div class="bg-amber-500 p-4 rounded mb-4">
-        <p class="font-semibold mb-2">Bremsübungen:</p>
-        <label class="block"><input type="checkbox" name="brems_degressiv"> degressiv</label>
-        <label class="block"><input type="checkbox" name="brems_ziel"> Zielbremsung</label>
-        <label class="block"><input type="checkbox" name="brems_gefahr"> Gefahrensituation</label>
+      <!-- SPALTE 2 -->
+      <div class="space-y-4">
+        <!-- Steigung -->
+        <div class="bg-green-100 p-4 rounded shadow">
+          <h2 class="font-semibold text-lg text-green-900">Steigung</h2>
+          <div class="ml-4 space-y-2">
+            <label><input type="checkbox" name="steigung_anhalten"> Anhalten</label><br>
+            <label><input type="checkbox" name="steigung_anfahren"> Anfahren</label><br>
+            <label><input type="checkbox" name="steigung_rueckwaerts"> Rückwärts</label><br>
+            <label><input type="checkbox" name="steigung_sichern"> Sichern</label><br>
+            <label><input type="checkbox" name="steigung_schalten"> Schalten</label>
+          </div>
+        </div>
+
+        <!-- Blickschulung -->
+        <div class="bg-indigo-100 p-4 rounded shadow">
+          <h2 class="font-semibold text-lg text-indigo-900">Blickschulung</h2>
+          <div class="ml-4 space-y-2">
+            <label><input type="checkbox" name="blickschulung"> Blickverhalten</label>
+          </div>
+        </div>
+
+        <!-- Weitere -->
+        <div class="bg-purple-100 p-4 rounded shadow">
+          <h2 class="font-semibold text-lg text-purple-900">Weitere Inhalte</h2>
+          <div class="ml-4 space-y-2">
+            <label><input type="checkbox" name="tastgeschwindigkeit"> Tastgeschwindigkeit</label><br>
+            <label><input type="checkbox" name="bedienung_kontrolle"> Bedienungs- & Kontrolleinrichtungen</label><br>
+            <label><input type="checkbox" name="oertliche_besonderheiten"> Örtliche Besonderheiten</label>
+          </div>
+        </div>
       </div>
+    </div>
 
-      <div class="bg-amber-500 p-4 rounded mb-4">
-        <p class="font-semibold mb-2">Gefälle:</p>
-        <label class="block"><input type="checkbox" name="g_anh"> Anhalten</label>
-        <label class="block"><input type="checkbox" name="g_anf"> Anfahren</label>
-        <label class="block"><input type="checkbox" name="g_rueck"> Rückwärts</label>
-        <label class="block"><input type="checkbox" name="g_sichern"> Sichern</label>
-        <label class="block"><input type="checkbox" name="g_schalten"> Schalten</label>
-      </div>
+    <!-- Notizen -->
+    <div>
+      <label for="notizen" class="block text-sm font-medium text-gray-700 mt-6">Notizen des Fahrlehrers</label>
+      <textarea name="notizen" rows="4" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm"></textarea>
+    </div>
 
-      <div class="bg-amber-500 p-4 rounded mb-4">
-        <p class="font-semibold mb-2">Steigung:</p>
-        <label class="block"><input type="checkbox" name="s_anh"> Anhalten</label>
-        <label class="block"><input type="checkbox" name="s_anf"> Anfahren</label>
-        <label class="block"><input type="checkbox" name="s_rueck"> Rückwärts</label>
-        <label class="block"><input type="checkbox" name="s_sichern"> Sichern</label>
-        <label class="block"><input type="checkbox" name="s_schalten"> Schalten</label>
-      </div>
-
-      <div class="bg-amber-500 p-4 rounded mb-4">
-        <label class="block mb-2"><input type="checkbox" name="tastgeschwindigkeit"> Tastgeschwindigkeit</label>
-        <label class="block mb-2"><input type="checkbox" name="kontrolleinrichtungen"> Bedienungs- u. Kontrolleinrichtungen</label>
-        <label class="block mb-2"><input type="checkbox" name="besonderheiten"> Örtliche Besonderheiten</label>
-      </div>
-
-      <div class="bg-amber-500 p-4 rounded mb-6">
-        <label for="notizen" class="block font-semibold mb-1">Notizen des Fahrlehrers:</label>
-        <textarea name="notizen" id="notizen" rows="4" class="w-full border p-2 rounded" placeholder="Besonderheiten, Fortschritt oder Hinweise..."></textarea>
-      </div>
-
-      <!-- Navigationsleiste -->
-<div class="mt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-  <!-- Zurück -->
-  <a href="{{ url_for('grundstufe') }}" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded shadow w-full md:w-auto text-center">
-    ⬅️ Zurück
-  </a>
-
-  <!-- Speichern -->
-  <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded shadow w-full md:w-auto">
-    💾 Speichern
-  </button>
-
-  <!-- Weiter -->
-  <a href="{{ url_for('leistungsstufe') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded shadow w-full md:w-auto text-center">
-    Weiter ➡️
-  </a>
-</div>
-    </form>
-  </div>
+    <!-- Navigation -->
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4 mt-6">
+      <a href="{{ url_for('grundstufe') }}" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded shadow w-full md:w-auto text-center">Zurück</a>
+      <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded shadow w-full md:w-auto">Speichern</button>
+      <a href="{{ url_for('leistungsstufe') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded shadow w-full md:w-auto text-center">Weiter</a>
+    </div>
+  </form>
 </body>
 </html>
