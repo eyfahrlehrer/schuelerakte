@@ -2,26 +2,34 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Grundstufe – Ausbildungsdiagrammkarte</title>
+  <title>Grundstufe</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script>
+    function closeAlert() {
+      document.getElementById("fehlerbox").style.display = "none";
+    }
+  </script>
 </head>
 <body class="bg-gray-100 p-8">
   <div class="max-w-4xl mx-auto bg-white p-6 rounded shadow">
     <h1 class="text-2xl font-bold text-blue-700 mb-6">Grundstufe</h1>
 
     <form method="POST" class="space-y-6">
+
       {% if status %}
-        <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded">
-          {{ status }}
-        </div>
+      <div id="fehlerbox" class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded relative">
+        <span class="absolute top-0 right-2 text-xl cursor-pointer" onclick="closeAlert()">×</span>
+        {{ status }}
+      </div>
       {% endif %}
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Spalte 1 -->
+        <!-- Linke Spalte -->
         <div class="space-y-4">
+
           <div class="bg-yellow-50 p-4 rounded">
             <label class="block font-semibold mb-2">Besonderheiten beim Einsteigen:</label>
-            <input type="checkbox" name="einsteigen"> <span>Ja</span>
+            <label><input type="checkbox" name="einsteigen"> Ja</label>
           </div>
 
           <div class="bg-yellow-50 p-4 rounded">
@@ -33,17 +41,17 @@
           </div>
 
           <div class="bg-yellow-50 p-4 rounded">
-            <label class="block mb-2"><input type="checkbox" name="lenkhaltung"> Lenkradhaltung</label>
-            <label class="block mb-2"><input type="checkbox" name="pedale"> Pedale</label>
-            <label class="block mb-2"><input type="checkbox" name="guert"> Gurt anlegen/anpassen</label>
-            <label class="block mb-2"><input type="checkbox" name="wahlhebel"> Schalt-/Wahlhebel</label>
-            <label class="block mb-2"><input type="checkbox" name="zuendschloss"> Zündschloss</label>
-            <label class="block mb-2"><input type="checkbox" name="motor"> Motor anlassen</label>
-            <label class="block mb-2"><input type="checkbox" name="anhalteuebungen"> Anfahr- bzw. Anhalteübungen</label>
+            <label class="block"><input type="checkbox" name="lenkhaltung"> Lenkradhaltung</label>
+            <label class="block"><input type="checkbox" name="pedale"> Pedale</label>
+            <label class="block"><input type="checkbox" name="guert"> Gurt anlegen/anpassen</label>
+            <label class="block"><input type="checkbox" name="wahlhebel"> Schalt-/Wahlhebel</label>
+            <label class="block"><input type="checkbox" name="zuendschloss"> Zündschloss</label>
+            <label class="block"><input type="checkbox" name="motor"> Motor anlassen</label>
+            <label class="block"><input type="checkbox" name="anhalteuebungen"> Anfahr- bzw. Anhalteübungen</label>
           </div>
         </div>
 
-        <!-- Spalte 2 -->
+        <!-- Rechte Spalte -->
         <div class="space-y-4">
           <div class="bg-yellow-50 p-4 rounded">
             <h2 class="font-semibold mb-2">Schaltübungen (umweltschonend)</h2>
@@ -75,15 +83,9 @@
 
       <!-- Navigation -->
       <div class="mt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-        <a href="{{ url_for('stammdaten') }}" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded shadow">
-          ⬅️ Zurück
-        </a>
-        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded shadow">
-          💾 Speichern
-        </button>
-        <a href="{{ url_for('aufbaustufe') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded shadow">
-          Weiter ➡️
-        </a>
+        <a href="{{ url_for('stammdaten') }}" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded shadow">⬅️ Zurück</a>
+        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded shadow">💾 Speichern</button>
+        <a href="{{ url_for('aufbaustufe') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded shadow">Weiter ➡️</a>
       </div>
     </form>
   </div>
