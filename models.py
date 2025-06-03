@@ -20,6 +20,7 @@ class Schueler(Base):
     ueberlandfahrt = relationship("Ueberlandfahrt", back_populates="schueler", uselist=False)
     daemmerung = relationship("Daemmerung", back_populates="schueler", uselist=False)
     reifestufe = relationship("Reifestufe", back_populates="schueler", uselist=False)
+    technik = relationship("Technik", uselist=False, back_populates="schueler")
 
 
     
@@ -170,3 +171,89 @@ class Reifestufe(Base):
 
     schueler = relationship("Schueler", back_populates="reifestufe")
 
+class Technik(Base):
+    __tablename__ = "technik"
+
+    id = Column(Integer, primary_key=True)
+    schueler_id = Column(Integer, ForeignKey("schueler.id"), nullable=False)
+
+    # Reifen
+    reifen_beschaedigung = Column(Boolean, default=False)
+    profiltiefe_druck = Column(Boolean, default=False)
+
+    # Lichtanlage
+    standlicht = Column(Boolean, default=False)
+    abbendlicht = Column(Boolean, default=False)
+    fernlicht = Column(Boolean, default=False)
+    schlussleuchten = Column(Boolean, default=False)
+    nebellicht = Column(Boolean, default=False)
+    warnblinker = Column(Boolean, default=False)
+    blinker = Column(Boolean, default=False)
+    hupe = Column(Boolean, default=False)
+    bremsleuchte = Column(Boolean, default=False)
+    kontrollleuchten = Column(Boolean, default=False)
+
+    # Lenkung
+    lenkschloss = Column(Boolean, default=False)
+    lenkspiel = Column(Boolean, default=False)
+
+    # Bremsen
+    betriebsbremse = Column(Boolean, default=False)
+    feststellbremse = Column(Boolean, default=False)
+
+    # Motorraum
+    motoroel = Column(Boolean, default=False)
+    kuehlmittel = Column(Boolean, default=False)
+    wischwasser = Column(Boolean, default=False)
+
+    # Tanken
+    tanken = Column(Boolean, default=False)
+
+    # Sicherungsmittel
+    warndreieck = Column(Boolean, default=False)
+    verbandskasten = Column(Boolean, default=False)
+    bordwerkzeug = Column(Boolean, default=False)
+    abschalten = Column(Boolean, default=False)
+
+    # Außenkontrolle
+    schaden_sauberkeit = Column(Boolean, default=False)
+    scheibenwischer = Column(Boolean, default=False)
+    kennzeichen = Column(Boolean, default=False)
+    spiegel = Column(Boolean, default=False)
+    beleuchtung = Column(Boolean, default=False)
+
+    # Ladung
+    ladung_sicherung = Column(Boolean, default=False)
+    ladung_kennzeichnung = Column(Boolean, default=False)
+
+    # Fahrerassistenzsysteme
+    assistent_ein = Column(Boolean, default=False)
+    assistent_anwenden = Column(Boolean, default=False)
+
+    # Heizung / Lüftung
+    heizung = Column(Boolean, default=False)
+    lueftung = Column(Boolean, default=False)
+    klimaanlage = Column(Boolean, default=False)
+    heckscheibenheizung = Column(Boolean, default=False)
+    sonderheizung = Column(Boolean, default=False)
+
+    # Energiesparende Nutzung
+    verbraucher_aus = Column(Boolean, default=False)
+    abschalten_rechtzeitig = Column(Boolean, default=False)
+
+    # Witterung
+    schlechte_witterung = Column(Boolean, default=False)
+    wit_lueftung = Column(Boolean, default=False)
+    wit_beleuchtung = Column(Boolean, default=False)
+    wit_scheibenwischer = Column(Boolean, default=False)
+    regen = Column(Boolean, default=False)
+    aquaplaning = Column(Boolean, default=False)
+    wind = Column(Boolean, default=False)
+    schnee_matsch = Column(Boolean, default=False)
+    eis = Column(Boolean, default=False)
+
+    # Notizen
+    notizen = Column(String)
+
+    # Beziehung zu Schüler
+    schueler = relationship("Schueler", back_populates="technik")
