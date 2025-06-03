@@ -19,6 +19,8 @@ class Schueler(Base):
     grundfahraufgaben = relationship("Grundfahraufgaben", back_populates="schueler", uselist=False)
     ueberlandfahrt = relationship("Ueberlandfahrt", back_populates="schueler", uselist=False)
     daemmerung = relationship("Daemmerung", back_populates="schueler", uselist=False)
+    reifestufe = relationship("Reifestufe", back_populates="schueler", uselist=False)
+
 
     
 class Grundstufe(Base):
@@ -69,6 +71,7 @@ class Aufbaustufe(Base):
     besondere_oertliche = Column(Boolean, default=False)
 
     notizen = Column(String, nullable=True)
+    
 
 class Grundfahraufgaben(Base):
     __tablename__ = "grundfahraufgaben"
@@ -86,6 +89,7 @@ class Grundfahraufgaben(Base):
     notizen = Column(String)
 
     schueler = relationship("Schueler", back_populates="grundfahraufgaben")
+    
 
 class Ueberlandfahrt(Base):
     __tablename__ = "ueberlandfahrt"
@@ -115,6 +119,7 @@ class Ueberlandfahrt(Base):
     notizen = Column(String)
 
     schueler = relationship("Schueler", back_populates="ueberlandfahrt")
+    
 
 class Daemmerung(Base):
     __tablename__ = "daemmerung"
@@ -144,6 +149,7 @@ class Daemmerung(Base):
     notizen = Column(String)
 
     schueler = relationship("Schueler", back_populates="daemmerung")
+    
 
 class Reifestufe(Base):
     __tablename__ = "reifestufe"
