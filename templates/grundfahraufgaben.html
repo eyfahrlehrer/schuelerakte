@@ -2,66 +2,92 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Grundfahraufgaben</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <title>Grundstufe</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 p-8">
-  <div class="max-w-4xl mx-auto p-6">
-    <h1 class="text-2xl font-bold mb-4 text-indigo-700">Grundfahraufgaben</h1>
+<body class="bg-gray-50 p-6">
+  <form method="POST" class="space-y-8">
+    <h1 class="text-2xl font-bold text-blue-700">Grundstufe</h1>
+    <p class="text-sm text-gray-600 mb-4">Bedienen des Fahrzeugs, einfache Verkehrssituationen, Schaltvorgänge</p>
 
-    <form method="POST" class="space-y-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- SPALTE LINKS -->
+      <div class="space-y-4">
+        <!-- Sitz, Spiegel, Lenkrad -->
+        <div class="bg-blue-100 p-4 rounded shadow">
+          <h2 class="font-semibold text-lg text-blue-900">Fahrvorbereitung</h2>
+          <div class="ml-4 space-y-2">
+            <label><input type="checkbox" name="sitz"> Sitz einstellen</label><br>
+            <label><input type="checkbox" name="spiegel"> Spiegel einstellen</label><br>
+            <label><input type="checkbox" name="lenkrad"> Lenkradhaltung</label>
+          </div>
+        </div>
 
-      <div class="bg-indigo-400 p-4 rounded">
-        <p class="font-semibold mb-2">Rückwärtsfahren</p>
-        <label class="block"><input type="checkbox" name="rueckwaerts_ecke"> Rechts rückwärts um die Ecke</label>
+        <!-- Schalten -->
+        <div class="bg-yellow-100 p-4 rounded shadow">
+          <h2 class="font-semibold text-lg text-yellow-900">Schaltübungen</h2>
+          <div class="ml-4 space-y-2">
+            <label><input type="checkbox" name="schalten_hoch"> Hochschalten</label><br>
+            <label><input type="checkbox" name="schalten_runter"> Runterschalten</label>
+          </div>
+        </div>
+
+        <!-- Anfahren, Halten, Rückwärts -->
+        <div class="bg-green-100 p-4 rounded shadow">
+          <h2 class="font-semibold text-lg text-green-900">Grundlegende Fahrmanöver</h2>
+          <div class="ml-4 space-y-2">
+            <label><input type="checkbox" name="anfahren"> Anfahren</label><br>
+            <label><input type="checkbox" name="halten"> Halten</label><br>
+            <label><input type="checkbox" name="rueckwaerts"> Rückwärtsfahren</label>
+          </div>
+        </div>
       </div>
 
-      <div class="bg-indigo-400 p-4 rounded">
-        <p class="font-semibold mb-2">Rückwärtsparken</p>
-        <label class="block"><input type="checkbox" name="einparken_laengs_rueck"> Rechts einparken in Längsaufstellung</label>
-        <label class="block"><input type="checkbox" name="einparken_quer_rueck"> Rechts einparken in Querstellung</label>
+      <!-- SPALTE RECHTS -->
+      <div class="space-y-4">
+        <!-- Verkehrsbeobachtung -->
+        <div class="bg-indigo-100 p-4 rounded shadow">
+          <h2 class="font-semibold text-lg text-indigo-900">Verkehrsbeobachtung</h2>
+          <div class="ml-4 space-y-2">
+            <label><input type="checkbox" name="schulterblick"> Schulterblick</label><br>
+            <label><input type="checkbox" name="spiegelkontrolle"> Spiegelkontrolle</label>
+          </div>
+        </div>
+
+        <!-- Einfaches Einordnen & Abbiegen -->
+        <div class="bg-red-100 p-4 rounded shadow">
+          <h2 class="font-semibold text-lg text-red-900">Einordnen & Abbiegen</h2>
+          <div class="ml-4 space-y-2">
+            <label><input type="checkbox" name="einordnen"> Einordnen</label><br>
+            <label><input type="checkbox" name="abbiegen_rechts"> Rechts abbiegen</label><br>
+            <label><input type="checkbox" name="abbiegen_links"> Links abbiegen</label>
+          </div>
+        </div>
+
+        <!-- Vorfahrt & Verkehrszeichen -->
+        <div class="bg-purple-100 p-4 rounded shadow">
+          <h2 class="font-semibold text-lg text-purple-900">Vorfahrt & Zeichen</h2>
+          <div class="ml-4 space-y-2">
+            <label><input type="checkbox" name="rechts_vor_links"> Rechts vor Links</label><br>
+            <label><input type="checkbox" name="stoppschild"> Stoppschild</label><br>
+            <label><input type="checkbox" name="ampel"> Ampelregelung</label>
+          </div>
+        </div>
       </div>
+    </div>
 
-      <div class="bg-indigo-400 p-4 rounded">
-        <p class="font-semibold mb-2">Vorwärtsparken</p>
-        <label class="block"><input type="checkbox" name="einparken_links_vor"> Links vorwärts einparken</label>
-        <label class="block"><input type="checkbox" name="einparken_rechts_vor"> Rechts vorwärts einparken</label>
-      </div>
+    <!-- Notizen -->
+    <div>
+      <label for="notizen" class="block text-sm font-medium text-gray-700 mt-6">Notizen des Fahrlehrers</label>
+      <textarea name="notizen" rows="4" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm"></textarea>
+    </div>
 
-      <div class="bg-indigo-400 p-4 rounded">
-        <p class="font-semibold mb-2">Wenden</p>
-        <label class="block"><input type="checkbox" name="umkehren"> Umkehren</label>
-      </div>
-
-      <div class="bg-indigo-400 p-4 rounded">
-        <p class="font-semibold mb-2">Bremsmanöver</p>
-        <label class="block"><input type="checkbox" name="gefahrenbremsung"> Gefahrenbremsung</label>
-      </div>
-
-      <div class="bg-indigo-400 p-4 rounded">
-        <label for="notizen" class="block font-semibold mb-2">Notizen des Fahrlehrers:</label>
-        <textarea name="notizen" id="notizen" rows="4" class="w-full border p-2 rounded" placeholder="Besonderheiten oder Beobachtungen…"></textarea>
-      </div>
-
-      <!-- Navigationsleiste -->
-<div class="mt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-  <!-- Zurück -->
-  <a href="{{ url_for('leistungsstufe') }}" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded shadow w-full md:w-auto text-center">
-    ⬅️ Zurück
-  </a>
-
-  <!-- Speichern -->
-  <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded shadow w-full md:w-auto">
-    💾 Speichern
-  </button>
-
-  <!-- Weiter -->
-  <a href="{{ url_for('ueberlandfahrt') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded shadow w-full md:w-auto text-center">
-    Weiter ➡️
-  </a>
-</div>
-    </form>
-  </div>
+    <!-- Navigation -->
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4 mt-6">
+      <a href="{{ url_for('stammdaten') }}" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded shadow w-full md:w-auto text-center">Zurück</a>
+      <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded shadow w-full md:w-auto">Speichern</button>
+      <a href="{{ url_for('aufbaustufe') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded shadow w-full md:w-auto text-center">Weiter</a>
+    </div>
+  </form>
 </body>
 </html>
-
