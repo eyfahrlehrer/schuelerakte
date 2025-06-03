@@ -236,6 +236,33 @@ def aufbaustufe_formular():
 
     return render_template("aufbaustufe.html", status=status)
 
+@app.route("/grundfahraufgaben", methods=["GET", "POST"])
+def grundfahraufgaben():
+    if "username" not in session:
+        return redirect(url_for("login"))
+
+    if request.method == "POST":
+        eintrag = {
+            "stammdaten": session.get("stammdaten", {}),
+            "grundfahraufgaben": {
+                "rueckwaerts_ecke": "rueckwaerts_ecke" in request.form,
+                "einparken_laengs_rueck": "einparken_laengs_rueck" in request.form,
+                "einparken_quer_rueck": "einparken_quer_rueck" in request.form,
+                "einparken_links_vor": "einparken_links_vor" in request.form,
+                "einparken_rechts_vor": "einparken_rechts_vor" in request.form,
+                "umkehren": "umkehren" in request.form,
+                "gefahrenbremsung": "gefahrenbremsung" in request.form,
+                "notizen": request.form.get("notizen")
+            }
+        }
+
+        # Speichern z. B. in Datenbank oder Session – hier nur Platzhalter
+        print(eintrag)  # Debug-Zweck
+
+        return render_template("grundfahraufgaben.html", status="✅ Grundfahraufgaben gespeichert")
+
+    return render_template("grundfahraufgaben.html")
+
 
 @app.route("/ueberlandfahrt", methods=["GET", "POST"])
 def ueberlandfahrt():
