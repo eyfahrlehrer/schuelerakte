@@ -313,20 +313,19 @@ def autobahnfahrt():
             "stammdaten": session.get("stammdaten", {}),
             "autobahnfahrt": {
                 "fahrtplanung": "fahrtplanung" in request.form,
-                "einfahren_bab": "einfahren_bab" in request.form,
+                "einfahrt_bab": "einfahrt_bab" in request.form,
                 "freistreifenwahl": "freistreifenwahl" in request.form,
                 "geschwindigkeit": "geschwindigkeit" in request.form,
                 "abstand_vorne": "abstand_vorne" in request.form,
                 "abstand_hinten": "abstand_hinten" in request.form,
                 "abstand_seitlich": "abstand_seitlich" in request.form,
                 "ueberholen": "ueberholen" in request.form,
-                "schildermarkierungen": "schildermarkierungen" in request.form,
+                "schilder_markierung": "schilder_markierung" in request.form,
                 "vorbeifahren_anschlussstellen": "vorbeifahren_anschlussstellen" in request.form,
-                "rastparkplaetze": "rastparkplaetze" in request.form,
-                "verhalten_unfaelle": "verhalten_unfaelle" in request.form,
+                "rast_tankstellen": "rast_tankstellen" in request.form,
+                "verhalten_unfall": "verhalten_unfall" in request.form,
                 "dichter_verkehr": "dichter_verkehr" in request.form,
                 "besondere_situation": "besondere_situation" in request.form,
-                "besondere_anforderungen": "besondere_anforderungen" in request.form,
                 "leistungsgrenze": "leistungsgrenze" in request.form,
                 "ablenkung": "ablenkung" in request.form,
                 "konfliktsituation": "konfliktsituation" in request.form,
@@ -334,8 +333,7 @@ def autobahnfahrt():
                 "notizen": request.form.get("notizen")
             }
         }
-
-        return render_template("autobahnfahrt.html", status="✅ Autobahnfahrt gespeichert")
+        return render_template("autobahnfahrt.html", status="✅ Autobahnfahrt gespeichert", **eintrag)
 
     return render_template("autobahnfahrt.html")
     
