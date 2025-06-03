@@ -84,3 +84,32 @@ class Grundfahraufgaben(Base):
     notizen = Column(String)
 
     schueler = relationship("Schueler", back_populates="grundfahraufgaben")
+
+class Ueberlandfahrt(Base):
+    __tablename__ = "ueberlandfahrt"
+
+    id = Column(Integer, primary_key=True)
+    schueler_id = Column(Integer, ForeignKey("schueler.id"), nullable=False)
+
+    geschwindigkeit = Column(Boolean, default=False)
+    abstand_vorne = Column(Boolean, default=False)
+    abstand_hinten = Column(Boolean, default=False)
+    abstand_seitlich = Column(Boolean, default=False)
+
+    beobachtung = Column(Boolean, default=False)
+    schilder = Column(Boolean, default=False)
+    kurven = Column(Boolean, default=False)
+    einmuendungen = Column(Boolean, default=False)
+
+    besonderheiten = Column(Boolean, default=False)
+    fussgaenger = Column(Boolean, default=False)
+    einfahren_ortschaft = Column(Boolean, default=False)
+    wildtiere = Column(Boolean, default=False)
+
+    leistungsgrenze = Column(Boolean, default=False)
+    ablenkung = Column(Boolean, default=False)
+    orientierung = Column(Boolean, default=False)
+
+    notizen = Column(String)
+
+    schueler = relationship("Schueler", back_populates="ueberlandfahrt")
