@@ -1,98 +1,107 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8">
-  <title>Leistungsstufe</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-100 p-8">
-  <div class="max-w-4xl mx-auto p-6">
-    <h1 class="text-2xl font-bold mb-2 text-rose-700">Leistungsstufe</h1>
-    <p class="mb-6 italic text-rose-700">
-      Schwierige Verkehrssituationen, umweltschonendes & vorausschauendes Fahren,<br>
-      Blickschulung, Bremsbereitschaft, Fahrbahnbenutzung
-    </p>
+<div class="max-w-7xl mx-auto p-6">
+  <h1 class="text-2xl font-bold mb-2 text-gray-800">Leistungsstufe</h1>
+  <p class="text-sm italic text-gray-500 mb-6">Schwierige Verkehrssituationen, umweltschonendes &amp; vorausschauendes Fahren, Blickschulung, Bremsbereitschaft, Fahrbahnbenutzung</p>
 
-    <form method="POST">
-
-      <div class="bg-rose-400 p-4 rounded mb-4">
-        <label class="block mb-1"><input type="checkbox" name="einordnen"> Einordnen</label>
-        <label class="block mb-1"><input type="checkbox" name="markierungen"> Markierungen</label>
-        <label class="block mb-1"><input type="checkbox" name="vorbeifahren"> Vorbeifahren</label>
-        <label class="block mb-1"><input type="checkbox" name="ueberholen"> Überholen</label>
-
-        <p class="font-semibold mt-3">Abbiegen:</p>
-        <label class="block ml-4"><input type="checkbox" name="abbiegen_rechts"> rechts</label>
-        <label class="block ml-4"><input type="checkbox" name="abbiegen_links"> links</label>
-        <label class="block ml-4"><input type="checkbox" name="abbiegen_mehrspurig"> mehrspurig</label>
-        <label class="block ml-4"><input type="checkbox" name="radweg"> Radweg</label>
-        <label class="block ml-4"><input type="checkbox" name="sonderfahrstreifen"> Sonderfahrstreifen</label>
-        <label class="block ml-4"><input type="checkbox" name="strassenbahn"> Straßenbahn</label>
-        <label class="block ml-4"><input type="checkbox" name="einbahnstrasse"> Einbahnstraße</label>
+  <form method="POST" class="space-y-6">
+    <!-- Abschnitt: Vorfahrt -->
+    <div class="bg-blue-50 p-4 rounded shadow">
+      <h2 class="text-blue-800 font-semibold mb-2">Vorfahrt</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pl-4">
+        <label><input type="checkbox" name="rechts_vor_links"> Rechts vor Links</label>
+        <label><input type="checkbox" name="verkehrsschilder"> Verkehrsschilder</label>
+        <label><input type="checkbox" name="ampel"> Ampel</label>
+        <label><input type="checkbox" name="polizeibeamter"> Polizeibeamter</label>
       </div>
+    </div>
 
-      <div class="bg-rose-400 p-4 rounded mb-4">
-        <p class="font-semibold mb-2">Vorfahrt:</p>
-        <label class="block"><input type="checkbox" name="rechts_vor_links"> Rechts vor Links</label>
-        <label class="block"><input type="checkbox" name="gruenpfeil"> Grünpfeil</label>
-        <label class="block"><input type="checkbox" name="polizei"> Polizeibeamte</label>
-        <label class="block"><input type="checkbox" name="schild"> Vorfahrt durch Schild</label>
+    <!-- Abschnitt: Fahrbahnbenutzung -->
+    <div class="bg-green-50 p-4 rounded shadow">
+      <h2 class="text-green-800 font-semibold mb-2">Fahrbahnbenutzung</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pl-4">
+        <label><input type="checkbox" name="einordnen"> Einordnen</label>
+        <label><input type="checkbox" name="markierungen"> Markierungen</label>
+        <label><input type="checkbox" name="sonderfahrstreifen"> Sonderfahrstreifen</label>
+        <label><input type="checkbox" name="strassenbahn"> Straßenbahn</label>
+        <label><input type="checkbox" name="einbahnstrasse"> Einbahnstraße</label>
+        <label><input type="checkbox" name="radweg"> Radweg</label>
       </div>
+    </div>
 
-      <div class="bg-rose-400 p-4 rounded mb-4">
-        <label class="block"><input type="checkbox" name="geschwindigkeit"> Geschwindigkeit</label>
-        <label class="block"><input type="checkbox" name="abstand"> Abstand</label>
-        
-        <p class="font-semibold mt-3">Verhalten zu anderen Verkehrsteilnehmern:</p>
-        <label class="block ml-4"><input type="checkbox" name="fussgaenger"> Fußgängerüberwege</label>
-        <label class="block ml-4"><input type="checkbox" name="kinder"> Kinder</label>
-        <label class="block ml-4"><input type="checkbox" name="oevm"> Öffentliche Verkehrsmittel</label>
-        <label class="block ml-4"><input type="checkbox" name="schulbus"> Schulbus</label>
-        <label class="block ml-4"><input type="checkbox" name="aeltere"> Ältere / Behinderte</label>
-        <label class="block ml-4"><input type="checkbox" name="radfahrer"> Radfahrer</label>
-        <label class="block ml-4"><input type="checkbox" name="mofa"> Mofa</label>
+    <!-- Abschnitt: Abbiegevorgänge -->
+    <div class="bg-yellow-50 p-4 rounded shadow">
+      <h2 class="text-yellow-800 font-semibold mb-2">Abbiegevorgänge</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pl-4">
+        <label><input type="checkbox" name="abbiegen_rechts"> rechts</label>
+        <label><input type="checkbox" name="abbiegen_links"> links</label>
+        <label><input type="checkbox" name="mehrspurig"> mehrspurig</label>
+        <label><input type="checkbox" name="radweg_schulterblick"> Radweg (Schulterblick)</label>
       </div>
+    </div>
 
-      <div class="bg-rose-400 p-4 rounded mb-4">
-        <label class="block"><input type="checkbox" name="schwierige_verkehrsfuehrung"> Schwierige Verkehrsführung</label>
-        <label class="block"><input type="checkbox" name="engpass"> Engpass</label>
-        <label class="block"><input type="checkbox" name="kreisverkehr"> Kreisverkehr</label>
-        <label class="block"><input type="checkbox" name="bahnuebergang"> Bahnübergang (Warten)</label>
-        <label class="block"><input type="checkbox" name="kritische_situation"> Kritische Verkehrssituation</label>
-        <label class="block"><input type="checkbox" name="hauptverkehrszeit"> Hauptverkehrszeit</label>
-        <label class="block"><input type="checkbox" name="partnerschaftlich"> Partnerschaftliches Verhalten (Kommunikation, Verzicht auf Vorfahrt)</label>
-        <label class="block"><input type="checkbox" name="schwung"> Schwung nutzen</label>
-        <label class="block"><input type="checkbox" name="fussgaengerschutz"> Fußgängerschutzbereich</label>
+    <!-- Abschnitt: Geschwindigkeiten -->
+    <div class="bg-purple-50 p-4 rounded shadow">
+      <h2 class="text-purple-800 font-semibold mb-2">Geschwindigkeiten</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pl-4">
+        <label><input type="checkbox" name="tastgeschwindigkeit"> Tastgeschwindigkeit</label>
+        <label><input type="checkbox" name="schrittgeschwindigkeit"> Schrittgeschwindigkeit</label>
+        <label><input type="checkbox" name="angepasst"> angepasste Geschwindigkeit</label>
+        <label><input type="checkbox" name="maessig"> mäßige Geschwindigkeit</label>
+        <label><input type="checkbox" name="richtgeschwindigkeit"> Richtgeschwindigkeit</label>
       </div>
+    </div>
 
-      <div class="bg-rose-400 p-4 rounded mb-6">
-        <label for="notizen" class="block font-semibold mb-1">Notizen des Fahrlehrers:</label>
-        <textarea name="notizen" id="notizen" rows="4" class="w-full border p-2 rounded" placeholder="Besonderheiten, Beobachtungen, Hinweise..."></textarea>
+    <!-- Abschnitt: Abstände -->
+    <div class="bg-indigo-50 p-4 rounded shadow">
+      <h2 class="text-indigo-800 font-semibold mb-2">Abstände</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pl-4">
+        <label><input type="checkbox" name="abstand_innerorts"> Innerorts (1,5 Meter)</label>
+        <label><input type="checkbox" name="abstand_ausserorts"> Außerorts (2 Meter)</label>
       </div>
+    </div>
 
- <!-- Navigationsleiste -->
-<div class="mt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+    <!-- Abschnitt: Verhalten zu anderen Verkehrsteilnehmern -->
+    <div class="bg-pink-50 p-4 rounded shadow">
+      <h2 class="text-pink-800 font-semibold mb-2">Verhalten zu anderen Verkehrsteilnehmern</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pl-4">
+        <label><input type="checkbox" name="fussgaenger"> Fußgängerüberwege</label>
+        <label><input type="checkbox" name="kinder"> Kinder</label>
+        <label><input type="checkbox" name="strassenbahn"> Straßenbahn</label>
+        <label><input type="checkbox" name="schulbus"> Schulbus</label>
+        <label><input type="checkbox" name="aeltere"> Ältere / Behinderte</label>
+        <label><input type="checkbox" name="radfahrer"> Radfahrer</label>
+        <label><input type="checkbox" name="mofa"> Motorrad/Mofa</label>
+      </div>
+    </div>
 
-  <!-- Zurück -->
-  <a href="{{ url_for('aufbaustufe') }}"
-     class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded shadow w-full md:w-auto text-center">
-    🔙 Zurück
-  </a>
+    <!-- Abschnitt: Sonstige Verkehrssituationen -->
+    <div class="bg-red-50 p-4 rounded shadow">
+      <h2 class="text-red-800 font-semibold mb-2">Sonstige Verkehrssituationen</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pl-4">
+        <label><input type="checkbox" name="sv_sonderfahrstreifen"> Sonderfahrstreifen</label>
+        <label><input type="checkbox" name="sv_einbahnstrasse"> Einbahnstraße</label>
+        <label><input type="checkbox" name="sv_schwierig"> Schwierige Verkehrsführung</label>
+        <label><input type="checkbox" name="sv_engpass"> Engpass</label>
+        <label><input type="checkbox" name="sv_kreisverkehr"> Kreisverkehr</label>
+        <label><input type="checkbox" name="sv_bahnuebergang"> Bahnübergang (Warten)</label>
+        <label><input type="checkbox" name="sv_kritisch"> Kritische Verkehrssituation</label>
+        <label><input type="checkbox" name="sv_hauptverkehr"> Hauptverkehrszeit</label>
+        <label><input type="checkbox" name="sv_partnerschaft"> Partnerschaftliches Verhalten (Kommunikation, Verzicht auf Vorfahrt)</label>
+        <label><input type="checkbox" name="sv_schwung"> Schwung nutzen</label>
+        <label><input type="checkbox" name="sv_fussgaenger"> Fußgängerschutzbereich</label>
+      </div>
+    </div>
 
-  <!-- Speichern -->
-  <button type="submit"
-          class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded shadow w-full md:w-auto">
-    💾 Speichern
-  </button>
+    <!-- Notizen des Fahrlehrers -->
+    <div class="mt-6">
+      <label for="notizen" class="block font-semibold text-gray-700 mb-2">Notizen des Fahrlehrers</label>
+      <textarea name="notizen" id="notizen" rows="4" class="w-full border border-gray-300 rounded p-2"></textarea>
+    </div>
 
-  <!-- Weiter -->
-  <a href="{{ url_for('grundstufe') }}"
-     class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded shadow w-full md:w-auto text-center">
-    Weiter 🡆
-  </a>
+    <!-- Buttons -->
+    <div class="flex justify-between mt-6">
+      <a href="{{ url_for('aufbaustufe') }}" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded">Zurück</a>
+      <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded">Speichern</button>
+      <a href="{{ url_for('grundstufe') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">Weiter</a>
+    </div>
+  </form>
 </div>
-
-    </form>
-  </div>
-</body>
-</html>
