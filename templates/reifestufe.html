@@ -2,51 +2,64 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Reifestufe</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <title>🧠 Reifestufe – Ausbildungsdiagrammkarte</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 p-6">
-  <div class="max-w-3xl mx-auto bg-rose-300 p-6 rounded shadow">
-    <h1 class="text-2xl font-bold text-rose-900 mb-4">Reifestufe</h1>
+  <div class="max-w-4xl mx-auto bg-white p-6 rounded shadow">
+    <h1 class="text-2xl font-bold text-blue-800 mb-4">🎓 Reifestufe</h1>
 
-    <form method="POST" class="space-y-4">
+    {% if status %}
+    <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-4 mb-6 rounded">
+      ⚠️ {{ status }}
+    </div>
+    {% endif %}
 
-      <!-- Reifestufe-Checkboxen -->
-      <div>
-        <label class="block"><input type="checkbox" name="selbststaendiges_fahren"> Selbstständiges Fahren</label>
-        <label class="block"><input type="checkbox" name="innerorts"> Innerorts</label>
-        <label class="block"><input type="checkbox" name="ausserorts"> Außerorts</label>
-        <label class="block"><input type="checkbox" name="verantwortungsbewusstes_fahren"> Verantwortungsbewusstes Fahren</label>
-        <label class="block"><input type="checkbox" name="testfahrt"> Testfahrt unter Prüfungsbedingungen</label>
-        <label class="block"><input type="checkbox" name="fakt"> FAKT</label>
-        <label class="block"><input type="checkbox" name="andere"> Andere</label>
-        <label class="block"><input type="checkbox" name="wiederholung_vertiefung"> Wiederholung / Vertiefung</label>
-        <label class="block"><input type="checkbox" name="leistungsbewertung"> Leistungsbewertung</label>
+    <form method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      
+      <!-- Linke Spalte -->
+      <div class="space-y-4">
+        <div class="bg-blue-50 p-4 rounded">
+          <h2 class="font-semibold text-blue-700 mb-2">🚗 Selbstständiges Fahren</h2>
+          <label class="block"><input type="checkbox" name="selbststaendiges_fahren"> Ja, bitte!</label>
+          <label class="block"><input type="checkbox" name="innerorts"> 🏘️ Innerorts</label>
+          <label class="block"><input type="checkbox" name="ausserorts"> 🌄 Außerorts</label>
+        </div>
+
+        <div class="bg-green-50 p-4 rounded">
+          <h2 class="font-semibold text-green-700 mb-2">✅ Verantwortung & Testfahrt</h2>
+          <label class="block"><input type="checkbox" name="verantwortungsbewusstes_fahren"> Verantwortung zeigen 💪</label>
+          <label class="block"><input type="checkbox" name="testfahrt"> 🚦 Testfahrt</label>
+        </div>
+      </div>
+
+      <!-- Rechte Spalte -->
+      <div class="space-y-4">
+        <div class="bg-indigo-50 p-4 rounded">
+          <h2 class="font-semibold text-indigo-700 mb-2">🎯 Besondere Anforderungen</h2>
+          <label class="block"><input type="checkbox" name="fakts"> FAKTs 🧾</label>
+          <label class="block"><input type="checkbox" name="andere"> 🛠️ Andere Anforderungen</label>
+        </div>
+
+        <div class="bg-purple-50 p-4 rounded">
+          <h2 class="font-semibold text-purple-700 mb-2">🏁 Abschluss</h2>
+          <label class="block"><input type="checkbox" name="wiederholung_vertiefung"> 📚 Wiederholen & Vertiefen</label>
+          <label class="block"><input type="checkbox" name="leistungsbewertung"> 📝 Leistungsbewertung</label>
+        </div>
       </div>
 
       <!-- Notizen -->
-      <div>
-        <label for="notizen" class="block font-semibold">Notizen des Fahrlehrers:</label>
-        <textarea name="notizen" id="notizen" rows="4" class="w-full border p-2 rounded" placeholder="Beobachtungen, Besonderheiten…"></textarea>
+      <div class="md:col-span-2 bg-yellow-50 p-4 rounded">
+        <label for="notizen" class="block font-medium mb-1">🗒️ Notizen des Fahrlehrers:</label>
+        <textarea name="notizen" id="notizen" rows="4" class="w-full border border-gray-300 rounded p-2" placeholder="Was lief gut? Was nicht? Was sagt dein Bauchgefühl? 😄"></textarea>
       </div>
 
-      <!-- Navigationsleiste -->
-<div class="mt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-  <!-- Zurück -->
-  <a href="{{ url_for('daemmerung') }}" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded shadow w-full md:w-auto text-center">
-    ⬅️ Zurück
-  </a>
-
-  <!-- Speichern -->
-  <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded shadow w-full md:w-auto">
-    💾 Speichern
-  </button>
-
-  <!-- Weiter -->
-  <a href="{{ url_for('technik') }}" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded shadow w-full md:w-auto text-center">
-    Weiter ➡️
-  </a>
-</div>
+      <!-- Navigation -->
+      <div class="md:col-span-2 flex flex-col md:flex-row justify-between gap-4 mt-4">
+        <a href="{{ url_for('autobahnfahrt') }}" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded text-center w-full md:w-auto">⬅️ Zurück</a>
+        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded shadow w-full md:w-auto">💾 Speichern</button>
+        <a href="{{ url_for('daemmerung') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded text-center w-full md:w-auto">Weiter ➡️</a>
+      </div>
     </form>
   </div>
 </body>
