@@ -17,6 +17,7 @@ class Schueler(Base):
     sehhilfe = Column(Boolean, default=False)
     theorie_bestanden = Column(Boolean, default=False)
     grundfahraufgaben = relationship("Grundfahraufgaben", back_populates="schueler", uselist=False)
+    ueberlandfahrt = relationship("Ueberlandfahrt", back_populates="schueler", uselist=False)
 
     
 class Grundstufe(Base):
