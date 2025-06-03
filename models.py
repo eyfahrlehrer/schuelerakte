@@ -14,6 +14,8 @@ class Schueler(Base):
     mobilnummer = Column(String, nullable=True)
     sehhilfe = Column(Boolean, default=False)
     theorie_bestanden = Column(Boolean, default=False)
+    grundfahraufgaben = relationship("Grundfahraufgaben", back_populates="schueler", uselist=False)
+
     
 class Grundstufe(Base):
     __tablename__ = "grundstufe"
