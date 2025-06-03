@@ -402,26 +402,33 @@ def reifestufe():
     if "username" not in session:
         return redirect(url_for("login"))
 
+    status = ""
+    schueler_id = session.get("stammdaten", {}).get("id")
+
+    if not schueler_id:
+        status = "❌ Fehler: Stammdaten nicht vorhanden!"
+        return render_template("reifestufe.html", status=status)
+
     if request.method == "POST":
-        eintrag = {
-            "stammdaten": session.get("stammdaten", {}),
-            "reifestufe": {
-                "selbststaendiges_fahren": "selbststaendiges_fahren" in request.form,
-                "innerorts": "innerorts" in request.form,
-                "ausserorts": "ausserorts" in request.form,
-                "verantwortungsbewusstes_fahren": "verantwortungsbewusstes_fahren" in request.form,
-                "testfahrt": "testfahrt" in request.form,
-                "fakt": "fakt" in request.form,
-                "andere": "andere" in request.form,
-                "wiederholung_vertiefung": "wiederholung_vertiefung" in request.form,
-                "leistungsbewertung": "leistungsbewertung" in request.form,
-                "notizen": request.form.get("notizen")
-            }
-        }
+        eintrag = Reifestufe(
+            schueler_id=schueler_id,
+            selbststaendiges_fahren=bool(request.form.get("selbststaendiges_fahren")),
+            innerorts=bool(request.form.get("innerorts")),
+            ausserorts=bool(request.form.get("ausserorts")),
+            verantwortungsbewusstes_fahren=bool(request.form.get("verantwortungsbewusstes_fahren")),
+            testfahrt=bool(request.form.get("testfahrt")),
+            fakts=bool(request.form.get("fakts")),
+            andere=bool(request.form.get("andere")),
+            wiederholung_vertiefung=bool(request.form.get("wiederholung_vertiefung")),
+            leistungsbewertung=bool(request.form.get("leistungsbewertung")),
+            notizen=request.form.get("notizen", "")
+        )
 
-      
+        db.session.add(eintrag)
+        db.session.commit()
 
-        return render_template("reifestufe.html", status="✅ Reifestufe gespeichert")
+        status = "✅ Reifestufe gespeichert ✅"
+        return render_template("reifestufe.html", status=status)
 
     return render_template("reifestufe.html")
     
