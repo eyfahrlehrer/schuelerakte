@@ -187,7 +187,7 @@ def leistungsstufe():
     return render_template("leistungsstufe.html")
 
 @app.route("/aufbaustufe", methods=["GET", "POST"])
-def aufbaustufe():
+def aufbaustufe_formular():
     if "username" not in session:
         return redirect(url_for("login"))
 
