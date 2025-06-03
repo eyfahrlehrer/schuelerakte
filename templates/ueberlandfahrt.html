@@ -2,77 +2,75 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Sonderfahrt: Überlandfahrten</title>
+  <title>Überlandfahrt</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100 p-6">
-  <div class="max-w-4xl mx-auto bg-blue-300 p-6 rounded shadow">
-    <h1 class="text-2xl font-bold text-blue-800 mb-4">Sonderfahrt: Überlandfahrten</h1>
+<body class="bg-gray-100 p-8">
+  <div class="max-w-4xl mx-auto bg-white p-6 rounded shadow">
+    <h1 class="text-2xl font-bold text-indigo-700 mb-6">Überlandfahrt</h1>
 
-    <form method="POST" class="space-y-4">
+    <form method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Spalte 1 -->
+      <div class="space-y-4">
+        <div class="bg-indigo-50 p-4 rounded">
+          <h2 class="font-semibold mb-2">Geschwindigkeit & Abstand</h2>
+          <label class="block"><input type="checkbox" name="geschwindigkeit"> Angepasste Geschwindigkeit</label>
+          <label class="block"><input type="checkbox" name="abstand_vorne"> Abstand vorne</label>
+          <label class="block"><input type="checkbox" name="abstand_hinten"> Abstand hinten</label>
+          <label class="block"><input type="checkbox" name="abstand_seite"> Abstand seitlich</label>
+        </div>
 
-      <!-- Fahrverhalten -->
-      <div>
-        <p class="font-semibold">Fahrverhalten</p>
-        <label class="block"><input type="checkbox" name="angepasste_geschwindigkeit"> Angepasste Geschwindigkeit</label>
-        <label class="block"><input type="checkbox" name="abstand_vorne"> Abstand – vorne</label>
-        <label class="block"><input type="checkbox" name="abstand_hinten"> Abstand – hinten</label>
-        <label class="block"><input type="checkbox" name="abstand_seitlich"> Abstand – seitlich</label>
-        <label class="block"><input type="checkbox" name="beobachtungsspiegel"> Beobachtungsspiegel</label>
-        <label class="block"><input type="checkbox" name="verkehrszeichen"> Verkehrszeichen</label>
-        <label class="block"><input type="checkbox" name="kreuzungen_einmuendungen"> Kreuzungen / Einmündungen</label>
+        <div class="bg-indigo-50 p-4 rounded">
+          <h2 class="font-semibold mb-2">Beobachtung & Verkehrszeichen</h2>
+          <label class="block"><input type="checkbox" name="beobachtung"> Beobachtung / Spiegel</label>
+          <label class="block"><input type="checkbox" name="verkehrszeichen"> Verkehrszeichen</label>
+        </div>
+
+        <div class="bg-indigo-50 p-4 rounded">
+          <h2 class="font-semibold mb-2">Kurven & Kreuzungen</h2>
+          <label class="block"><input type="checkbox" name="kurven"> Kurven</label>
+          <label class="block"><input type="checkbox" name="einmuendungen"> Kreuzungen/Einmündungen</label>
+        </div>
       </div>
 
-      <!-- Straßenführung -->
-      <div>
-        <p class="font-semibold">Straßenführung</p>
-        <label class="block"><input type="checkbox" name="kurven"> Kurven</label>
-        <label class="block"><input type="checkbox" name="steigerung"> Steigerung</label>
-        <label class="block"><input type="checkbox" name="gefaelle"> Gefälle</label>
-        <label class="block"><input type="checkbox" name="alleen"> Alleen</label>
-        <label class="block"><input type="checkbox" name="ueberholen"> Überholen</label>
+      <!-- Spalte 2 -->
+      <div class="space-y-4">
+        <div class="bg-indigo-50 p-4 rounded">
+          <h2 class="font-semibold mb-2">Landschaft & Situationen</h2>
+          <label class="block"><input type="checkbox" name="alleen"> Alleen</label>
+          <label class="block"><input type="checkbox" name="ueberholen"> Überholen</label>
+          <label class="block"><input type="checkbox" name="steigerung"> Steigerung</label>
+          <label class="block"><input type="checkbox" name="gefaelle"> Gefälle</label>
+        </div>
+
+        <div class="bg-indigo-50 p-4 rounded">
+          <h2 class="font-semibold mb-2">Besondere Situationen</h2>
+          <label class="block"><input type="checkbox" name="liegengeblieben"> Liegengebliebene Fahrzeuge & Absichern</label>
+          <label class="block"><input type="checkbox" name="fussgaenger"> Fußgänger</label>
+          <label class="block"><input type="checkbox" name="ortschaften"> Einfahren in Ortschaften</label>
+          <label class="block"><input type="checkbox" name="wildtiere"> Wildtiere</label>
+        </div>
+
+        <div class="bg-indigo-50 p-4 rounded">
+          <h2 class="font-semibold mb-2">Besondere Anforderungen</h2>
+          <label class="block"><input type="checkbox" name="leistungsgrenze"> Leistungsgrenze</label>
+          <label class="block"><input type="checkbox" name="ablenkung"> Ablenkung</label>
+          <label class="block"><input type="checkbox" name="orientierung"> Orientierung</label>
+        </div>
       </div>
 
-      <!-- Besondere Situationen -->
-      <div>
-        <p class="font-semibold">Besondere Situationen</p>
-        <label class="block"><input type="checkbox" name="liegen_geblieben"> Liegengeblieben und Absichern</label>
-        <label class="block"><input type="checkbox" name="fussgaenger"> Fußgänger</label>
-        <label class="block"><input type="checkbox" name="ortseinfahrt"> Einfahren in Ortschaften</label>
-        <label class="block"><input type="checkbox" name="wildtiere"> Wildtiere</label>
+      <!-- Notizfeld -->
+      <div class="md:col-span-2">
+        <label for="notizen" class="block font-semibold mb-1">Notizen des Fahrlehrers:</label>
+        <textarea name="notizen" id="notizen" rows="4" class="w-full border p-2 rounded" placeholder="Besonderheiten, Beobachtungen, Hinweise..."></textarea>
       </div>
 
-      <!-- Besondere Anforderungen -->
-      <div>
-        <p class="font-semibold">Besondere Anforderungen</p>
-        <label class="block"><input type="checkbox" name="leistungsgrenze"> Leistungsgrenze</label>
-        <label class="block"><input type="checkbox" name="ablenkung"> Ablenkung</label>
-        <label class="block"><input type="checkbox" name="orientierung"> Orientierung</label>
+      <!-- Navigation -->
+      <div class="md:col-span-2 flex flex-col md:flex-row justify-between items-center gap-4">
+        <a href="{{ url_for('grundfahraufgaben') }}" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded shadow">Zurück</a>
+        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded shadow">Speichern</button>
+        <a href="{{ url_for('autobahnfahrt') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded shadow">Weiter</a>
       </div>
-
-      <!-- Notizen -->
-      <div>
-        <label for="notizen" class="block font-semibold">Notizen des Fahrlehrers:</label>
-        <textarea name="notizen" id="notizen" rows="4" class="w-full border p-2 rounded" placeholder="Besonderheiten oder Beobachtungen…"></textarea>
-      </div>
-
-      <!-- Navigationsleiste -->
-<div class="mt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-  <!-- Zurück -->
-  <a href="{{ url_for('grundfahraufgaben') }}" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded shadow w-full md:w-auto text-center">
-    ⬅️ Zurück
-  </a>
-
-  <!-- Speichern -->
-  <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded shadow w-full md:w-auto">
-    💾 Speichern
-  </button>
-
-  <!-- Weiter -->
-  <a href="{{ url_for('autobahnfahrt') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded shadow w-full md:w-auto text-center">
-    Weiter ➡️
-  </a>
-</div>
     </form>
   </div>
 </body>
