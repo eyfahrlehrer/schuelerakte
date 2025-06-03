@@ -342,36 +342,48 @@ def daemmerung():
     if "username" not in session:
         return redirect(url_for("login"))
 
+    status = ""
+    schueler_id = session.get("stammdaten", {}).get("id")
+
+    if not schueler_id:
+        status = "❌ Fehler: Stammdaten nicht vorhanden!"
+        return render_template("daemmerung.html", status=status)
+
     if request.method == "POST":
-        eintrag = {
-            "stammdaten": session.get("stammdaten", {}),
-            "daemmerung": {
-                "beleuchtung": "beleuchtung" in request.form,
-                "kontrolle": "kontrolle" in request.form,
-                "benutzung": "benutzung" in request.form,
-                "einstellen": "einstellen" in request.form,
-                "fernlicht": "fernlicht" in request.form,
-                "beleuchtete_strasse": "beleuchtete_strasse" in request.form,
-                "unbeleuchtete_strasse": "unbeleuchtete_strasse" in request.form,
-                "parken": "parken" in request.form,
-                "besondere_situationen": "besondere_situationen" in request.form,
-                "schlechte_witterung": "schlechte_witterung" in request.form,
-                "bahnuebergaenge": "bahnuebergaenge" in request.form,
-                "tiere": "tiere" in request.form,
-                "unbeleuchtete_verkehrsteilnehmer": "unbeleuchtete_verkehrsteilnehmer" in request.form,
-                "besondere_anforderungen": "besondere_anforderungen" in request.form,
-                "blendung": "blendung" in request.form,
-                "orientierung": "orientierung" in request.form,
-                "abschlussbesprechung": "abschlussbesprechung" in request.form,
-                "notizen": request.form.get("notizen")
-            }
-        }
+        eintrag = Daemmerung(
+            schueler_id=schueler_id,
+            beleuchtung="beleuchtung" in request.form,
+            kontrolle="kontrolle" in request.form,
+            benutzung="benutzung" in request.form,
+            einstellen="einstellen" in request.form,
+            fernlicht="fernlicht" in request.form,
+            beleuchtete_strasse="beleuchtete_strasse" in request.form,
+            unbeleuchtete_strasse="unbeleuchtete_strasse" in request.form,
+            parken="parken" in request.form,
 
-       
+            besondere_situationen="besondere_situationen" in request.form,
+            schlechte_witterung="schlechte_witterung" in request.form,
+            bahnuebergaenge="bahnuebergaenge" in request.form,
+            tiere="tiere" in request.form,
+            unbeleuchtete_verkehrsteilnehmer="unbeleuchtete_verkehrsteilnehmer" in request.form,
+            besondere_anforderungen="besondere_anforderungen" in request.form,
+            blendung="blendung" in request.form,
+            orientierung="orientierung" in request.form,
+            abschlussbesprechung="abschlussbesprechung" in request.form,
 
-        return render_template("daemmerung.html", status="✅ Dämmerungsfahrt gespeichert")
+            notizen=request.form.get("notizen", "")
+        )
+
+        db = SessionLocal()
+        db.add(eintrag)
+        db.commit()
+        db.close()
+
+        status = "✅ Dämmerungsfahrt gespeichert!"
+        return render_template("daemmerung.html", status=status)
 
     return render_template("daemmerung.html")
+
 
 # Route: Gespeicherte Daten anzeigen
 @app.route("/anzeigen")
