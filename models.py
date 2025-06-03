@@ -64,3 +64,19 @@ class Aufbaustufe(Base):
 
     notizen = Column(String, nullable=True)
 
+class Grundfahraufgaben(Base):
+    __tablename__ = "grundfahraufgaben"
+
+    id = Column(Integer, primary_key=True)
+    schueler_id = Column(Integer, ForeignKey("schueler.id"), nullable=False)
+
+    rueckwaerts_ecke = Column(Boolean, default=False)
+    einparken_laengs_rueck = Column(Boolean, default=False)
+    einparken_quer_rueck = Column(Boolean, default=False)
+    einparken_links_vor = Column(Boolean, default=False)
+    einparken_rechts_vor = Column(Boolean, default=False)
+    umkehren = Column(Boolean, default=False)
+    gefahrenbremsung = Column(Boolean, default=False)
+    notizen = Column(String)
+
+    schueler = relationship("Schueler", back_populates="grundfahraufgaben")
