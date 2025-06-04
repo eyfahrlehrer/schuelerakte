@@ -1,11 +1,19 @@
-from flask import Flask, render_template, request, redirect, url_for, session, send_file, models
+from flask import Flask, render_template, request, redirect, url_for, session, send_file
 import io
 from xhtml2pdf import pisa
 from storage import save_diagrammkarte
-from flask import render_template
 from db import SessionLocal
-from models import Schueler
-from models import Ueberlandfahrt
+from models import (
+    Base,
+    Schueler,
+    Grundstufe,
+    Aufbaustufe,
+    Grundfahraufgaben,
+    Ueberlandfahrt,
+    Daemmerung,
+    Reifestufe,
+    Technik
+)
 
 app = Flask(__name__)
 app.secret_key = "geheimcode123"
