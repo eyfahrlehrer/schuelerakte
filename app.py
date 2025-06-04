@@ -53,6 +53,20 @@ def diagrammkarte():
 def neuer_schueler():
     return redirect(url_for("stammdaten"))
 
+@app.route("/profil/<int:schueler_id>", methods=["GET"])
+def profil(schueler_id):
+    if "username" not in session:
+        return redirect(url_for("login"))
+
+    db = SessionLocal()
+    schueler = db.query(Fahrschueler).filter_by(id=schueler_id).first()
+    db.close()
+
+    if not schueler:
+        return "Fahrschüler nicht gefunden", 404
+
+    return render_template("profil.html", schueler=schueler)
+
 
 @app.route("/stammdaten", methods=["GET", "POST"])
 def stammdaten():
