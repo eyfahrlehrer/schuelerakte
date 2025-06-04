@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session, send_file
+from flask import Flask, render_template, request, redirect, url_for, session, send_file, models
 import io
 from xhtml2pdf import pisa
 from storage import save_diagrammkarte
@@ -59,7 +59,7 @@ def profil(schueler_id):
         return redirect(url_for("login"))
 
     db = SessionLocal()
-    schueler = db.query(Fahrschueler).filter_by(id=schueler_id).first()
+    schueler = db.query(models.Fahrschueler).filter_by(id=schueler_id).first()
     db.close()
 
     if not schueler:
@@ -124,7 +124,7 @@ def stammdaten():
 @app.route("/alle_schueler", methods=["GET"])
 def alle_schueler():
     db = SessionLocal()
-    schueler_liste = db.query(Schueler).all()  # ← HIER anpassen
+    schueler_liste = db.query(models.Fahrschueler).order_by(models.Fahrschueler.name).all()
     db.close()
     return render_template("alle_schueler.html", schueler=schueler_liste)
 
