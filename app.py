@@ -66,6 +66,8 @@ def stammdaten():
             geburtsdatum = request.form.get("geburtsdatum")
             strasse = request.form.get("strasse")
             hausnummer = request.form.get("hausnummer")
+            plz = request.form.get("plz")
+            ort = request.form.get("ort")
             mobil = request.form.get("mobil")
             sehhilfe = "sehhilfe" in request.form
             theorie_bestanden = "theorie_bestanden" in request.form
@@ -76,6 +78,8 @@ def stammdaten():
                 geburtsdatum=geburtsdatum,
                 strasse=strasse,
                 hausnummer=hausnummer,
+                plz=plz,
+                ort=ort,
                 mobil=mobil,
                 sehhilfe=sehhilfe,
                 theorie_bestanden=theorie_bestanden
