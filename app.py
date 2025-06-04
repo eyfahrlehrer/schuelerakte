@@ -48,7 +48,11 @@ def diagrammkarte():
         return render_template("diagrammkarte.html", status="✅ Daten gespeichert")
 
     return render_template("diagrammkarte.html")
-    
+
+@app.route("/neuer_schueler")
+def neuer_schueler():
+    return redirect(url_for("stammdaten"))
+
 
 @app.route("/stammdaten", methods=["GET", "POST"])
 def stammdaten():
