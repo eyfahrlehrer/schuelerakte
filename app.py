@@ -12,7 +12,8 @@ from models import (
     Ueberlandfahrt,
     Daemmerung,
     Reifestufe,
-    Technik
+    Technik,
+    Schueler
 )
 
 app = Flask(__name__)
