@@ -1,52 +1,99 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <title>Fahrschülerprofil</title>
-  <script src="https://unpkg.com/htmx.org@1.9.2"></script>
-  <link href="https://cdn.tailwindcss.com" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Fahrschüler-Profil</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-gray-100 text-gray-900">
-  <div class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-10">
-    <h1 class="text-2xl font-bold mb-4 text-center text-blue-700">📋 Ausbildungsübersicht</h1>
+<body class="bg-gray-100 min-h-screen flex">
+  <!-- Sidebar -->
+  <aside class="w-64 bg-blue-800 text-white hidden md:block p-6 space-y-4">
+    <h2 class="text-xl font-bold">Menü</h2>
+    <nav class="flex flex-col space-y-2">
+      <a href="{{ url_for('neuer_schueler') }}" class="hover:bg-blue-700 p-2 rounded">➕ Fahrschüler erstellen</a>
+      <a href="{{ url_for('alle_schueler') }}" class="hover:bg-blue-700 p-2 rounded">📋 Alle Fahrschüler</a>
+    </nav>
+  </aside>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+  <!-- Main Content -->
+  <main class="flex-1 p-6">
+    <div class="bg-white p-6 rounded shadow">
+      <h1 class="text-2xl font-bold mb-4">👤 Fahrschüler-Profil</h1>
 
-      <div class="bg-green-100 p-4 rounded shadow">
-        <h2 class="font-semibold">✅ Grundstufe</h2>
-        <p>✔️ abgeschlossen</p>
-      </div>
+      <!-- Stammdaten -->
+      <form method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block font-semibold">Vorname</label>
+          <input name="vorname" class="w-full border p-2 rounded" value="{{ schueler.vorname }}">
+        </div>
+        <div>
+          <label class="block font-semibold">Nachname</label>
+          <input name="nachname" class="w-full border p-2 rounded" value="{{ schueler.nachname }}">
+        </div>
+        <div>
+          <label class="block font-semibold">Geburtsdatum</label>
+          <input name="geburtsdatum" type="date" class="w-full border p-2 rounded" value="{{ schueler.geburtsdatum }}">
+        </div>
+        <div>
+          <label class="block font-semibold">PLZ</label>
+          <input name="plz" id="plz" class="w-full border p-2 rounded" value="{{ schueler.plz }}" oninput="autoFillOrt(this.value)">
+        </div>
+        <div>
+          <label class="block font-semibold">Ort</label>
+          <input name="ort" id="ort" class="w-full border p-2 rounded" value="{{ schueler.ort }}">
+        </div>
+        <div>
+          <label class="block font-semibold">Geschlecht</label>
+          <select name="geschlecht" class="w-full border p-2 rounded">
+            <option value="maennlich">👨 Männlich</option>
+            <option value="weiblich">👩 Weiblich</option>
+            <option value="divers">⚧️ Divers</option>
+          </select>
+        </div>
+        <div class="md:col-span-2">
+          <button class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded shadow">💾 Stammdaten speichern</button>
+        </div>
+      </form>
 
-      <div class="bg-green-100 p-4 rounded shadow">
-        <h2 class="font-semibold">✅ Aufbaustufe</h2>
-        <p>✔️ abgeschlossen</p>
-      </div>
-
-      <div class="bg-green-100 p-4 rounded shadow">
-        <h2 class="font-semibold">✅ Leistungsstufe</h2>
-        <p>✔️ abgeschlossen</p>
-      </div>
-
-      <div class="bg-green-100 p-4 rounded shadow">
-        <h2 class="font-semibold">✅ Grundfahraufgaben</h2>
-        <p>✔️ abgeschlossen</p>
-      </div>
-
-      <div class="bg-yellow-100 p-4 rounded shadow">
-        <h2 class="font-semibold">🛠️ Sonderfahrten</h2>
-        <p>⏳ in Bearbeitung</p>
-      </div>
-
-      <div class="bg-gray-100 p-4 rounded shadow">
-        <h2 class="font-semibold">🧠 Reifestufe</h2>
-        <p>🚫 noch nicht begonnen</p>
-      </div>
-
-      <div class="bg-gray-100 p-4 rounded shadow">
-        <h2 class="font-semibold">⚙️ Technik</h2>
-        <p>🚫 noch nicht begonnen</p>
+      <!-- Tabs für Stufen -->
+      <div class="mt-8">
+        <h2 class="text-xl font-bold mb-4">📚 Ausbildungsstand</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {% for stufe in [
+            ('grundstufe', 'Grundstufe'),
+            ('aufbaustufe', 'Aufbaustufe'),
+            ('leistungsstufe', 'Leistungsstufe'),
+            ('grundfahraufgaben', 'Grundfahraufgaben'),
+            ('ueberlandfahrt', 'Überlandfahrt'),
+            ('autobahnfahrt', 'Autobahnfahrt'),
+            ('daemmerung', 'Dämmerungsfahrt'),
+            ('reifestufe', 'Reifestufe'),
+            ('technik', 'Technik')
+          ] %}
+            <div class="bg-gray-50 p-4 border rounded shadow">
+              <h3 class="font-semibold">{{ stufe[1] }}</h3>
+              <p class="text-sm text-gray-600">{{ get_fortschritt(schueler.id, stufe[0]) }}</p>
+              <a href="{{ url_for(stufe[0], schueler_id=schueler.id) }}" class="inline-block mt-2 text-blue-600 hover:underline">Bearbeiten ➡️</a>
+            </div>
+          {% endfor %}
+        </div>
       </div>
     </div>
-  </div>
+  </main>
+
+  <script>
+    function autoFillOrt(plz) {
+      fetch("https://api.zippopotam.us/de/" + plz)
+        .then(res => res.json())
+        .then(data => {
+          if (data.places && data.places.length > 0) {
+            document.getElementById("ort").value = data.places[0]["place name"];
+          }
+        })
+        .catch(() => console.log("Keine PLZ gefunden"));
+    }
+  </script>
 </body>
 </html>
+
