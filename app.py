@@ -107,6 +107,12 @@ def stammdaten():
 
     return render_template("stammdaten.html")
 
+@app.route("/alle_schueler", methods=["GET"])
+def alle_schueler():
+    db = SessionLocal()
+    schueler_liste = db.query(Fahrschueler).all()
+    db.close()
+    return render_template("alle_schueler.html", schueler=schueler_liste)
 
 @app.route("/grundstufe", methods=["GET", "POST"])
 def grundstufe():
