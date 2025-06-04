@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Ausbildungsdiagrammkarte{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex h-screen">
+
+  <!-- Sidebar (Desktop) -->
+  <div class="hidden md:flex flex-col w-64 bg-blue-800 text-white p-6 space-y-4">
+    <h1 class="text-xl font-bold">🚘 Schülerakte</h1>
+    <a href="{{ url_for('neuer_schueler') }}" class="hover:bg-blue-700 rounded p-2">➕ Fahrschüler erstellen</a>
+    <a href="{{ url_for('alle_schueler') }}" class="hover:bg-blue-700 rounded p-2">👥 Alle Fahrschüler</a>
+  </div>
+
+  <!-- Mobile Menübutton -->
+  <div class="md:hidden p-4 bg-blue-800 text-white flex justify-between items-center w-full">
+    <h1 class="text-lg font-bold">🚘 Menü</h1>
+    <button onclick="document.getElementById('mobileMenu').classList.toggle('hidden')">☰</button>
+  </div>
+  <!-- Mobile Menü -->
+  <div id="mobileMenu" class="md:hidden hidden bg-blue-700 text-white p-4 space-y-2">
+    <a href="{{ url_for('neuer_schueler') }}" class="block hover:bg-blue-600 rounded p-2">➕ Fahrschüler erstellen</a>
+    <a href="{{ url_for('alle_schueler') }}" class="block hover:bg-blue-600 rounded p-2">👥 Alle Fahrschüler</a>
+  </div>
+
+  <!-- Hauptinhalt -->
+  <div class="flex-1 overflow-y-auto p-6">
+    {% block content %}{% endblock %}
+  </div>
+
+</body>
+</html>
