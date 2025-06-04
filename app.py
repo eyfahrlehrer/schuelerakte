@@ -6,7 +6,6 @@ from flask import render_template
 from db import SessionLocal
 from models import Schueler
 from models import Ueberlandfahrt
-from models import Fahrschueler
 
 app = Flask(__name__)
 app.secret_key = "geheimcode123"
