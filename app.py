@@ -124,9 +124,10 @@ def stammdaten():
 @app.route("/alle_schueler", methods=["GET"])
 def alle_schueler():
     db = SessionLocal()
-    schueler_liste = db.query(Fahrschueler).order_by(Fahrschueler.name).all()
+    schueler_liste = db.query(Schueler).all()  # ← HIER anpassen
     db.close()
     return render_template("alle_schueler.html", schueler=schueler_liste)
+
 
 @app.route("/grundstufe", methods=["GET", "POST"])
 def grundstufe():
