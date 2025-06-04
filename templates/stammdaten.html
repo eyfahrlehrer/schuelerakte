@@ -92,20 +92,33 @@
   </form>
 </div>
 
-<!-- Ort per PLZ automatisch ausfüllen -->
+<!-- PLZ -->
+<div class="mb-4">
+  <label class="block font-semibold mb-1" for="plz">📮 Postleitzahl</label>
+  <input type="text" name="plz" id="plz" class="w-full border rounded p-2" required>
+</div>
+
+<!-- Ort -->
+<div class="mb-4">
+  <label class="block font-semibold mb-1" for="ort">📍 Ort</label>
+  <input type="text" name="ort" id="ort" class="w-full border rounded p-2" required>
+</div>
+
+<!-- PLZ-Ort Auto-Fill Script -->
 <script>
-document.getElementById('plz').addEventListener('input', async function () {
-  const plz = this.value;
-  if (plz.length === 5) {
-    try {
-      const res = await fetch(`https://api.zippopotam.us/de/${plz}`);
-      if (!res.ok) throw new Error();
-      const data = await res.json();
-      document.getElementById('ort').value = data.places[0]['place name'];
-    } catch (e) {
-      document.getElementById('ort').value = '';
+  document.getElementById('plz').addEventListener('input', async function () {
+    const plz = this.value;
+    if (plz.length === 5) {
+      try {
+        const res = await fetch(`https://api.zippopotam.us/de/${plz}`);
+        if (!res.ok) throw new Error();
+        const data = await res.json();
+        document.getElementById('ort').value = data.places[0]['place name'];
+      } catch (e) {
+        document.getElementById('ort').value = '';
+      }
     }
-  }
-});
+  });
 </script>
+
 {% endblock %}
