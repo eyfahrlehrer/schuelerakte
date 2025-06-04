@@ -21,8 +21,8 @@ class Schueler(Base):
     daemmerung = relationship("Daemmerung", back_populates="schueler", uselist=False)
     reifestufe = relationship("Reifestufe", back_populates="schueler", uselist=False)
     technik = relationship("Technik", uselist=False, back_populates="schueler")
-
-
+    plz = Column(String, nullable=True)
+    ort = Column(String, nullable=True)
     
 class Grundstufe(Base):
     __tablename__ = "grundstufe"
