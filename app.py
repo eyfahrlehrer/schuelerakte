@@ -13,7 +13,6 @@ from models import (
     Daemmerung,
     Reifestufe,
     Technik,
-    Schueler
 )
 
 app = Flask(__name__)
@@ -130,13 +129,14 @@ def stammdaten():
 
     return render_template("stammdaten.html")
 
+from models import Schueler  # Wichtig: ganz oben, falls nicht schon da!
+
 @app.route("/alle_schueler", methods=["GET"])
 def alle_schueler():
     db = SessionLocal()
-    schueler_liste = db.query(models.Fahrschueler).order_by(models.Fahrschueler.name).all()
+    schueler_liste = db.query(Schueler).order_by(Schueler.name).all()
     db.close()
     return render_template("alle_schueler.html", schueler=schueler_liste)
-
 
 @app.route("/grundstufe", methods=["GET", "POST"])
 def grundstufe():
