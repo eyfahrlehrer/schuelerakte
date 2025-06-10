@@ -504,3 +504,31 @@ def pdf_export():
         return send_file(pdf, mimetype="application/pdf", as_attachment=True, download_name="ausbildungsdaten.pdf")
     except Exception as e:
         return f"Fehler bei der PDF-Erzeugung: {e}"
+
+
+@app.route("/create", methods=["GET", "POST"])
+def create_schueler():
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    if request.method == "POST":
+        try:
+            neuer_schueler = Schueler(
+                vorname=request.form["vorname"],
+                name=request.form["name"],
+                geburtsdatum=request.form["geburtsdatum"],
+                adresse=request.form["adresse"],
+                plz=request.form["plz"],
+                ort=request.form["ort"],
+                telefon=request.form["telefon"],
+                sehhilfe=request.form["sehhilfe"],
+                klasse=request.form["klasse"]
+            )
+            db.session.add(neuer_schueler)
+            db.session.commit()
+
+            return redirect(url_for("stammdaten"))
+        except Exception as e:
+            return f"Fehler beim Erstellen: {e}", 500
+
+    return render_template("create.html")
