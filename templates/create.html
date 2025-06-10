@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% block title %}Fahrschüler erstellen{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto bg-white p-6 rounded shadow mt-6">
+  <h1 class="text-2xl font-bold mb-4">🧾 Fahrschüler-Stammdaten</h1>
+  <form method="POST">
+    
+    <!-- Geschlecht -->
+    <div class="mb-4">
+      <label class="block font-semibold mb-1">👤 Geschlecht:</label>
+      <div class="flex gap-4">
+        <label class="flex items-center gap-1">
+          <input type="radio" name="geschlecht" value="männlich"> 👨 Männlich
+        </label>
+        <label class="flex items-center gap-1">
+          <input type="radio" name="geschlecht" value="weiblich"> 👩 Weiblich
+        </label>
+        <label class="flex items-center gap-1">
+          <input type="radio" name="geschlecht" value="divers"> ⚧️ Divers
+        </label>
+      </div>
+    </div>
+
+    <!-- Vorname / Nachname -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <div>
+        <label class="block font-semibold mb-1">Vorname</label>
+        <input type="text" name="vorname" class="w-full border rounded p-2" required>
+      </div>
+      <div>
+        <label class="block font-semibold mb-1">Nachname</label>
+        <input type="text" name="nachname" class="w-full border rounded p-2" required>
+      </div>
+    </div>
+
+    <!-- Geburtsdatum -->
+    <div class="mb-4">
+      <label class="block font-semibold mb-1">📅 Geburtsdatum</label>
+      <input type="date" name="geburtsdatum" class="w-full border rounded p-2">
+    </div>
+
+    <!-- Adresse -->
+    <div class="mb-4">
+      <label class="block font-semibold mb-1">🏠 Adresse</label>
+      <input type="text" name="adresse" class="w-full border rounded p-2">
+    </div>
+
+    <!-- PLZ und Ort -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <div>
+        <label class="block font-semibold mb-1">📮 Postleitzahl</label>
+        <input type="text" name="plz" id="plz" class="w-full border rounded p-2" required>
+      </div>
+      <div>
+        <label class="block font-semibold mb-1">🌍 Ort</label>
+        <input type="text" name="ort" id="ort" class="w-full border rounded p-2" required>
+      </div>
+    </div>
+
+    <!-- Telefonnummer -->
+    <div class="mb-4">
+      <label class="block font-semibold mb-1">📱 Telefonnummer</label>
+      <input type="tel" name="telefonnummer" class="w-full border rounded p-2">
+    </div>
+
+    <!-- Sehhilfe -->
+    <div class="mb-4">
+      <label class="block font-semibold mb-1">👓 Sehhilfe</label>
+      <select name="sehhilfe" class="w-full border rounded p-2">
+        <option value="ja">Ja</option>
+        <option value="nein">Nein</option>
+      </select>
+    </div>
+
+    <!-- Theorieprüfung -->
+    <div class="mb-6">
+      <label class="block font-semibold mb-1">📘 Theorieprüfung bestanden?</label>
+      <select name="theorie" class="w-full border rounded p-2">
+        <option value="ja">Ja</option>
+        <option value="nein">Nein</option>
+      </select>
+    </div>
+
+    <!-- Nur Speichern-Button -->
+    <div class="flex justify-center">
+      <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded shadow">
+        💾 Fahrschüler speichern
+      </button>
+    </div>
+
+  </form>
+</div>
+
+
+<!-- PLZ-Ort Auto-Fill Script -->
+<script>
+  document.getElementById('plz').addEventListener('input', async function () {
+    const plz = this.value;
+    if (plz.length === 5) {
+      try {
+        const res = await fetch(`https://api.zippopotam.us/de/${plz}`);
+        if (!res.ok) throw new Error();
+        const data = await res.json();
+        document.getElementById('ort').value = data.places[0]['place name'];
+      } catch (e) {
+        document.getElementById('ort').value = '';
+      }
+    }
+  });
+</script>
+
+{% endblock %}
